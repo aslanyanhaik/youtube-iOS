@@ -37,7 +37,6 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
     }
     
     
-    
    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! TabBarCellCollectionViewCell
@@ -53,6 +52,9 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
         return cell
 
     }
+    
+    //MARK: CollectionView Delegates
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -89,12 +91,9 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
     override init(frame: CGRect) {
         super.init(frame: frame)
         collectionView.register(TabBarCellCollectionViewCell.self, forCellWithReuseIdentifier: identifier)
+        self.backgroundColor = UIColor.rbg(r: 228, g: 34, b: 24)
         addSubview(collectionView)
-        
-        
-
-        
-        
+                
     }
     
     

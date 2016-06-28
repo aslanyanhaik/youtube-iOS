@@ -38,7 +38,7 @@
                                             </constraints>
                                             <state key="normal" backgroundImage="San Francisco"/>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5812822E-6A66-4DED-8D77-258AC20ADC92" translatesAutoresizingMaskIntoConstraints="NO" id="nkB-lx-Z0Z">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="C3B413E5-9E7A-4C66-99D0-71822666449C" translatesAutoresizingMaskIntoConstraints="NO" id="nkB-lx-Z0Z">
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="nkB-lx-Z0Z" secondAttribute="height" multiplier="16:9" id="aan-Cf-ejp"/>
                                             </constraints>
@@ -53,6 +53,15 @@
                                             <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltF-ch-yN9">
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="OtU-mK-Pd5"/>
+                                                <constraint firstAttribute="height" constant="21" id="gh2-Z9-ae3"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </view>
                                 <constraints>
@@ -65,17 +74,20 @@
                                     <constraint firstAttribute="trailing" secondItem="ihG-kZ-enK" secondAttribute="trailing" constant="16" id="T5L-Bx-3xE"/>
                                     <constraint firstItem="tJD-Rq-iux" firstAttribute="leading" secondItem="CRs-hp-v93" secondAttribute="trailing" constant="8" id="UoN-64-9sT"/>
                                     <constraint firstAttribute="trailing" secondItem="tJD-Rq-iux" secondAttribute="trailing" constant="16" id="VnH-aP-Cdf"/>
+                                    <constraint firstItem="ltF-ch-yN9" firstAttribute="trailing" secondItem="nkB-lx-Z0Z" secondAttribute="trailing" id="YA3-F4-xPJ"/>
                                     <constraint firstItem="ihG-kZ-enK" firstAttribute="leading" secondItem="CRs-hp-v93" secondAttribute="trailing" constant="8" id="cN7-Xt-eMp"/>
                                     <constraint firstItem="WiP-VV-kPM" firstAttribute="leading" secondItem="VII-7m-I35" secondAttribute="leading" id="hFJ-7t-tg9"/>
                                     <constraint firstItem="tJD-Rq-iux" firstAttribute="top" secondItem="ihG-kZ-enK" secondAttribute="bottom" constant="8" id="hWv-f9-cLc"/>
+                                    <constraint firstItem="ltF-ch-yN9" firstAttribute="bottom" secondItem="nkB-lx-Z0Z" secondAttribute="bottom" id="icJ-s5-HHw"/>
                                     <constraint firstAttribute="bottom" secondItem="WiP-VV-kPM" secondAttribute="bottom" id="l1D-LB-hlc"/>
                                     <constraint firstItem="nkB-lx-Z0Z" firstAttribute="leading" secondItem="VII-7m-I35" secondAttribute="leading" constant="16" id="pMS-D3-cVv"/>
                                     <constraint firstItem="CRs-hp-v93" firstAttribute="top" secondItem="nkB-lx-Z0Z" secondAttribute="bottom" constant="16" id="xSP-dp-ZXG"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="profilePic" destination="CRs-hp-v93" id="7HL-VH-im5"/>
+                                    <outlet property="channelPic" destination="CRs-hp-v93" id="30U-3h-yYo"/>
                                     <outlet property="separatorView" destination="WiP-VV-kPM" id="7fG-lZ-kwI"/>
                                     <outlet property="videoDescription" destination="tJD-Rq-iux" id="zjQ-w2-wvF"/>
+                                    <outlet property="videoDuration" destination="ltF-ch-yN9" id="vtB-Xr-VTK"/>
                                     <outlet property="videoPic" destination="nkB-lx-Z0Z" id="TbU-og-QXO"/>
                                     <outlet property="videoTitle" destination="ihG-kZ-enK" id="CwG-jQ-G9Y"/>
                                     <segue destination="u54-Hp-3ec" kind="show" id="C7w-JX-Y2f"/>
@@ -111,10 +123,10 @@
             </objects>
             <point key="canvasLocation" x="1502" y="147"/>
         </scene>
-        <!--Nav View Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="VBS-Ts-hUi">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IXR-Mk-kYq" customClass="NavViewController" customModule="YouTube" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IXR-Mk-kYq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="mbv-fJ-8Zp">
@@ -132,7 +144,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="5812822E-6A66-4DED-8D77-258AC20ADC92" width="960" height="600">
+        <image name="C3B413E5-9E7A-4C66-99D0-71822666449C" width="960" height="600">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
