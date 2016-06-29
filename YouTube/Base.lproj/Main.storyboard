@@ -31,14 +31,13 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WiP-VV-kPM" customClass="SeparatorView" customModule="YouTube" customModuleProvider="target">
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRs-hp-v93">
+                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRs-hp-v93">
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="48" id="3Bn-fx-24p"/>
                                                 <constraint firstAttribute="height" constant="48" id="OBD-6l-DQ7"/>
                                             </constraints>
-                                            <state key="normal" backgroundImage="San Francisco"/>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="C3B413E5-9E7A-4C66-99D0-71822666449C" translatesAutoresizingMaskIntoConstraints="NO" id="nkB-lx-Z0Z">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ACD781F1-1E90-4727-84C2-EF71E4249196" translatesAutoresizingMaskIntoConstraints="NO" id="nkB-lx-Z0Z">
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="nkB-lx-Z0Z" secondAttribute="height" multiplier="16:9" id="aan-Cf-ejp"/>
                                             </constraints>
@@ -90,7 +89,6 @@
                                     <outlet property="videoDuration" destination="ltF-ch-yN9" id="vtB-Xr-VTK"/>
                                     <outlet property="videoPic" destination="nkB-lx-Z0Z" id="TbU-og-QXO"/>
                                     <outlet property="videoTitle" destination="ihG-kZ-enK" id="CwG-jQ-G9Y"/>
-                                    <segue destination="u54-Hp-3ec" kind="show" id="C7w-JX-Y2f"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -104,24 +102,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHm-OD-Ukx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="821.60000000000002" y="152.47376311844079"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="ViI-Ec-BXv">
-            <objects>
-                <viewController id="u54-Hp-3ec" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Wpc-72-z7q"/>
-                        <viewControllerLayoutGuide type="bottom" id="hHF-Lo-3E6"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kCy-Q1-Iaw">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.34509803919999998" green="0.3411764706" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="epg-oL-m7Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1502" y="147"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VBS-Ts-hUi">
@@ -144,7 +124,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="C3B413E5-9E7A-4C66-99D0-71822666449C" width="960" height="600">
+        <image name="ACD781F1-1E90-4727-84C2-EF71E4249196" width="960" height="600">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -38600,6 +38580,5 @@ ACMyogAjMqQAIzKpACMysQAjMrQAIzK5ACMywQAjMsQAIzLWACMy2QAjMt4AAAAAAAAEAQAAAAAAAABB
 AAAAAAAAAAAAAAAAACMy4A
 </mutableData>
         </image>
-        <image name="San Francisco" width="960" height="600"/>
     </resources>
 </document>

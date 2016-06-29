@@ -18,3 +18,21 @@ extension UIColor{
         return color
     }
 }
+
+
+extension UIImage {
+    
+  class  func contentOfURL(link: String) -> UIImage {
+    
+    let url = URL.init(string: link)!
+    var image = UIImage()
+    
+    do{
+        let data = try Data.init(contentsOf: url)
+        image = UIImage.init(data: data)!
+    } catch _ {
+        print("error downloading images")
+    }
+    return image
+    }
+}
