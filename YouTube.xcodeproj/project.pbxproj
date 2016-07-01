@@ -11,6 +11,9 @@
 		223A51501D1C425F002A5BE8 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223A514F1D1C425F002A5BE8 /* SeparatorView.swift */; };
 		22464D531D22A8000041B3A0 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22464D521D22A8000041B3A0 /* Channel.swift */; };
 		22464D551D22AB300041B3A0 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22464D541D22AB300041B3A0 /* GlobalVariables.swift */; };
+		2277E9081D26ADD800F0F234 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2277E9071D26ADD800F0F234 /* SecondViewController.swift */; };
+		2277E90A1D26B31100F0F234 /* Suggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2277E9091D26B31100F0F234 /* Suggestions.swift */; };
+		228DF9CF1D251FA70006FB26 /* SettingsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DF9CE1D251FA70006FB26 /* SettingsTable.swift */; };
 		22A3B7DF1D217E5D00CFB210 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A3B7DE1D217E5D00CFB210 /* Video.swift */; };
 		22AA44671D1302FC00CA6185 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AA44661D1302FC00CA6185 /* AppDelegate.swift */; };
 		22AA446C1D1302FC00CA6185 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22AA446A1D1302FC00CA6185 /* Main.storyboard */; };
@@ -27,6 +30,9 @@
 		223A514F1D1C425F002A5BE8 /* SeparatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		22464D521D22A8000041B3A0 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		22464D541D22AB300041B3A0 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
+		2277E9071D26ADD800F0F234 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		2277E9091D26B31100F0F234 /* Suggestions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Suggestions.swift; sourceTree = "<group>"; };
+		228DF9CE1D251FA70006FB26 /* SettingsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTable.swift; path = ../SettingsTable.swift; sourceTree = "<group>"; };
 		22A3B7DE1D217E5D00CFB210 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		22AA44631D1302FB00CA6185 /* YouTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AA44661D1302FC00CA6185 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,8 +61,10 @@
 			isa = PBXGroup;
 			children = (
 				22D6D3B31D1FC55C0058B607 /* TabBar.swift */,
+				228DF9CE1D251FA70006FB26 /* SettingsTable.swift */,
 				22D6D3B51D1FE4970058B607 /* TabBarCellCollectionViewCell.swift */,
 				22DC3C921D1AF8F50098AB57 /* MainCollectionViewController.swift */,
+				2277E9091D26B31100F0F234 /* Suggestions.swift */,
 				22DC3C961D1BC89E0098AB57 /* CustomCollectionViewCell.swift */,
 				223A514F1D1C425F002A5BE8 /* SeparatorView.swift */,
 			);
@@ -111,6 +119,7 @@
 			children = (
 				22AA44661D1302FC00CA6185 /* AppDelegate.swift */,
 				22AA446A1D1302FC00CA6185 /* Main.storyboard */,
+				2277E9071D26ADD800F0F234 /* SecondViewController.swift */,
 				22AA446D1D1302FC00CA6185 /* Assets.xcassets */,
 				2229DC541D1EEA2E0058E804 /* ViewControllers */,
 				2229DC551D1EEA4F0058E804 /* Extensions */,
@@ -194,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2277E9081D26ADD800F0F234 /* SecondViewController.swift in Sources */,
 				22D6D3B61D1FE4970058B607 /* TabBarCellCollectionViewCell.swift in Sources */,
 				22AA44671D1302FC00CA6185 /* AppDelegate.swift in Sources */,
 				22DC3C971D1BC89E0098AB57 /* CustomCollectionViewCell.swift in Sources */,
@@ -202,7 +212,9 @@
 				22A3B7DF1D217E5D00CFB210 /* Video.swift in Sources */,
 				2236EA0C1D1D5F4F0099411D /* extensions.swift in Sources */,
 				22DC3C931D1AF8F50098AB57 /* MainCollectionViewController.swift in Sources */,
+				2277E90A1D26B31100F0F234 /* Suggestions.swift in Sources */,
 				22464D531D22A8000041B3A0 /* Channel.swift in Sources */,
+				228DF9CF1D251FA70006FB26 /* SettingsTable.swift in Sources */,
 				22D6D3B41D1FC55C0058B607 /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

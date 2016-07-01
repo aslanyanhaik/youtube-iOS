@@ -9,12 +9,26 @@
 import UIKit
 
 
-class MainCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class MainCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, SelectedCell  {
     
     //MARK: - Properties
     
-    var items = [Video]()
+    var itemsList = [[String : AnyObject]] ()
     
+    var videoCache = Cache<NSNumber, Video>()
+    
+    var darkView: UIView = {
+        let dv =  UIView.init(frame: UIScreen.main().bounds)
+        dv.backgroundColor = UIColor.black()
+        dv.alpha = 0
+        return dv
+    }()
+    
+    lazy var settings: Settings = {
+        let st = Settings.init(frame: CGRect.init(x: 0, y: UIScreen.main().bounds.height, width: UIScreen.main().bounds.width, height: 288))
+        return st
+    
+    }()
     
     var titleLabel: UILabel = {
         let tl = UILabel.init(frame: CGRect.init(x: 20, y: 5, width: 200, height: 30))
@@ -24,11 +38,10 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         return tl
     }()
     
-
-    
     var tabBar: TabBar?
     
-    //MARk: - Methods
+    //MARK: - Methods
+    
     
     
     func customization()  {
@@ -38,6 +51,16 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         self.collectionView?.contentInset = UIEdgeInsetsMake((self.navigationController?.navigationBar.frame.height)!, 0, 0, 0)
         self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake((self.navigationController?.navigationBar.frame.height)!, 0, 0, 0)
         
+        //DarkView
+
+        let singleTap = UITapGestureRecognizer.init(target: self, action: #selector(MainCollectionViewController.dismissDarkView))
+        self.darkView.addGestureRecognizer(singleTap)
+        
+        
+        //Settings Table 
+        
+        
+
         
         //NavigationBar customization
         
@@ -84,20 +107,60 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     
-    //MARK: Search and More functions
-    
-    
     func handleSearch()  {
-        let aa = Video.init(title: "Taylor Swift", tumbnail: UIImage.init(named: "San Francisco")!, views: 15235235235, duration: 9, channel: Channel.init(name: "TaylorSwiftVevo", image: UIImage.init(named: "San Francisco")!))
-        self.items.append(aa)
-        self.collectionView?.reloadData()
+
+
         
     }
+    
+    
+    func dismissDarkView(andPush: Bool = false)  {
+        UIView.animate(withDuration: 0.3,
+                       animations: {self.darkView.alpha = 0
+            self.settings.frame.origin.y = (UIApplication.shared().keyWindow?.frame.height)!})
+        { (true) in self.darkView.removeFromSuperview()
+                    self.settings.removeFromSuperview()
+            if andPush == true {
+                self.navigationController?.pushViewController(UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Second"), animated: true)            }
+            
+        }
+        
+    }
+    
     
     
     func more()  {
         
+        if let window = UIApplication.shared().keyWindow {
+            window.addSubview(self.darkView)
+            window.addSubview(self.settings)
+        }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.darkView.alpha = 0.5
+        })
+        
+        UIView.animate(withDuration: 0.3, animations: {
+           self.settings.frame.origin.y -= 288
+        })
+
     }
+    
+    
+    //MARK Settings Table delegate
+    
+    func cellInfoAtIndex(index: Int) {
+        switch index {
+        case 0:
+            dismissDarkView(andPush: true)
+            
+        default:
+            dismissDarkView()
+        }
+
+    }
+    
+   
     
     //MARK: -  ViewController Lifecylce
     
@@ -105,26 +168,27 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         customization()
-        Video.getVideos(fromURL: globalVariables.urlLink) { (videos) in
+        Video.getVideosList(fromURL: globalVariables.urlLink) { (items) -> (Void) in
             
-            self.items = videos
-
-                DispatchQueue.main.async(execute: {
-                    self.collectionView?.reloadData()
-                    UIApplication.shared().isNetworkActivityIndicatorVisible = false
-                })
+            self.itemsList = items
+            self.videoCache.countLimit = items.count
+            
+            DispatchQueue.main.async(execute: {
+                self.collectionView?.reloadData()
+                UIApplication.shared().isNetworkActivityIndicatorVisible = false
+            })
         }
-        
-        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.settings.delegate = self
+
         
     }
     
-    
-
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     
@@ -139,24 +203,46 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        return items.count
+        return self.itemsList.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CustomCollectionViewCell
+            if itemsList.isEmpty == false {
+                if videoCache.object(forKey: indexPath.row as NSNumber) != nil {
+                    let videoItem = self.videoCache.object(forKey: indexPath.row as NSNumber)!
+                    cell.videoPic.image = videoItem.tumbnail
+                    cell.videoTitle.text = videoItem.title
+                    cell.channelPic.setImage(videoItem.channel.image, for: [])
+                    cell.channelPic.imageView?.contentMode = UIViewContentMode.scaleAspectFill
+                    cell.videoDuration.text = " " + secondsToHoursMinutesSeconds(seconds: videoItem.duration) + " "
+                    let viewsCount = NumberFormatter()
+                    viewsCount.numberStyle = .decimal
+                    let views = viewsCount.string(from: videoItem.views as NSNumber)!
+                    let description = videoItem.channel.name + "  • " + views
+                    cell.videoDescription.text = description
+                } else{
+                    Video.object(at: indexPath.row, fromList: itemsList, completiotion: { (videoItem, index) in
+                        
+                        self.videoCache.setObject(videoItem, forKey: indexPath.row as NSNumber)
+                        if indexPath.row == index {
+                            DispatchQueue.main.async(execute: {
+                                cell.videoPic.image = videoItem.tumbnail
+                                cell.videoTitle.text = videoItem.title
+                                cell.channelPic.setImage(videoItem.channel.image, for: [])
+                                cell.channelPic.imageView?.contentMode = UIViewContentMode.scaleAspectFill
+                                cell.videoDuration.text = " " + secondsToHoursMinutesSeconds(seconds: videoItem.duration) + " "
+                                let viewsCount = NumberFormatter()
+                                viewsCount.numberStyle = .decimal
+                                let views = viewsCount.string(from: videoItem.views as NSNumber)!
+                                let description = videoItem.channel.name + "  • " + views
+                                cell.videoDescription.text = description
+                            })
+                        }
+                    })
+                }
+        }
         
-        cell.videoPic.image = items[indexPath.row].tumbnail
-        cell.videoTitle.text = items[indexPath.row].title
-        cell.channelPic.setImage(items[indexPath.row].channel.image, for: [])
-        cell.channelPic.imageView?.contentMode = UIViewContentMode.scaleAspectFill
-        cell.videoDuration.text = " " + secondsToHoursMinutesSeconds(seconds: items[indexPath.row].duration) + " "
-            let viewsCount = NumberFormatter()
-            viewsCount.numberStyle = .decimal
-            let views = viewsCount.string(from: items[indexPath.row].views as NSNumber)!
-            let description = items[indexPath.row].channel.name + "  • " + views
-        cell.videoDescription.text = description
-        
-
         
         return cell
     }
@@ -176,7 +262,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if indexPath.row == (self.items.count - 1) {
+        if indexPath.row == (self.itemsList.count - 1) {
             cell.subviews[0].subviews[0].isHidden = true
         }
         

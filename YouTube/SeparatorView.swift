@@ -21,6 +21,5 @@ class SeparatorView: UIView {
         bezierPath.stroke()
 
     }
-    
 
 }
