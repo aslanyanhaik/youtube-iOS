@@ -24,7 +24,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         return dv
     }()
     
-    lazy var settings: Settings = {
+    let settings: Settings = {
         let st = Settings.init(frame: CGRect.init(x: 0, y: UIScreen.main().bounds.height, width: UIScreen.main().bounds.width, height: 288))
         return st
     
@@ -39,6 +39,12 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     }()
     
     var tabBar: TabBar?
+    
+    var searchField = UITextField()
+    
+    var searchView = UIView()
+    
+    var statusBarBackgroundView = UIView()
     
     //MARK: - Methods
     
@@ -57,7 +63,14 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         self.darkView.addGestureRecognizer(singleTap)
         
         
-        //Settings Table 
+        //Search View and textfield
+
+        self.searchField = UITextField.init(frame: CGRect.init(x: 20, y: 20, width: self.view.frame.width - 20, height: (self.navigationController?.navigationBar.frame.height)!))
+        self.searchField.keyboardAppearance = .dark
+        self.searchView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: (self.navigationController?.navigationBar.frame.height)! + 20))
+        self.searchView.backgroundColor = UIColor.white()
+        self.searchView.addSubview(self.searchField)
+        
         
         
 
@@ -100,7 +113,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         
         //StatusBar background color
         
-        let statusBarBackgroundView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: 20))
+        statusBarBackgroundView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: 20))
         statusBarBackgroundView.backgroundColor = UIColor.black().withAlphaComponent(0.2)
         self.navigationController?.view.addSubview(statusBarBackgroundView)
         
@@ -108,7 +121,22 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     
     
     func handleSearch()  {
-
+        
+        
+        if let window = UIApplication.shared().keyWindow {
+            
+            window.addSubview(self.darkView)
+            window.addSubview(self.searchView)
+            window.addSubview(self.statusBarBackgroundView)
+            self.searchField.becomeFirstResponder()
+            
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                self.darkView.alpha = 0.5
+                self.searchView.alpha = 1
+                
+            })
+        }
 
         
     }
@@ -138,14 +166,10 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         
         UIView.animate(withDuration: 0.3, animations: {
             self.darkView.alpha = 0.5
+            self.settings.frame.origin.y -= 288
         })
         
-        UIView.animate(withDuration: 0.3, animations: {
-           self.settings.frame.origin.y -= 288
-        })
-
     }
-    
     
     //MARK Settings Table delegate
     
