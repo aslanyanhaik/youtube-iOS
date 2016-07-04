@@ -65,12 +65,9 @@ func secondsToHoursMinutesSeconds (seconds : Int) -> String {
     return label
 }
 
-func textConvert(text: String) -> String {
-    let netText = text.addingPercentEncoding(withAllowedCharacters: CharacterSet())
-    return netText!
-}
 
 func requestSuggestionsURL(text: String) -> URL {
-    let url = URL.init(string: "https://suggestqueries.google.com/complete/search?client=firefox&q=\(text)")!
+    let netText = text.addingPercentEncoding(withAllowedCharacters: CharacterSet())!
+    let url = URL.init(string: "https://api.bing.com/osjson.aspx?query=\(netText)")!
     return url
 }

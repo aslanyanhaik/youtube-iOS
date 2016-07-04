@@ -16,6 +16,11 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
     let identifier = "cell"
     let darkItems = ["homeDark", "trendingDark", "subscriptionsDark", "accountDark"]
     let items = ["home", "trending", "subscriptions", "account"]
+    lazy var whiteView: UIView = {
+        let wv = UIView.init(frame: CGRect.init(x: 0, y: self.frame.height - 3, width: self.frame.width / 4, height: 3))
+        wv.backgroundColor = UIColor.rbg(r: 245, g: 245, b: 245)
+        return wv
+    }()
     
     lazy var collectionView: UICollectionView  = {
         
@@ -79,7 +84,10 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
 
         let cell = collectionView.cellForItem(at: indexPath) as! TabBarCellCollectionViewCell
         cell.icon.image = UIImage.init(named: items[indexPath.row])
-
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.whiteView.frame.origin.x = self.frame.width / 4 * CGFloat(indexPath.row)
+        })
         
     }
     
@@ -90,7 +98,8 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
         super.init(frame: frame)
         collectionView.register(TabBarCellCollectionViewCell.self, forCellWithReuseIdentifier: identifier)
         self.backgroundColor = UIColor.rbg(r: 228, g: 34, b: 24)
-        addSubview(collectionView)
+        addSubview(self.collectionView)
+        addSubview(self.whiteView)
                 
     }
     
