@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
     //MARK: Variables
 
@@ -14,6 +15,10 @@ import Foundation
 struct globalVariables {
     
     static let urlLink = URL.init(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json")!
+    static let rect = CGRect.init(x: 0, y: 0, width: UIScreen.main().bounds.width, height: 44)
+    static let width  = UIScreen.main().bounds.width
+    static let height: CGFloat =  64
+    
     
 }
 
@@ -60,4 +65,12 @@ func secondsToHoursMinutesSeconds (seconds : Int) -> String {
     return label
 }
 
+func textConvert(text: String) -> String {
+    let netText = text.addingPercentEncoding(withAllowedCharacters: CharacterSet())
+    return netText!
+}
 
+func requestSuggestionsURL(text: String) -> URL {
+    let url = URL.init(string: "https://suggestqueries.google.com/complete/search?client=firefox&q=\(text)")!
+    return url
+}

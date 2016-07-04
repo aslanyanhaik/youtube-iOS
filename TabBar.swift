@@ -20,7 +20,7 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
     lazy var collectionView: UICollectionView  = {
         
         let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView.init(frame: self.bounds, collectionViewLayout: layout)
+        let cv = UICollectionView.init(frame: globalVariables.rect, collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
         cv.backgroundColor = UIColor.clear()
@@ -33,14 +33,12 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
     //MARK: CollectionView DataSources
    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return self.items.count
     }
-    
     
    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! TabBarCellCollectionViewCell
-        cell.backgroundColor = UIColor.clear()
         cell.icon.image = UIImage.init(named: darkItems[indexPath.row])
         
         if indexPath.row == 0 {
@@ -102,5 +100,31 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+}
+
+
+
+//TabBarCell Class
+
+class TabBarCellCollectionViewCell: UICollectionViewCell {
+    
+    
+    let icon = UIImageView()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = UIColor.clear()
+        let height = (self.contentView.frame.height - 40) / 2
+        let width = (self.contentView.frame.width - 30) / 2
+        icon.frame = CGRect.init(x: width, y: height, width: 30, height: 30)
+        let image = UIImage.init(named: "home")
+        icon.image = image?.withRenderingMode(.alwaysTemplate)
+        self.contentView.addSubview(icon)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 }

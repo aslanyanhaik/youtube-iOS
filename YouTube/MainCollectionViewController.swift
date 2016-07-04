@@ -9,46 +9,32 @@
 import UIKit
 
 
-class MainCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, SelectedCell  {
+class MainCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, hideSettings, hideSearch {
     
     //MARK: - Properties
     
     var itemsList = [[String : AnyObject]] ()
-    
     var videoCache = Cache<NSNumber, Video>()
-    
-    var darkView: UIView = {
-        let dv =  UIView.init(frame: UIScreen.main().bounds)
-        dv.backgroundColor = UIColor.black()
-        dv.alpha = 0
-        return dv
+    let tabBar: TabBar = {
+        let tb = TabBar.init(frame: globalVariables.rect)
+        return tb
     }()
-    
-    let settings: Settings = {
-        let st = Settings.init(frame: CGRect.init(x: 0, y: UIScreen.main().bounds.height, width: UIScreen.main().bounds.width, height: 288))
+    let statusView: UIView = {
+       let st = UIView.init(frame: CGRect.init(x: 0, y: 0, width: globalVariables.width, height: 20))
+        st.backgroundColor = UIColor.black()
+        st.alpha = 0.3
         return st
-    
     }()
-    
-    var titleLabel: UILabel = {
-        let tl = UILabel.init(frame: CGRect.init(x: 20, y: 5, width: 200, height: 30))
-        tl.font = UIFont.systemFont(ofSize: 18)
-        tl.textColor = UIColor.white()
-        tl.text = "Home"
-        return tl
+    let settings: Settings = {
+       let st = Settings.init(frame: UIScreen.main().bounds)
+        return st
     }()
-    
-    var tabBar: TabBar?
-    
-    var searchField = UITextField()
-    
-    var searchView = UIView()
-    
-    var statusBarBackgroundView = UIView()
+    let search: Search = {
+        let se = Search.init(frame: UIScreen.main().bounds)
+        return se
+    }()
     
     //MARK: - Methods
-    
-    
     
     func customization()  {
         
@@ -57,29 +43,19 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         self.collectionView?.contentInset = UIEdgeInsetsMake((self.navigationController?.navigationBar.frame.height)!, 0, 0, 0)
         self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake((self.navigationController?.navigationBar.frame.height)!, 0, 0, 0)
         
-        //DarkView
-
-        let singleTap = UITapGestureRecognizer.init(target: self, action: #selector(MainCollectionViewController.dismissDarkView))
-        self.darkView.addGestureRecognizer(singleTap)
+        //StaturBar background View
         
-        
-        //Search View and textfield
-
-        self.searchField = UITextField.init(frame: CGRect.init(x: 20, y: 20, width: self.view.frame.width - 20, height: (self.navigationController?.navigationBar.frame.height)!))
-        self.searchField.keyboardAppearance = .dark
-        self.searchView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: (self.navigationController?.navigationBar.frame.height)! + 20))
-        self.searchView.backgroundColor = UIColor.white()
-        self.searchView.addSubview(self.searchField)
-        
-        
-        
-
+        if let window  = UIApplication.shared().keyWindow {
+            window.addSubview(self.statusView)
+        }
         
         //NavigationBar customization
         
-            //NavigationBar color
+            //NavigationBar color and shadow
         
         self.navigationController?.navigationBar.barTintColor = UIColor.rbg(r: 228, g: 34, b: 24)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
 
             // Buttons
         
@@ -90,7 +66,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         }()
         
         let moreButton: UIBarButtonItem = {
-            let  mb = UIBarButtonItem.init(image: UIImage.init(named: "nav_more_icon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(MainCollectionViewController.more))
+            let  mb = UIBarButtonItem.init(image: UIImage.init(named: "nav_more_icon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(MainCollectionViewController.handleMore))
             mb.tintColor = UIColor.white()
             return mb
         }()
@@ -99,92 +75,54 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         
             // TitleBabel
         
-        self.navigationController?.navigationBar.addSubview(titleLabel)
+        let _ : UILabel = {
+            let tl = UILabel.init(frame: CGRect.init(x: 20, y: 5, width: 200, height: 30))
+            tl.font = UIFont.systemFont(ofSize: 18)
+            tl.textColor = UIColor.white()
+            tl.text = "Home"
+            self.navigationController?.navigationBar.addSubview(tl)
+            return tl
+        }()
 
             //TabBar
         
-        self.tabBar = TabBar.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: (self.navigationController?.navigationBar.frame.height)!))
-        self.view.addSubview(self.tabBar!)
+        self.view.addSubview(self.tabBar)
         
-            //Navbar Shadow
-        
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        
-        //StatusBar background color
-        
-        statusBarBackgroundView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: 20))
-        statusBarBackgroundView.backgroundColor = UIColor.black().withAlphaComponent(0.2)
-        self.navigationController?.view.addSubview(statusBarBackgroundView)
+        //Search and Settings
         
     }
-    
     
     func handleSearch()  {
-        
-        
         if let window = UIApplication.shared().keyWindow {
-            
-            window.addSubview(self.darkView)
-            window.addSubview(self.searchView)
-            window.addSubview(self.statusBarBackgroundView)
-            self.searchField.becomeFirstResponder()
-            
-            
-            UIView.animate(withDuration: 0.3, animations: {
-                self.darkView.alpha = 0.5
-                self.searchView.alpha = 1
-                
-            })
-        }
-
-        
-    }
-    
-    
-    func dismissDarkView(andPush: Bool = false)  {
-        UIView.animate(withDuration: 0.3,
-                       animations: {self.darkView.alpha = 0
-            self.settings.frame.origin.y = (UIApplication.shared().keyWindow?.frame.height)!})
-        { (true) in self.darkView.removeFromSuperview()
-                    self.settings.removeFromSuperview()
-            if andPush == true {
-                self.navigationController?.pushViewController(UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Second"), animated: true)            }
-            
+            window.insertSubview(self.search, belowSubview: self.statusView)
+            self.search.animate()
         }
         
     }
     
     
     
-    func more()  {
-        
+    func handleMore()  {
         if let window = UIApplication.shared().keyWindow {
-            window.addSubview(self.darkView)
             window.addSubview(self.settings)
+            self.settings.animate()
         }
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.darkView.alpha = 0.5
-            self.settings.frame.origin.y -= 288
-        })
-        
     }
     
-    //MARK Settings Table delegate
-    
-    func cellInfoAtIndex(index: Int) {
-        switch index {
-        case 0:
-            dismissDarkView(andPush: true)
-            
-        default:
-            dismissDarkView()
-        }
+    //MARK: Delegates implementation
 
+    func hideSettingsView(status: Bool) {
+        if status == true {
+            self.settings.removeFromSuperview()
+        }
     }
     
-   
+    func hideSearchView(status : Bool){
+        if status == true {
+            self.search.removeFromSuperview()
+        }
+    }
+
     
     //MARK: -  ViewController Lifecylce
     
@@ -197,6 +135,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
             self.itemsList = items
             self.videoCache.countLimit = items.count
             
+            
             DispatchQueue.main.async(execute: {
                 self.collectionView?.reloadData()
                 UIApplication.shared().isNetworkActivityIndicatorVisible = false
@@ -207,15 +146,8 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.settings.delegate = self
-
-        
+        self.search.delegate = self
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
-    
     
        // MARK: UICollectionViewDataSource
 

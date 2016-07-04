@@ -22,7 +22,6 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="VII-7m-I35" customClass="CustomCollectionViewCell" customModule="YouTube" customModuleProvider="target">
-                                <frame key="frameInset" width="375" height="289"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="289"/>
@@ -102,25 +101,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHm-OD-Ukx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="821.60000000000002" y="152.47376311844079"/>
-        </scene>
-        <!--Second View Controller-->
-        <scene sceneID="unq-tK-DVc">
-            <objects>
-                <viewController storyboardIdentifier="Second" id="npP-MZ-Jcz" customClass="SecondViewController" customModule="YouTube" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="79d-E9-ffv"/>
-                        <viewControllerLayoutGuide type="bottom" id="aYm-3S-GXb"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="F0O-xd-kqM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x8N-Vt-doV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1591" y="152"/>
+            <point key="canvasLocation" x="977" y="165"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VBS-Ts-hUi">

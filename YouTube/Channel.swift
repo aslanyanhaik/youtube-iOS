@@ -17,6 +17,8 @@ class Channel {
     let image: UIImage
     
     
+    //MARK: Inits
+    
     init(name: String, image: UIImage) {
         self.name = name
         self.image = image

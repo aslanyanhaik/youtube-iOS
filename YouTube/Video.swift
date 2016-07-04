@@ -21,7 +21,7 @@ class Video {
     let duration: Int
     
     
-    //MARK: download and parsing
+    //MARK: Download the list of items
     
     
     class func getVideosList(fromURL: URL, completition: ([[String : AnyObject]]) -> (Void)) {
@@ -43,6 +43,7 @@ class Video {
     }.resume()
     }
     
+    //MARK: single item download
     
     class func object(at: Int, fromList: Array<[String : AnyObject]>, completiotion: ((Video, Int) -> Void))  {
         
