@@ -6,6 +6,10 @@
 //  Copyright © 2016 Haik Aslanyan. All rights reserved.
 //
 
+protocol TabBarDelegate {
+    func didSelectItem(atIndex: Int)
+}
+
 import UIKit
 
 class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -17,7 +21,7 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
     let darkItems = ["homeDark", "trendingDark", "subscriptionsDark", "accountDark"]
     let items = ["home", "trending", "subscriptions", "account"]
     lazy var whiteView: UIView = {
-        let wv = UIView.init(frame: CGRect.init(x: 0, y: self.frame.height - 3, width: self.frame.width / 4, height: 3))
+        let wv = UIView.init(frame: CGRect.init(x: 0, y: self.frame.height - 5, width: self.frame.width / 4, height: 5))
         wv.backgroundColor = UIColor.rbg(r: 245, g: 245, b: 245)
         return wv
     }()
@@ -32,6 +36,7 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
         return cv
         
     }()
+    var delegate: TabBarDelegate?
     
     
   
@@ -76,6 +81,7 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        
+        delegate?.didSelectItem(atIndex: indexPath.row)
         for index in  0...3 {
             let cell = collectionView.cellForItem(at: IndexPath.init(row: index, section: 0)) as! TabBarCellCollectionViewCell
             cell.icon.image = UIImage.init(named: darkItems[index])

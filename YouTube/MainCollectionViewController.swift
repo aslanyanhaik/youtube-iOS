@@ -9,14 +9,15 @@
 import UIKit
 
 
-class MainCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, hideSettings, hideSearch {
+class MainCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, hideSettings, hideSearch, TabBarDelegate {
     
     //MARK: - Properties
     
     var itemsList = [[String : AnyObject]] ()
     var videoCache = Cache<NSNumber, Video>()
-    let tabBar: TabBar = {
+    lazy var tabBar: TabBar = {
         let tb = TabBar.init(frame: globalVariables.rect)
+        tb.delegate = self
         return tb
     }()
     let statusView: UIView = {
@@ -32,6 +33,14 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     let search: Search = {
         let se = Search.init(frame: UIScreen.main().bounds)
         return se
+    }()
+    
+    let titleLabel: UILabel = {
+        let tl = UILabel.init(frame: CGRect.init(x: 20, y: 5, width: 200, height: 30))
+        tl.font = UIFont.systemFont(ofSize: 18)
+        tl.textColor = UIColor.white()
+        tl.text = "Home"
+        return tl
     }()
     
     //MARK: - Methods
@@ -75,14 +84,9 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         
             // TitleBabel
         
-        let _ : UILabel = {
-            let tl = UILabel.init(frame: CGRect.init(x: 20, y: 5, width: 200, height: 30))
-            tl.font = UIFont.systemFont(ofSize: 18)
-            tl.textColor = UIColor.white()
-            tl.text = "Home"
-            self.navigationController?.navigationBar.addSubview(tl)
-            return tl
-        }()
+        self.navigationController?.navigationBar.addSubview(self.titleLabel)
+
+       
 
             //TabBar
         
@@ -110,6 +114,20 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     //MARK: Delegates implementation
+    
+    func didSelectItem(atIndex: Int) {
+        switch atIndex {
+        case 0:
+            self.titleLabel.text = "Home"
+        case 1:
+            self.titleLabel.text = "Trending"
+        case 2:
+            self.titleLabel.text = "Subscriptions"
+        case 3:
+            self.titleLabel.text = "Account"
+        default: break
+        }
+    }
 
     func hideSettingsView(status: Bool) {
         if status == true {
