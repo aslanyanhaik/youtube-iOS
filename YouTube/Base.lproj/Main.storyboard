@@ -22,14 +22,12 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="VII-7m-I35" customClass="CustomCollectionViewCell" customModule="YouTube" customModuleProvider="target">
+                                <frame key="frameInset" width="375" height="289"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="289"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WiP-VV-kPM" customClass="SeparatorView" customModule="YouTube" customModuleProvider="target">
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </view>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRs-hp-v93">
                                             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
@@ -61,30 +59,35 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HMg-kw-bHb">
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="h8m-Yh-ANa"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                 </view>
                                 <constraints>
                                     <constraint firstItem="nkB-lx-Z0Z" firstAttribute="top" secondItem="VII-7m-I35" secondAttribute="top" constant="16" id="7df-O6-58w"/>
-                                    <constraint firstAttribute="trailing" secondItem="WiP-VV-kPM" secondAttribute="trailing" id="AQv-YP-wnp"/>
                                     <constraint firstItem="CRs-hp-v93" firstAttribute="leading" secondItem="VII-7m-I35" secondAttribute="leading" constant="16" id="J5q-fo-4lQ"/>
                                     <constraint firstAttribute="trailing" secondItem="nkB-lx-Z0Z" secondAttribute="trailing" constant="16" id="KJ2-oR-Onr"/>
                                     <constraint firstItem="ihG-kZ-enK" firstAttribute="top" secondItem="nkB-lx-Z0Z" secondAttribute="bottom" constant="16" id="O74-ch-4qB"/>
-                                    <constraint firstItem="WiP-VV-kPM" firstAttribute="top" secondItem="VII-7m-I35" secondAttribute="top" id="QTT-iL-yci"/>
                                     <constraint firstAttribute="trailing" secondItem="ihG-kZ-enK" secondAttribute="trailing" constant="16" id="T5L-Bx-3xE"/>
                                     <constraint firstItem="tJD-Rq-iux" firstAttribute="leading" secondItem="CRs-hp-v93" secondAttribute="trailing" constant="8" id="UoN-64-9sT"/>
                                     <constraint firstAttribute="trailing" secondItem="tJD-Rq-iux" secondAttribute="trailing" constant="16" id="VnH-aP-Cdf"/>
                                     <constraint firstItem="ltF-ch-yN9" firstAttribute="trailing" secondItem="nkB-lx-Z0Z" secondAttribute="trailing" constant="-3" id="YA3-F4-xPJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="HMg-kw-bHb" secondAttribute="bottom" id="bmA-5Z-yLf"/>
                                     <constraint firstItem="ihG-kZ-enK" firstAttribute="leading" secondItem="CRs-hp-v93" secondAttribute="trailing" constant="8" id="cN7-Xt-eMp"/>
-                                    <constraint firstItem="WiP-VV-kPM" firstAttribute="leading" secondItem="VII-7m-I35" secondAttribute="leading" id="hFJ-7t-tg9"/>
                                     <constraint firstItem="tJD-Rq-iux" firstAttribute="top" secondItem="ihG-kZ-enK" secondAttribute="bottom" constant="8" id="hWv-f9-cLc"/>
                                     <constraint firstItem="ltF-ch-yN9" firstAttribute="bottom" secondItem="nkB-lx-Z0Z" secondAttribute="bottom" constant="-3" id="icJ-s5-HHw"/>
-                                    <constraint firstAttribute="bottom" secondItem="WiP-VV-kPM" secondAttribute="bottom" id="l1D-LB-hlc"/>
+                                    <constraint firstItem="HMg-kw-bHb" firstAttribute="leading" secondItem="VII-7m-I35" secondAttribute="leading" id="jsC-c4-92c"/>
+                                    <constraint firstAttribute="trailing" secondItem="HMg-kw-bHb" secondAttribute="trailing" id="orV-BB-xt9"/>
                                     <constraint firstItem="nkB-lx-Z0Z" firstAttribute="leading" secondItem="VII-7m-I35" secondAttribute="leading" constant="16" id="pMS-D3-cVv"/>
                                     <constraint firstItem="CRs-hp-v93" firstAttribute="top" secondItem="nkB-lx-Z0Z" secondAttribute="bottom" constant="16" id="xSP-dp-ZXG"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="channelPic" destination="CRs-hp-v93" id="30U-3h-yYo"/>
-                                    <outlet property="separatorView" destination="WiP-VV-kPM" id="7fG-lZ-kwI"/>
+                                    <outlet property="separatorView" destination="HMg-kw-bHb" id="qiP-5h-5D1"/>
                                     <outlet property="videoDescription" destination="tJD-Rq-iux" id="zjQ-w2-wvF"/>
                                     <outlet property="videoDuration" destination="ltF-ch-yN9" id="vtB-Xr-VTK"/>
                                     <outlet property="videoPic" destination="nkB-lx-Z0Z" id="TbU-og-QXO"/>
@@ -101,7 +104,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHm-OD-Ukx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="977" y="165"/>
+            <point key="canvasLocation" x="976.79999999999995" y="164.16791604197903"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VBS-Ts-hUi">

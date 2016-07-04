@@ -18,8 +18,9 @@ import UIKit
     @IBOutlet weak var videoPic: UIImageView!
     @IBOutlet weak var videoTitle: UILabel!
     @IBOutlet weak var videoDescription: UILabel!
-    @IBOutlet weak var separatorView: SeparatorView!
     @IBOutlet weak var videoDuration: UILabel!
+    @IBOutlet weak var separatorView: UIView!
+       
     
    //MARK: Methods
         
@@ -40,7 +41,7 @@ import UIKit
         customization()
         
     }
-        
+   
         
     required init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
@@ -48,20 +49,3 @@ import UIKit
     }
         
   }
-
-//MARK: Separator View
-
-class SeparatorView: UIView {
-    
-    
-    override func draw(_ rect: CGRect) {
-        let bezierPath = UIBezierPath()
-        bezierPath.move(to: CGPoint(x: 0, y: self.bounds.height))
-        bezierPath.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height))
-        UIColor.gray().setStroke()
-        bezierPath.lineWidth = 1
-        bezierPath.stroke()
-        
-    }
-    
-}
