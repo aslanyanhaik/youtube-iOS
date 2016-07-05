@@ -33,6 +33,16 @@ import UIKit
         self.videoDuration.sizeToFit()
     }
         
+    //MARK: Methods
+        
+        func resetCell()  {
+            self.separatorView.isHidden = false
+            self.videoPic.image = UIImage.init(named: "emptyTumbnail")
+            self.videoTitle.text = ""
+            self.channelPic.setImage(UIImage(), for: [])
+            self.videoDuration.text = ""
+            self.videoDescription.text = ""
+        }
         
     //MARK: Inits
         

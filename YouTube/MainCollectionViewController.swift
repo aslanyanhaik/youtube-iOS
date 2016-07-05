@@ -14,7 +14,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     //MARK: - Properties
     
     var itemsList = [[String : AnyObject]] ()
-    var videoCache = Cache<NSNumber, Video>()
+    var videoItems = [Int : Video]()
     lazy var tabBar: TabBar = {
         let tb = TabBar.init(frame: globalVariables.rect)
         tb.delegate = self
@@ -51,6 +51,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         self.collectionView?.backgroundColor = UIColor.white()
         self.collectionView?.contentInset = UIEdgeInsetsMake((self.navigationController?.navigationBar.frame.height)!, 0, 0, 0)
         self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake((self.navigationController?.navigationBar.frame.height)!, 0, 0, 0)
+        self.navigationController?.hidesBarsOnSwipe = true
         
         //StaturBar background View
         
@@ -149,11 +150,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         super.viewDidLoad()
         customization()
         Video.getVideosList(fromURL: globalVariables.urlLink) { (items) -> (Void) in
-            
             self.itemsList = items
-            self.videoCache.countLimit = items.count
-            
-            
             DispatchQueue.main.async(execute: {
                 self.collectionView?.reloadData()
                 UIApplication.shared().isNetworkActivityIndicatorVisible = false
@@ -169,11 +166,6 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     
        // MARK: UICollectionViewDataSource
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
@@ -182,42 +174,31 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CustomCollectionViewCell
-            if itemsList.isEmpty == false {
-                if videoCache.object(forKey: indexPath.row as NSNumber) != nil {
-                    let videoItem = self.videoCache.object(forKey: indexPath.row as NSNumber)!
-                    cell.videoPic.image = videoItem.tumbnail
-                    cell.videoTitle.text = videoItem.title
-                    cell.channelPic.setImage(videoItem.channel.image, for: [])
-                    cell.channelPic.imageView?.contentMode = UIViewContentMode.scaleAspectFill
-                    cell.videoDuration.text = " " + secondsToHoursMinutesSeconds(seconds: videoItem.duration) + " "
-                    let viewsCount = NumberFormatter()
-                    viewsCount.numberStyle = .decimal
-                    let views = viewsCount.string(from: videoItem.views as NSNumber)!
-                    let description = videoItem.channel.name + "  • " + views
-                    cell.videoDescription.text = description
-                } else{
-                    Video.object(at: indexPath.row, fromList: itemsList, completiotion: { (videoItem, index) in
-                        
-                        self.videoCache.setObject(videoItem, forKey: indexPath.row as NSNumber)
-                        if indexPath.row == index {
-                            DispatchQueue.main.async(execute: {
-                                cell.videoPic.image = videoItem.tumbnail
-                                cell.videoTitle.text = videoItem.title
-                                cell.channelPic.setImage(videoItem.channel.image, for: [])
-                                cell.channelPic.imageView?.contentMode = UIViewContentMode.scaleAspectFill
-                                cell.videoDuration.text = " " + secondsToHoursMinutesSeconds(seconds: videoItem.duration) + " "
-                                let viewsCount = NumberFormatter()
-                                viewsCount.numberStyle = .decimal
-                                let views = viewsCount.string(from: videoItem.views as NSNumber)!
-                                let description = videoItem.channel.name + "  • " + views
-                                cell.videoDescription.text = description
-                            })
-                        }
-                    })
-                }
+        cell.resetCell()
+        if let videoItem  = videoItems[indexPath.row] {
+            cell.videoPic.image = videoItem.tumbnail
+            cell.videoTitle.text = videoItem.title
+            cell.channelPic.setImage(videoItem.channel.image, for: [])
+            cell.channelPic.imageView?.contentMode = UIViewContentMode.scaleAspectFill
+            cell.videoDuration.text = " " + secondsToHoursMinutesSeconds(seconds: videoItem.duration) + " "
+            let viewsCount = NumberFormatter()
+            viewsCount.numberStyle = .decimal
+            let views = viewsCount.string(from: videoItem.views as NSNumber)!
+            let description = videoItem.channel.name + "  • " + views
+            cell.videoDescription.text = description
+        } else{
+            Video.object(at: indexPath.row, fromList: itemsList, completiotion: { (videoItem, index) in
+                
+                self.videoItems[index]  = videoItem
+                
+                DispatchQueue.main.async(execute: {
+                    self.collectionView?.reloadData()
+                })
+            })
         }
-        
-        
+        if indexPath.row == (self.itemsList.count - 1) {
+            cell.separatorView.isHidden = true
+        }
         return cell
     }
 
@@ -234,13 +215,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         return 0
     }
     
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        if indexPath.row == (self.itemsList.count - 1) {
-            cell.subviews[0].subviews[0].isHidden = true
-        }
-        
-    }
+
     
     
    }
