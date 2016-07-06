@@ -46,7 +46,8 @@ class Video {
     //MARK: single item download
     
     class func object(at: Int, fromList: Array<[String : AnyObject]>, completiotion: ((Video, Int) -> Void))  {
-        
+       
+        UIApplication.shared().isNetworkActivityIndicatorVisible = true
         DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosUserInteractive).async(execute: {
             let item = fromList[at]
             let title  = item["title"] as! String

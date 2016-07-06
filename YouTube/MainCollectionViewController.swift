@@ -15,9 +15,8 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     
     var itemsList = [[String : AnyObject]] ()
     var videoItems = [Int : Video]()
-    lazy var tabBar: TabBar = {
-        let tb = TabBar.init(frame: globalVariables.rect)
-        tb.delegate = self
+    let tabBar: TabBar = {
+        let tb = TabBar.init(frame: CGRect.init(x: 0, y: 0, width: globalVariables.width, height: 64))
         return tb
     }()
     let statusView: UIView = {
@@ -49,9 +48,10 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         
         //CollectionView Customization
         self.collectionView?.backgroundColor = UIColor.white()
-        self.collectionView?.contentInset = UIEdgeInsetsMake((self.navigationController?.navigationBar.frame.height)!, 0, 0, 0)
-        self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake((self.navigationController?.navigationBar.frame.height)!, 0, 0, 0)
+        self.collectionView?.contentInset = UIEdgeInsetsMake(self.tabBar.frame.height, 0, 0, 0)
+        self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(self.tabBar.frame.height, 0, 0, 0)
         self.navigationController?.hidesBarsOnSwipe = true
+        self.navigationController?.view.backgroundColor = UIColor.rbg(r: 228, g: 34, b: 24)
         
         //StaturBar background View
         
@@ -87,15 +87,14 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         
         self.navigationController?.navigationBar.addSubview(self.titleLabel)
 
-       
-
             //TabBar
         
         self.view.addSubview(self.tabBar)
-        
-        //Search and Settings
-        
     }
+
+    
+    
+    //MARK: Search and Settings
     
     func handleSearch()  {
         if let window = UIApplication.shared().keyWindow {
@@ -104,8 +103,6 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         }
         
     }
-    
-    
     
     func handleMore()  {
         if let window = UIApplication.shared().keyWindow {
@@ -162,37 +159,28 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         super.init(coder: aDecoder)
         self.settings.delegate = self
         self.search.delegate = self
+        self.tabBar.delegate = self
+        
     }
-    
+  
        // MARK: UICollectionViewDataSource
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
         return self.itemsList.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CustomCollectionViewCell
         cell.resetCell()
-        if let videoItem  = videoItems[indexPath.row] {
-            cell.videoPic.image = videoItem.tumbnail
-            cell.videoTitle.text = videoItem.title
-            cell.channelPic.setImage(videoItem.channel.image, for: [])
-            cell.channelPic.imageView?.contentMode = UIViewContentMode.scaleAspectFill
-            cell.videoDuration.text = " " + secondsToHoursMinutesSeconds(seconds: videoItem.duration) + " "
-            let viewsCount = NumberFormatter()
-            viewsCount.numberStyle = .decimal
-            let views = viewsCount.string(from: videoItem.views as NSNumber)!
-            let description = videoItem.channel.name + "  • " + views
-            cell.videoDescription.text = description
+        if let video = videoItems[indexPath.row] {
+                cell.setupCell(videoItem: video)
         } else{
-            Video.object(at: indexPath.row, fromList: itemsList, completiotion: { (videoItem, index) in
-                
-                self.videoItems[index]  = videoItem
-                
+            Video.object(at: indexPath.row, fromList: itemsList, completiotion: { (video, index) in
+                self.videoItems[index] = video
                 DispatchQueue.main.async(execute: {
                     self.collectionView?.reloadData()
+                    UIApplication.shared().isNetworkActivityIndicatorVisible = false
                 })
             })
         }
@@ -214,8 +202,6 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
-
-    
+   
     
    }

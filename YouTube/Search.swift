@@ -81,6 +81,7 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
     func  dismiss()  {
         
         self.searchField.text = ""
+        self.items.removeAll()
         UIView.animate(withDuration: 0.3, animations: {
             self.backgroundView.alpha = 0
             self.searchView.alpha = 0
@@ -118,8 +119,9 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
         return true
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        dismiss()
+        return true
     }
     
     //MARK: TableView Delegates and Datasources

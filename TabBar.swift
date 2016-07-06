@@ -29,10 +29,11 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
     lazy var collectionView: UICollectionView  = {
         
         let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView.init(frame: globalVariables.rect, collectionViewLayout: layout)
+        let cv = UICollectionView.init(frame: CGRect.init(x: 0, y: 20, width: self.frame.width, height: (self.frame.height - 20)), collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
         cv.backgroundColor = UIColor.clear()
+        cv.isScrollEnabled = false
         return cv
         
     }()
@@ -66,8 +67,7 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize.init(width: self.frame.width / 4, height: self.frame.height)
-        
+        return CGSize.init(width: self.frame.width / 4, height: (self.frame.height - 20))
         
     }
    
@@ -76,8 +76,6 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
         return 0
     }
     
-    
-  
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        
@@ -130,9 +128,8 @@ class TabBarCellCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clear()
-        let height = (self.contentView.frame.height - 40) / 2
-        let width = (self.contentView.frame.width - 30) / 2
-        icon.frame = CGRect.init(x: width, y: height, width: 30, height: 30)
+        let width = (self.contentView.bounds.width - 30) / 2
+        icon.frame = CGRect.init(x: width, y: 2, width: 30, height: 30)
         let image = UIImage.init(named: "home")
         icon.image = image?.withRenderingMode(.alwaysTemplate)
         self.contentView.addSubview(icon)

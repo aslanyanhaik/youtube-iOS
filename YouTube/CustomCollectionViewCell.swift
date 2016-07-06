@@ -35,14 +35,28 @@ import UIKit
         
     //MARK: Methods
         
-        func resetCell()  {
-            self.separatorView.isHidden = false
-            self.videoPic.image = UIImage.init(named: "emptyTumbnail")
-            self.videoTitle.text = ""
-            self.channelPic.setImage(UIImage(), for: [])
-            self.videoDuration.text = ""
-            self.videoDescription.text = ""
+    func resetCell()  {
+        self.separatorView.isHidden = false
+        self.videoPic.image = UIImage.init(named: "emptyTumbnail")
+        self.videoTitle.text = ""
+        self.channelPic.setImage(UIImage(), for: [])
+        self.videoDuration.text = ""
+        self.videoDescription.text = ""
+    }
+        
+        func setupCell(videoItem: Video)  {
+        self.videoPic.image = videoItem.tumbnail
+        self.videoTitle.text = videoItem.title
+        self.channelPic.setImage(videoItem.channel.image, for: [])
+        self.channelPic.imageView?.contentMode = UIViewContentMode.scaleAspectFill
+        self.videoDuration.text = " " + secondsToHoursMinutesSeconds(seconds: videoItem.duration) + " "
+        let viewsCount = NumberFormatter()
+        viewsCount.numberStyle = .decimal
+        let views = viewsCount.string(from: videoItem.views as NSNumber)!
+        let description = videoItem.channel.name + "  • " + views
+        self.videoDescription.text = description
         }
+        
         
     //MARK: Inits
         
