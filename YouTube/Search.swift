@@ -70,7 +70,7 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
     }
     
     func animate()  {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             self.backgroundView.alpha = 0.5
             self.searchView.alpha = 1
             self.searchField.becomeFirstResponder()
@@ -82,7 +82,7 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
         
         self.searchField.text = ""
         self.items.removeAll()
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             self.backgroundView.alpha = 0
             self.searchView.alpha = 0
             self.searchField.resignFirstResponder()

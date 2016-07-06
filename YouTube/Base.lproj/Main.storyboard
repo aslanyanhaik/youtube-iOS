@@ -7,12 +7,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main Collection View Controller-->
+        <!--Home Collection View Controller-->
         <scene sceneID="hEZ-hq-nL4">
             <objects>
-                <collectionViewController id="iD3-3m-SMz" customClass="MainCollectionViewController" customModule="YouTube" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="Home" id="iD3-3m-SMz" customClass="HomeCollectionViewController" customModule="YouTube" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" id="g1m-kT-Fbb">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="abK-vo-4Ay">
                             <size key="itemSize" width="375" height="289"/>
@@ -104,7 +104,38 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHm-OD-Ukx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="976.79999999999995" y="164.16791604197903"/>
+            <point key="canvasLocation" x="1324" y="152"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="aY0-b5-Jlu">
+            <objects>
+                <viewController id="1Ps-Vg-V52" customClass="MainViewController" customModule="YouTube" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oDK-OG-ikb"/>
+                        <viewControllerLayoutGuide type="bottom" id="vPz-Qz-Vo2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EfD-Bg-Q5H">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ua-9E-yWV"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0Ua-9E-yWV" firstAttribute="top" secondItem="oDK-OG-ikb" secondAttribute="bottom" id="2JP-SD-624"/>
+                            <constraint firstAttribute="trailing" secondItem="0Ua-9E-yWV" secondAttribute="trailing" id="C8l-ep-Y2L"/>
+                            <constraint firstItem="vPz-Qz-Vo2" firstAttribute="top" secondItem="0Ua-9E-yWV" secondAttribute="bottom" id="Jrr-Wa-tKS"/>
+                            <constraint firstItem="0Ua-9E-yWV" firstAttribute="leading" secondItem="EfD-Bg-Q5H" secondAttribute="leading" id="xaE-Pq-wmc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="09C-fi-7fq"/>
+                    <connections>
+                        <outlet property="scrollview" destination="0Ua-9E-yWV" id="Xhb-77-FxC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C7n-ch-ZfR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="616.5" y="151.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VBS-Ts-hUi">
@@ -117,7 +148,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="iD3-3m-SMz" kind="relationship" relationship="rootViewController" id="vjb-5I-zNa"/>
+                        <segue destination="1Ps-Vg-V52" kind="relationship" relationship="rootViewController" id="Ri4-Cz-tVn"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3On-42-oCh" userLabel="First Responder" sceneMemberID="firstResponder"/>

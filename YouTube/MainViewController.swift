@@ -1,32 +1,29 @@
 //
-//  MainCollectionViewController.swift
+//  MainViewController.swift
 //  YouTube
 //
-//  Created by Haik Aslanyan on 6/22/16.
+//  Created by Haik Aslanyan on 7/6/16.
 //  Copyright © 2016 Haik Aslanyan. All rights reserved.
 //
 
 import UIKit
 
+class MainViewController: UIViewController, hideSettings, hideSearch, TabBarDelegate {
 
-class MainCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, hideSettings, hideSearch, TabBarDelegate {
-    
-    //MARK: - Properties
-    
-    var itemsList = [[String : AnyObject]] ()
-    var videoItems = [Int : Video]()
+    //MARK: Properties
+    @IBOutlet weak var scrollview: UIScrollView!
     let tabBar: TabBar = {
         let tb = TabBar.init(frame: CGRect.init(x: 0, y: 0, width: globalVariables.width, height: 64))
         return tb
     }()
     let statusView: UIView = {
-       let st = UIView.init(frame: CGRect.init(x: 0, y: 0, width: globalVariables.width, height: 20))
+        let st = UIView.init(frame: CGRect.init(x: 0, y: 0, width: globalVariables.width, height: 20))
         st.backgroundColor = UIColor.black()
         st.alpha = 0.3
         return st
     }()
     let settings: Settings = {
-       let st = Settings.init(frame: UIScreen.main().bounds)
+        let st = Settings.init(frame: UIScreen.main().bounds)
         return st
     }()
     let search: Search = {
@@ -42,14 +39,17 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         return tl
     }()
     
-    //MARK: - Methods
+    //MARK: Methods
     
     func customization()  {
+   
+        //ScrollVIew Customization
+        self.scrollview.contentInset = UIEdgeInsetsMake(self.tabBar.frame.height, 0, 0, 0)
+        self.scrollview.contentSize = CGSize.init(width: (UIScreen.main().bounds.width * 4), height: self.view.bounds.height)
         
-        //CollectionView Customization
-        self.collectionView?.backgroundColor = UIColor.white()
-        self.collectionView?.contentInset = UIEdgeInsetsMake(self.tabBar.frame.height, 0, 0, 0)
-        self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(self.tabBar.frame.height, 0, 0, 0)
+        
+        //NavigationController Customization
+        self.scrollview.contentInset = UIEdgeInsetsMake(self.tabBar.frame.height, 0, 0, 0)
         self.navigationController?.hidesBarsOnSwipe = true
         self.navigationController?.view.backgroundColor = UIColor.rbg(r: 228, g: 34, b: 24)
         
@@ -61,38 +61,50 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         
         //NavigationBar customization
         
-            //NavigationBar color and shadow
+        //NavigationBar color and shadow
         
         self.navigationController?.navigationBar.barTintColor = UIColor.rbg(r: 228, g: 34, b: 24)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-
-            // Buttons
+        
+        // Buttons
         
         let searchButton: UIBarButtonItem = {
-            let sb = UIBarButtonItem.init(image: UIImage.init(named: "search_icon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(MainCollectionViewController.handleSearch))
+            let sb = UIBarButtonItem.init(image: UIImage.init(named: "search_icon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(MainViewController.handleSearch))
             sb.tintColor = UIColor.white()
             return sb
         }()
         
         let moreButton: UIBarButtonItem = {
-            let  mb = UIBarButtonItem.init(image: UIImage.init(named: "nav_more_icon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(MainCollectionViewController.handleMore))
+            let  mb = UIBarButtonItem.init(image: UIImage.init(named: "nav_more_icon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(MainViewController.handleMore))
             mb.tintColor = UIColor.white()
             return mb
         }()
         
         self.navigationItem.rightBarButtonItems = [moreButton, searchButton]
         
-            // TitleBabel
+        // TitleBabel
         
         self.navigationController?.navigationBar.addSubview(self.titleLabel)
-
-            //TabBar
+        
+        //TabBar
         
         self.view.addSubview(self.tabBar)
-    }
-
+        
     
+    }
+    
+    
+    func viewControllersInits()  {
+        let storyBoard = self.storyboard!
+        let homeVC = storyBoard.instantiateViewController(withIdentifier: "Home")
+        print(homeVC.description)
+        self.addChildViewController(homeVC)
+        homeVC.view.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+        self.scrollview.addSubview(homeVC.view)
+        homeVC.didMove(toParentViewController: self)
+        
+    }
     
     //MARK: Search and Settings
     
@@ -110,8 +122,10 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
             self.settings.animate()
         }
     }
+
     
     //MARK: Delegates implementation
+
     
     func didSelectItem(atIndex: Int) {
         switch atIndex {
@@ -126,7 +140,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         default: break
         }
     }
-
+    
     func hideSettingsView(status: Bool) {
         if status == true {
             self.settings.removeFromSuperview()
@@ -139,20 +153,12 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         }
     }
 
-    
     //MARK: -  ViewController Lifecylce
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewControllersInits()
         customization()
-        Video.getVideosList(fromURL: globalVariables.urlLink) { (items) -> (Void) in
-            self.itemsList = items
-            DispatchQueue.main.async(execute: {
-                self.collectionView?.reloadData()
-                UIApplication.shared().isNetworkActivityIndicatorVisible = false
-            })
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -162,46 +168,5 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         self.tabBar.delegate = self
         
     }
-  
-       // MARK: UICollectionViewDataSource
 
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.itemsList.count
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CustomCollectionViewCell
-        cell.resetCell()
-        if let video = videoItems[indexPath.row] {
-                cell.setupCell(videoItem: video)
-        } else{
-            Video.object(at: indexPath.row, fromList: itemsList, completiotion: { (video, index) in
-                self.videoItems[index] = video
-                DispatchQueue.main.async(execute: {
-                    self.collectionView?.reloadData()
-                    UIApplication.shared().isNetworkActivityIndicatorVisible = false
-                })
-            })
-        }
-        if indexPath.row == (self.itemsList.count - 1) {
-            cell.separatorView.isHidden = true
-        }
-        return cell
-    }
-
-    // MARK: UICollectionViewDelegate
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        
-        let size = CGSize.init(width: self.view.bounds.width, height: 300)
-        return size
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-   
-    
-   }
+}
