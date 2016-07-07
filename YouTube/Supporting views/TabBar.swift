@@ -92,7 +92,20 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
         UIView.animate(withDuration: 0.2, animations: {
             self.whiteView.frame.origin.x = self.frame.width / 4 * CGFloat(indexPath.row)
         })
+    }
+    
+    //MARK: Methods
+    
+    func selectItem(index: Int)  {
+        for index in  0...3 {
+            let cell = collectionView.cellForItem(at: IndexPath.init(row: index, section: 0)) as! TabBarCellCollectionViewCell
+            cell.icon.image = UIImage.init(named: darkItems[index])
+            
+        }
         
+        let cell = collectionView.cellForItem(at: IndexPath.init(row: index, section: 0)) as! TabBarCellCollectionViewCell
+        cell.icon.image = UIImage.init(named: items[index])
+        self.collectionView.selectItem(at: IndexPath.init(row: index, section: 0), animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
     }
     
    
@@ -106,7 +119,6 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
         addSubview(self.whiteView)
                 
     }
-    
     
     
     required init?(coder aDecoder: NSCoder) {

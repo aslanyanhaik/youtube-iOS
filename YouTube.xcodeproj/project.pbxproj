@@ -62,9 +62,9 @@
 		2229DC541D1EEA2E0058E804 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				220E5E1B1D2E7C92001E60A3 /* MainViewController.swift */,
 				220E5E191D2E7C92001E60A3 /* AccountVC.swift */,
 				220E5E1A1D2E7C92001E60A3 /* HomeVC.swift */,
-				220E5E1B1D2E7C92001E60A3 /* MainViewController.swift */,
 				220E5E1C1D2E7C92001E60A3 /* SubscriptionsVC.swift */,
 				220E5E1D1D2E7C92001E60A3 /* TrendingVC.swift */,
 			);

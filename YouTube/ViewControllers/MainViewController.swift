@@ -13,8 +13,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     //MARK: Properties
     
-    let identifier = "cell"
-    var items = [UIView]()
+    var views = [UIView]()
+    let items = ["Home", "Trending", "Subscriptions", "Account"]
     
      lazy var collectionView: UICollectionView  = {
         let layout = UICollectionViewFlowLayout()
@@ -22,6 +22,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         let cv: UICollectionView = UICollectionView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main().bounds.width, height: (self.view.bounds.height)), collectionViewLayout: layout)
+        cv.delegate = self
+        cv.dataSource = self
         cv.showsHorizontalScrollIndicator = false
         cv.backgroundColor = UIColor.clear()
         cv.bounces = false
@@ -30,22 +32,28 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         return cv
     }()
     
-    let tabBar: TabBar = {
+    lazy var tabBar: TabBar = {
         let tb = TabBar.init(frame: CGRect.init(x: 0, y: 0, width: globalVariables.width, height: 64))
+        tb.delegate = self
         return tb
     }()
+    
     let statusView: UIView = {
         let st = UIView.init(frame: CGRect.init(x: 0, y: 0, width: globalVariables.width, height: 20))
         st.backgroundColor = UIColor.black()
         st.alpha = 0.3
         return st
     }()
-    let settings: Settings = {
+    
+    lazy var settings: Settings = {
         let st = Settings.init(frame: UIScreen.main().bounds)
+        st.delegate = self
         return st
     }()
-    let search: Search = {
+    
+    lazy var search: Search = {
         let se = Search.init(frame: UIScreen.main().bounds)
+        se.delegate = self
         return se
     }()
     
@@ -53,39 +61,10 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         let tl = UILabel.init(frame: CGRect.init(x: 20, y: 5, width: 200, height: 30))
         tl.font = UIFont.systemFont(ofSize: 18)
         tl.textColor = UIColor.white()
-        tl.text = "Home"
         return tl
     }()
     
     //MARK: Methods
-    
-    func viewControllersInits()  {
-        let storyBoard = self.storyboard!
-        let homeVC = storyBoard.instantiateViewController(withIdentifier: "Home")
-        self.addChildViewController(homeVC)
-        homeVC.view.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height - 44))
-        homeVC.didMove(toParentViewController: self)
-        self.items.append(homeVC.view)
-        let trendingVC = storyBoard.instantiateViewController(withIdentifier: "Trending")
-        self.addChildViewController(trendingVC)
-        trendingVC.view.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height - 44))
-        trendingVC.didMove(toParentViewController: self)
-        self.items.append(trendingVC.view)
-        
-        let subscriptionsVC = storyBoard.instantiateViewController(withIdentifier: "Subscriptions")
-        self.addChildViewController(trendingVC)
-        subscriptionsVC.view.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height - 44))
-        subscriptionsVC.didMove(toParentViewController: self)
-        self.items.append(subscriptionsVC.view)
-        
-        let accountVC = storyBoard.instantiateViewController(withIdentifier: "Account")
-        self.addChildViewController(accountVC)
-        accountVC.view.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height - 44))
-        accountVC.didMove(toParentViewController: self)
-        self.items.append(accountVC.view)
-
-        
-    }
     
     
     func customization()  {
@@ -132,11 +111,19 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         //TabBar
         self.view.addSubview(self.tabBar)
         
+        //ViewControllers init
+        for title in self.items {
+            let storyBoard = self.storyboard!
+            let vc = storyBoard.instantiateViewController(withIdentifier: title)
+            self.addChildViewController(vc)
+            vc.view.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height - 44))
+            vc.didMove(toParentViewController: self)
+            self.views.append(vc.view)
+        }
         
     }
     
     
-  
     
     //MARK: Search and Settings
     
@@ -160,17 +147,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     
     func didSelectItem(atIndex: Int) {
-        switch atIndex {
-        case 0:
-            self.titleLabel.text = "Home"
-        case 1:
-            self.titleLabel.text = "Trending"
-        case 2:
-            self.titleLabel.text = "Subscriptions"
-        case 3:
-            self.titleLabel.text = "Account"
-        default: break
-        }
+        self.titleLabel.text = self.items[atIndex]
+        self.collectionView.scrollRectToVisible(CGRect.init(origin: CGPoint.init(x: (self.view.bounds.width * CGFloat(atIndex)), y: 0), size: self.view.bounds.size), animated: true)
     }
     
     func hideSettingsView(status: Bool) {
@@ -186,31 +164,24 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     override func viewDidLoad() {
+        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         super.viewDidLoad()
-        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: identifier)
-        self.settings.delegate = self
-        self.search.delegate = self
-        self.tabBar.delegate = self
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
         customization()
-        viewControllersInits()
+        didSelectItem(atIndex: 0)
+        
     }
-
-
-    
     
     
     //MARK: CollectionView DataSources
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return self.views.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
-        cell.contentView.addSubview(self.items[indexPath.row])
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        cell.contentView.addSubview(self.views[indexPath.row])
         return cell
         
     }
@@ -220,10 +191,16 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize.init(width: self.view.bounds.width, height: (self.view.bounds.height + 22))
-        
+               return CGSize.init(width: self.view.bounds.width, height: (self.view.bounds.height + 22))
+
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.tabBar.whiteView.frame.origin.x = (scrollView.contentOffset.x / 4)
+        let aa = Int(scrollView.contentOffset.x / self.view.bounds.width)
+        print(aa)
+        //self.tabBar.selectItem(index: aa)
+    }
     
 }
 
