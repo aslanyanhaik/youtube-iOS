@@ -36,7 +36,7 @@
                                                 <constraint firstAttribute="height" constant="48" id="OBD-6l-DQ7"/>
                                             </constraints>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2A035EBD-AE71-4A63-89C3-5F99C4E31E39" translatesAutoresizingMaskIntoConstraints="NO" id="nkB-lx-Z0Z">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="05561D2E-A407-46EB-B9A2-AF696B2B2916" translatesAutoresizingMaskIntoConstraints="NO" id="nkB-lx-Z0Z">
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="nkB-lx-Z0Z" secondAttribute="height" multiplier="16:9" id="aan-Cf-ejp"/>
                                             </constraints>
@@ -112,7 +112,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IXR-Mk-kYq" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="mbv-fJ-8Zp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="mbv-fJ-8Zp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -173,7 +173,7 @@
                                                 <constraint firstAttribute="width" constant="48" id="uUk-nz-Ig1"/>
                                             </constraints>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2A035EBD-AE71-4A63-89C3-5F99C4E31E39" translatesAutoresizingMaskIntoConstraints="NO" id="icX-9A-GCV">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="05561D2E-A407-46EB-B9A2-AF696B2B2916" translatesAutoresizingMaskIntoConstraints="NO" id="icX-9A-GCV">
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="icX-9A-GCV" secondAttribute="height" multiplier="16:9" id="65r-IS-95X"/>
                                             </constraints>
@@ -273,7 +273,7 @@
                                                 <constraint firstAttribute="height" constant="48" id="yYi-2O-5a3"/>
                                             </constraints>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2A035EBD-AE71-4A63-89C3-5F99C4E31E39" translatesAutoresizingMaskIntoConstraints="NO" id="xDG-u2-sHa">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="05561D2E-A407-46EB-B9A2-AF696B2B2916" translatesAutoresizingMaskIntoConstraints="NO" id="xDG-u2-sHa">
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="xDG-u2-sHa" secondAttribute="height" multiplier="16:9" id="IvI-DZ-Yhr"/>
                                             </constraints>
@@ -373,7 +373,7 @@
                                                 <constraint firstAttribute="height" constant="48" id="a48-Lw-sGh"/>
                                             </constraints>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2A035EBD-AE71-4A63-89C3-5F99C4E31E39" translatesAutoresizingMaskIntoConstraints="NO" id="7cu-nV-Xec">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="05561D2E-A407-46EB-B9A2-AF696B2B2916" translatesAutoresizingMaskIntoConstraints="NO" id="7cu-nV-Xec">
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="7cu-nV-Xec" secondAttribute="height" multiplier="16:9" id="sfT-0o-njd"/>
                                             </constraints>
@@ -446,7 +446,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="2A035EBD-AE71-4A63-89C3-5F99C4E31E39" width="375" height="211">
+        <image name="05561D2E-A407-46EB-B9A2-AF696B2B2916" width="375" height="211">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBMU
 GR4fJSYsLzU4VSRudWxs1QkKCwwNDg8QERJWTlNTaXplViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBz
