@@ -117,7 +117,6 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
 }
 
 
-
 //TabBarCell Class
 
 class TabBarCellCollectionViewCell: UICollectionViewCell {
