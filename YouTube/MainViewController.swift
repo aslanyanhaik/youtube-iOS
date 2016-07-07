@@ -8,10 +8,28 @@
 
 import UIKit
 
-class MainViewController: UIViewController, hideSettings, hideSearch, TabBarDelegate {
-
+class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, hideSettings, hideSearch, TabBarDelegate   {
+    
+    
     //MARK: Properties
-    @IBOutlet weak var scrollview: UIScrollView!
+    
+    let identifier = "cell"
+    var items = [UIView]()
+    
+     lazy var collectionView: UICollectionView  = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        let cv: UICollectionView = UICollectionView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main().bounds.width, height: (self.view.bounds.height)), collectionViewLayout: layout)
+        cv.showsHorizontalScrollIndicator = false
+        cv.backgroundColor = UIColor.clear()
+        cv.bounces = false
+        cv.isPagingEnabled = true
+        cv.isDirectionalLockEnabled = true
+        return cv
+    }()
+    
     let tabBar: TabBar = {
         let tb = TabBar.init(frame: CGRect.init(x: 0, y: 0, width: globalVariables.width, height: 64))
         return tb
@@ -41,20 +59,47 @@ class MainViewController: UIViewController, hideSettings, hideSearch, TabBarDele
     
     //MARK: Methods
     
+    func viewControllersInits()  {
+        let storyBoard = self.storyboard!
+        let homeVC = storyBoard.instantiateViewController(withIdentifier: "Home")
+        self.addChildViewController(homeVC)
+        homeVC.view.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height - 44))
+        homeVC.didMove(toParentViewController: self)
+        self.items.append(homeVC.view)
+        let trendingVC = storyBoard.instantiateViewController(withIdentifier: "Trending")
+        self.addChildViewController(trendingVC)
+        trendingVC.view.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height - 44))
+        trendingVC.didMove(toParentViewController: self)
+        self.items.append(trendingVC.view)
+        
+        let subscriptionsVC = storyBoard.instantiateViewController(withIdentifier: "Subscriptions")
+        self.addChildViewController(trendingVC)
+        subscriptionsVC.view.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height - 44))
+        subscriptionsVC.didMove(toParentViewController: self)
+        self.items.append(subscriptionsVC.view)
+        
+        let accountVC = storyBoard.instantiateViewController(withIdentifier: "Account")
+        self.addChildViewController(accountVC)
+        accountVC.view.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height - 44))
+        accountVC.didMove(toParentViewController: self)
+        self.items.append(accountVC.view)
+
+        
+    }
+    
+    
     func customization()  {
-   
-        //ScrollVIew Customization
-        self.scrollview.contentInset = UIEdgeInsetsMake(self.tabBar.frame.height, 0, 0, 0)
-        self.scrollview.contentSize = CGSize.init(width: (UIScreen.main().bounds.width * 4), height: self.view.bounds.height)
+        
+        //CollectionView Customization
+        self.collectionView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
+        self.view.addSubview(self.collectionView)
         
         
         //NavigationController Customization
-        self.scrollview.contentInset = UIEdgeInsetsMake(self.tabBar.frame.height, 0, 0, 0)
         self.navigationController?.hidesBarsOnSwipe = true
         self.navigationController?.view.backgroundColor = UIColor.rbg(r: 228, g: 34, b: 24)
         
         //StaturBar background View
-        
         if let window  = UIApplication.shared().keyWindow {
             window.addSubview(self.statusView)
         }
@@ -62,13 +107,11 @@ class MainViewController: UIViewController, hideSettings, hideSearch, TabBarDele
         //NavigationBar customization
         
         //NavigationBar color and shadow
-        
         self.navigationController?.navigationBar.barTintColor = UIColor.rbg(r: 228, g: 34, b: 24)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
         // Buttons
-        
         let searchButton: UIBarButtonItem = {
             let sb = UIBarButtonItem.init(image: UIImage.init(named: "search_icon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(MainViewController.handleSearch))
             sb.tintColor = UIColor.white()
@@ -84,27 +127,16 @@ class MainViewController: UIViewController, hideSettings, hideSearch, TabBarDele
         self.navigationItem.rightBarButtonItems = [moreButton, searchButton]
         
         // TitleBabel
-        
         self.navigationController?.navigationBar.addSubview(self.titleLabel)
         
         //TabBar
-        
         self.view.addSubview(self.tabBar)
         
-    
-    }
-    
-    
-    func viewControllersInits()  {
-        let storyBoard = self.storyboard!
-        let homeVC = storyBoard.instantiateViewController(withIdentifier: "Home")
-        print(homeVC.description)
-        self.addChildViewController(homeVC)
-        homeVC.view.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-        self.scrollview.addSubview(homeVC.view)
-        homeVC.didMove(toParentViewController: self)
         
     }
+    
+    
+  
     
     //MARK: Search and Settings
     
@@ -122,10 +154,10 @@ class MainViewController: UIViewController, hideSettings, hideSearch, TabBarDele
             self.settings.animate()
         }
     }
-
+    
     
     //MARK: Delegates implementation
-
+    
     
     func didSelectItem(atIndex: Int) {
         switch atIndex {
@@ -152,21 +184,48 @@ class MainViewController: UIViewController, hideSettings, hideSearch, TabBarDele
             self.search.removeFromSuperview()
         }
     }
-
-    //MARK: -  ViewController Lifecylce
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewControllersInits()
-        customization()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: identifier)
         self.settings.delegate = self
         self.search.delegate = self
         self.tabBar.delegate = self
-        
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        customization()
+        viewControllersInits()
     }
 
+
+    
+    
+    
+    //MARK: CollectionView DataSources
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+        cell.contentView.addSubview(self.items[indexPath.row])
+        return cell
+        
+    }
+    
+    //MARK: CollectionView Delegates
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize.init(width: self.view.bounds.width, height: (self.view.bounds.height + 22))
+        
+    }
+    
+    
 }
+
+
+

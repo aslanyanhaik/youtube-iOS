@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		222B33551D2D4F3C00421145 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222B33541D2D4F3C00421145 /* MainViewController.swift */; };
 		2236EA0C1D1D5F4F0099411D /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236EA0B1D1D5F4F0099411D /* extensions.swift */; };
 		22464D531D22A8000041B3A0 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22464D521D22A8000041B3A0 /* Channel.swift */; };
 		22464D551D22AB300041B3A0 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22464D541D22AB300041B3A0 /* GlobalVariables.swift */; };
+		2266A71E1D2E724600B4B9B3 /* TrendingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2266A71D1D2E724600B4B9B3 /* TrendingVC.swift */; };
+		2266A7201D2E72A400B4B9B3 /* SubscriptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2266A71F1D2E72A400B4B9B3 /* SubscriptionsVC.swift */; };
+		2266A7221D2E72C000B4B9B3 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2266A7211D2E72C000B4B9B3 /* AccountVC.swift */; };
 		227E43A81D2D28050049A057 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E43A71D2D28050049A057 /* HomeVC.swift */; };
 		227F46131D2A89C500536D8C /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F46121D2A89C500536D8C /* Search.swift */; };
 		228DF9CF1D251FA70006FB26 /* SettingsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DF9CE1D251FA70006FB26 /* SettingsTable.swift */; };
@@ -18,15 +22,18 @@
 		22AA446C1D1302FC00CA6185 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22AA446A1D1302FC00CA6185 /* Main.storyboard */; };
 		22AA446E1D1302FC00CA6185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22AA446D1D1302FC00CA6185 /* Assets.xcassets */; };
 		22AA44711D1302FC00CA6185 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22AA446F1D1302FC00CA6185 /* LaunchScreen.storyboard */; };
-		22C509AF1D2D16B900839042 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C509AE1D2D16B900839042 /* MainViewController.swift */; };
 		22D6D3B41D1FC55C0058B607 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D6D3B31D1FC55C0058B607 /* TabBar.swift */; };
 		22DC3C971D1BC89E0098AB57 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC3C961D1BC89E0098AB57 /* CustomCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		222B33541D2D4F3C00421145 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2236EA0B1D1D5F4F0099411D /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		22464D521D22A8000041B3A0 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		22464D541D22AB300041B3A0 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
+		2266A71D1D2E724600B4B9B3 /* TrendingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingVC.swift; sourceTree = "<group>"; };
+		2266A71F1D2E72A400B4B9B3 /* SubscriptionsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionsVC.swift; sourceTree = "<group>"; };
+		2266A7211D2E72C000B4B9B3 /* AccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		227E43A71D2D28050049A057 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		227F46121D2A89C500536D8C /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		228DF9CE1D251FA70006FB26 /* SettingsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTable.swift; path = ../SettingsTable.swift; sourceTree = "<group>"; };
@@ -37,7 +44,6 @@
 		22AA446D1D1302FC00CA6185 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22AA44701D1302FC00CA6185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22AA44721D1302FC00CA6185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22C509AE1D2D16B900839042 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		22D6D3B31D1FC55C0058B607 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBar.swift; path = ../TabBar.swift; sourceTree = "<group>"; };
 		22DC3C961D1BC89E0098AB57 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,11 +62,11 @@
 		2229DC541D1EEA2E0058E804 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				22D6D3B31D1FC55C0058B607 /* TabBar.swift */,
+				222B33541D2D4F3C00421145 /* MainViewController.swift */,
 				227E43A71D2D28050049A057 /* HomeVC.swift */,
-				22DC3C961D1BC89E0098AB57 /* CustomCollectionViewCell.swift */,
-				228DF9CE1D251FA70006FB26 /* SettingsTable.swift */,
-				227F46121D2A89C500536D8C /* Search.swift */,
+				2266A71D1D2E724600B4B9B3 /* TrendingVC.swift */,
+				2266A71F1D2E72A400B4B9B3 /* SubscriptionsVC.swift */,
+				2266A7211D2E72C000B4B9B3 /* AccountVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -92,6 +98,17 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		2266A71C1D2E6C1B00B4B9B3 /* supporting views */ = {
+			isa = PBXGroup;
+			children = (
+				22D6D3B31D1FC55C0058B607 /* TabBar.swift */,
+				22DC3C961D1BC89E0098AB57 /* CustomCollectionViewCell.swift */,
+				228DF9CE1D251FA70006FB26 /* SettingsTable.swift */,
+				227F46121D2A89C500536D8C /* Search.swift */,
+			);
+			name = "supporting views";
+			sourceTree = "<group>";
+		};
 		22AA445A1D1302FB00CA6185 = {
 			isa = PBXGroup;
 			children = (
@@ -113,9 +130,9 @@
 			children = (
 				22AA44661D1302FC00CA6185 /* AppDelegate.swift */,
 				22AA446A1D1302FC00CA6185 /* Main.storyboard */,
-				22C509AE1D2D16B900839042 /* MainViewController.swift */,
 				22AA446D1D1302FC00CA6185 /* Assets.xcassets */,
 				2229DC541D1EEA2E0058E804 /* ViewControllers */,
+				2266A71C1D2E6C1B00B4B9B3 /* supporting views */,
 				2229DC551D1EEA4F0058E804 /* Extensions */,
 				2241B9331D2281F400A8167B /* Model */,
 				2241B9341D22821600A8167B /* Helpers */,
@@ -198,13 +215,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				22AA44671D1302FC00CA6185 /* AppDelegate.swift in Sources */,
-				22C509AF1D2D16B900839042 /* MainViewController.swift in Sources */,
+				2266A7201D2E72A400B4B9B3 /* SubscriptionsVC.swift in Sources */,
 				22DC3C971D1BC89E0098AB57 /* CustomCollectionViewCell.swift in Sources */,
+				222B33551D2D4F3C00421145 /* MainViewController.swift in Sources */,
 				22464D551D22AB300041B3A0 /* GlobalVariables.swift in Sources */,
 				22A3B7DF1D217E5D00CFB210 /* Video.swift in Sources */,
 				2236EA0C1D1D5F4F0099411D /* extensions.swift in Sources */,
 				22464D531D22A8000041B3A0 /* Channel.swift in Sources */,
+				2266A71E1D2E724600B4B9B3 /* TrendingVC.swift in Sources */,
 				227F46131D2A89C500536D8C /* Search.swift in Sources */,
+				2266A7221D2E72C000B4B9B3 /* AccountVC.swift in Sources */,
 				228DF9CF1D251FA70006FB26 /* SettingsTable.swift in Sources */,
 				227E43A81D2D28050049A057 /* HomeVC.swift in Sources */,
 				22D6D3B41D1FC55C0058B607 /* TabBar.swift in Sources */,

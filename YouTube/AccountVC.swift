@@ -9,17 +9,17 @@
 import UIKit
 
 
-class HomeCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class AccountCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     //MARK: - Properties
     
     var itemsList = [[String : AnyObject]] ()
     var videoItems = [Int : Video]()
-   
+    
     
     //MARK: -  ViewController Lifecylce
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView?.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
@@ -32,19 +32,19 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         }
     }
     
-  
-       // MARK: UICollectionViewDataSource
-
-
+    
+    // MARK: UICollectionViewDataSource
+    
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.itemsList.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CustomCollectionViewCell
         cell.resetCell()
         if let video = videoItems[indexPath.row] {
-                cell.setupCell(videoItem: video)
+            cell.setupCell(videoItem: video)
         } else{
             Video.object(at: indexPath.row, fromList: itemsList, completiotion: { (video, index) in
                 self.videoItems[index] = video
@@ -59,9 +59,9 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         }
         return cell
     }
-
+    
     // MARK: UICollectionViewDelegate
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         
@@ -72,6 +72,6 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-
     
-   }
+    
+}

@@ -133,6 +133,7 @@ class TabBarCellCollectionViewCell: UICollectionViewCell {
         let image = UIImage.init(named: "home")
         icon.image = image?.withRenderingMode(.alwaysTemplate)
         self.contentView.addSubview(icon)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
