@@ -15,21 +15,44 @@ class SubscriptionsCollectionViewController: UICollectionViewController, UIColle
     
     var itemsList = [[String : AnyObject]] ()
     var videoItems = [Int : Video]()
+    let refresh = UIRefreshControl()
     
+    
+    //MARK: Methods
+    func refreshContent()  {
+        self.videoItems.removeAll()
+        fetchItemsList()
+    }
+    
+    func fetchItemsList() {
+        Video.getVideosList(fromURL: globalVariables.urlLink) { (items) -> (Void) in
+            self.itemsList = items
+            DispatchQueue.main.async(execute: {
+                self.collectionView?.reloadData()
+                UIApplication.shared().isNetworkActivityIndicatorVisible = false
+                self.refresh.endRefreshing()
+            })
+        }
+    }
+    
+    func customization() {
+        
+        //CollectionView customization
+        self.collectionView?.contentInset = UIEdgeInsetsMake(21, 0, 0, 0)
+        
+        //Refresh Control
+        refresh.addTarget(self, action: #selector(SubscriptionsCollectionViewController.refreshContent), for: UIControlEvents.valueChanged)
+        self.refresh.tintColor = UIColor.rbg(r: 228, g: 34, b: 24)
+        self.collectionView?.addSubview(self.refresh)
+    }
     
     //MARK: -  ViewController Lifecylce
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView?.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
-        Video.getVideosList(fromURL: globalVariables.urlLink) { (items) -> (Void) in
-            self.itemsList = items
-            DispatchQueue.main.async(execute: {
-                self.collectionView?.reloadData()
-                UIApplication.shared().isNetworkActivityIndicatorVisible = false
-            })
-        }
+        customization()
+        fetchItemsList()
     }
     
     
@@ -72,6 +95,5 @@ class SubscriptionsCollectionViewController: UICollectionViewController, UIColle
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
     
 }

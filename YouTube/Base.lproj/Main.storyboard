@@ -11,7 +11,7 @@
         <scene sceneID="hEZ-hq-nL4">
             <objects>
                 <collectionViewController storyboardIdentifier="Home" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iD3-3m-SMz" customClass="HomeCollectionViewController" customModule="YouTube" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" id="g1m-kT-Fbb">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" id="g1m-kT-Fbb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -215,7 +215,7 @@
                                     <constraint firstItem="S6F-Ey-rSn" firstAttribute="leading" secondItem="48g-Hu-Ra7" secondAttribute="trailing" constant="8" id="Sdh-hf-23L"/>
                                     <constraint firstItem="P6G-na-a5K" firstAttribute="top" secondItem="icX-9A-GCV" secondAttribute="bottom" constant="16" id="SjW-uV-klR"/>
                                     <constraint firstAttribute="trailing" secondItem="S6F-Ey-rSn" secondAttribute="trailing" constant="16" id="T0n-gH-2HB"/>
-                                    <constraint firstAttribute="bottom" secondItem="VMm-zq-kln" secondAttribute="bottom" id="aB9-eX-zXk"/>
+                                    <constraint firstAttribute="top" secondItem="VMm-zq-kln" secondAttribute="top" id="aB9-eX-zXk"/>
                                     <constraint firstItem="uMd-hF-kXD" firstAttribute="trailing" secondItem="icX-9A-GCV" secondAttribute="trailing" constant="-3" id="aYb-ak-TpO"/>
                                     <constraint firstItem="P6G-na-a5K" firstAttribute="leading" secondItem="48g-Hu-Ra7" secondAttribute="trailing" constant="8" id="ajV-OF-di1"/>
                                     <constraint firstAttribute="trailing" secondItem="VMm-zq-kln" secondAttribute="trailing" id="qGr-0X-fH0"/>
@@ -232,6 +232,58 @@
                                     <outlet property="videoTitle" destination="P6G-na-a5K" id="j5B-Dd-aqA"/>
                                 </connections>
                             </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Top" id="V4s-uF-3C8" customClass="TrendingItemsCell" customModule="YouTube" customModuleProvider="target">
+                                <frame key="frameInset" minY="299" width="375" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Tmh-se-6HY">
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLn-34-H6j">
+                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="86" id="LiS-fk-1su"/>
+                                                        <constraint firstAttribute="height" constant="32" id="gUP-KV-LNh"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Music" image="music">
+                                                        <color key="titleColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKp-Y2-2ks">
+                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="HnF-Be-VIv"/>
+                                                        <constraint firstAttribute="width" constant="86" id="OPV-gN-ySl"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Music" image="music">
+                                                        <color key="titleColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZD-HK-L9y">
+                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="J8H-mc-knI"/>
+                                                        <constraint firstAttribute="width" constant="86" id="dZE-aH-zxy"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Music" image="music">
+                                                        <color key="titleColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.32734374999999999" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </stackView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Tmh-se-6HY" secondAttribute="trailing" id="1Cw-Js-NGo"/>
+                                    <constraint firstItem="Tmh-se-6HY" firstAttribute="leading" secondItem="V4s-uF-3C8" secondAttribute="leading" id="NLS-n0-EH7"/>
+                                    <constraint firstAttribute="bottom" secondItem="Tmh-se-6HY" secondAttribute="bottom" id="Rjn-5q-jti"/>
+                                    <constraint firstItem="Tmh-se-6HY" firstAttribute="top" secondItem="V4s-uF-3C8" secondAttribute="top" id="h46-9T-9lF"/>
+                                </constraints>
+                                <size key="customSize" width="375" height="100"/>
+                            </collectionViewCell>
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="X0r-cB-dEk" id="7fu-fS-5nN"/>
@@ -242,7 +294,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pnc-GP-8aR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="563" y="914"/>
+            <point key="canvasLocation" x="562.39999999999998" y="913.49325337331345"/>
         </scene>
         <!--Subscriptions Collection View Controller-->
         <scene sceneID="83e-pd-3Gk">
@@ -445,4 +497,7 @@
             <point key="canvasLocation" x="1881" y="913"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="music" width="32" height="32"/>
+    </resources>
 </document>
