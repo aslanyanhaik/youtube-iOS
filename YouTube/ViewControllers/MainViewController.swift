@@ -15,8 +15,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     var views = [UIView]()
     let items = ["Home", "Trending", "Subscriptions", "Account"]
-    
-     lazy var collectionView: UICollectionView  = {
+    var viewsInitialized = false
+    lazy var collectionView: UICollectionView  = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 0
@@ -132,7 +132,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             window.insertSubview(self.search, belowSubview: self.statusView)
             self.search.animate()
         }
-        
     }
     
     func handleMore()  {
@@ -163,14 +162,19 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
+    //MARK: VieController lifecyle
+    
     override func viewDidLoad() {
         self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         super.viewDidLoad()
         customization()
         didSelectItem(atIndex: 0)
-        
+        self.viewsInitialized = false
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.viewsInitialized = true
+    }
     
     //MARK: CollectionView DataSources
     
@@ -197,11 +201,11 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.tabBar.whiteView.frame.origin.x = (scrollView.contentOffset.x / 4)
-        let aa = Int(scrollView.contentOffset.x / self.view.bounds.width)
-        print(aa)
-        //self.tabBar.selectItem(index: aa)
+        let scrollIndex = Int(round(scrollView.contentOffset.x / self.view.bounds.width))
+        if self.viewsInitialized {
+        self.tabBar.highlightItem(atIndex: scrollIndex)
+        }
     }
-    
 }
 
 

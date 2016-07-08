@@ -90,24 +90,23 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
         cell.icon.image = UIImage.init(named: items[indexPath.row])
         
         UIView.animate(withDuration: 0.2, animations: {
-            self.whiteView.frame.origin.x = self.frame.width / 4 * CGFloat(indexPath.row)
+            self.whiteView.bounds.origin.x = (self.frame.width / 4 * CGFloat(indexPath.row))
         })
     }
     
     //MARK: Methods
     
-    func selectItem(index: Int)  {
+    func highlightItem(atIndex: Int)  {
         for index in  0...3 {
             let cell = collectionView.cellForItem(at: IndexPath.init(row: index, section: 0)) as! TabBarCellCollectionViewCell
             cell.icon.image = UIImage.init(named: darkItems[index])
             
         }
         
-        let cell = collectionView.cellForItem(at: IndexPath.init(row: index, section: 0)) as! TabBarCellCollectionViewCell
-        cell.icon.image = UIImage.init(named: items[index])
-        self.collectionView.selectItem(at: IndexPath.init(row: index, section: 0), animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
+        let cell = collectionView.cellForItem(at: IndexPath.init(row: atIndex, section: 0)) as! TabBarCellCollectionViewCell
+        cell.icon.image = UIImage.init(named: items[atIndex])
+        
     }
-    
    
     //MARK: - Inits
     
