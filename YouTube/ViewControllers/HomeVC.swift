@@ -39,6 +39,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
         
         //CollectionView customization
         self.collectionView?.contentInset = UIEdgeInsetsMake(21, 0, 0, 0)
+        self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(21, 0, 0, 0)
 
         //Refresh Control
         refresh.addTarget(self, action: #selector(HomeCollectionViewController.refreshContent), for: UIControlEvents.valueChanged)

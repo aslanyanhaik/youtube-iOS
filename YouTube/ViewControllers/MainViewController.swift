@@ -204,6 +204,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         let scrollIndex = Int(round(scrollView.contentOffset.x / self.view.bounds.width))
         if self.viewsInitialized {
         self.tabBar.highlightItem(atIndex: scrollIndex)
+        self.titleLabel.text = self.items[scrollIndex]
         }
     }
 }
