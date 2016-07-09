@@ -51,47 +51,26 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! TabBarCellCollectionViewCell
         cell.icon.image = UIImage.init(named: darkItems[indexPath.row])
-        
         if indexPath.row == 0 {
             cell.icon.image = UIImage.init(named: items[0])
             
         }
-        
-       
         return cell
-
     }
     
     //MARK: CollectionView Delegates
 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         return CGSize.init(width: self.frame.width / 4, height: (self.frame.height - 20))
-        
     }
-   
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
         delegate?.didSelectItem(atIndex: indexPath.row)
-        for index in  0...3 {
-            let cell = collectionView.cellForItem(at: IndexPath.init(row: index, section: 0)) as! TabBarCellCollectionViewCell
-            cell.icon.image = UIImage.init(named: darkItems[index])
-            
-        }
-
-        let cell = collectionView.cellForItem(at: indexPath) as! TabBarCellCollectionViewCell
-        cell.icon.image = UIImage.init(named: items[indexPath.row])
-        
-        UIView.animate(withDuration: 0.2, animations: {
-            self.whiteView.bounds.origin.x = (self.frame.width / 4 * CGFloat(indexPath.row))
-        })
     }
     
     //MARK: Methods
