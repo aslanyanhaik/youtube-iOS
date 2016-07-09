@@ -67,7 +67,7 @@ class TrendingCollectionViewController: UICollectionViewController, UICollection
         var returncell = UICollectionViewCell()
         
         if indexPath.row == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Top", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Top", for: indexPath) as! TrendingItemsCell
             print("aa \(cell.subviews)")
             returncell = cell
         } else {
@@ -111,12 +111,19 @@ class TrendingCollectionViewController: UICollectionViewController, UICollection
 
 class TrendingItemsCell: UICollectionViewCell {
     
-    //MARK: Properties
+    @IBOutlet var buttons: [UIButton]!
+    
+    func roundCorners()  {
+        for button in self.buttons {
+            button.layer.cornerRadius = 16
+            button.clipsToBounds = true
+        }
+    }
     
     //MARK: Inits
-    
-    override func layoutSubviews() {
-        
+  
+    override func awakeFromNib() {
+        roundCorners()
     }
     
     required init?(coder aDecoder: NSCoder) {

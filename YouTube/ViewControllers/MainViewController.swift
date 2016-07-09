@@ -41,7 +41,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     let statusView: UIView = {
         let st = UIView.init(frame: CGRect.init(x: 0, y: 0, width: globalVariables.width, height: 20))
         st.backgroundColor = UIColor.black()
-        st.alpha = 0.3
+        st.alpha = 0.15
         return st
     }()
     

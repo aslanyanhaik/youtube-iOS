@@ -11,7 +11,7 @@
         <scene sceneID="hEZ-hq-nL4">
             <objects>
                 <collectionViewController storyboardIdentifier="Home" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iD3-3m-SMz" customClass="HomeCollectionViewController" customModule="YouTube" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" id="g1m-kT-Fbb">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" id="g1m-kT-Fbb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -239,50 +239,52 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Tmh-se-6HY">
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLn-34-H6j">
-                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="86" id="LiS-fk-1su"/>
-                                                        <constraint firstAttribute="height" constant="32" id="gUP-KV-LNh"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Music" image="music">
-                                                        <color key="titleColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKp-Y2-2ks">
-                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="32" id="HnF-Be-VIv"/>
-                                                        <constraint firstAttribute="width" constant="86" id="OPV-gN-ySl"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Music" image="music">
-                                                        <color key="titleColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZD-HK-L9y">
-                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="32" id="J8H-mc-knI"/>
-                                                        <constraint firstAttribute="width" constant="86" id="dZE-aH-zxy"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Music" image="music">
-                                                        <color key="titleColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.32734374999999999" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nt4-3k-PR3">
+                                            <color key="backgroundColor" red="0.83137254900000002" green="0.83921568629999999" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="32" id="N2b-u8-Aju"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <state key="normal" title="  Music  " image="music">
+                                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUK-g9-yuq">
+                                            <color key="backgroundColor" red="0.83137254900000002" green="0.83921568629999999" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="32" id="qH4-OA-55C"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <state key="normal" title="  News  " image="news">
+                                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hrL-M0-noF">
+                                            <color key="backgroundColor" red="0.83137254900000002" green="0.83921568629999999" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="32" id="Sjp-6G-Qco"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <state key="normal" title="  Live  " image="live">
+                                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Tmh-se-6HY" secondAttribute="trailing" id="1Cw-Js-NGo"/>
-                                    <constraint firstItem="Tmh-se-6HY" firstAttribute="leading" secondItem="V4s-uF-3C8" secondAttribute="leading" id="NLS-n0-EH7"/>
-                                    <constraint firstAttribute="bottom" secondItem="Tmh-se-6HY" secondAttribute="bottom" id="Rjn-5q-jti"/>
-                                    <constraint firstItem="Tmh-se-6HY" firstAttribute="top" secondItem="V4s-uF-3C8" secondAttribute="top" id="h46-9T-9lF"/>
+                                    <constraint firstItem="tUK-g9-yuq" firstAttribute="centerY" secondItem="V4s-uF-3C8" secondAttribute="centerY" id="K8S-zw-Af2"/>
+                                    <constraint firstAttribute="trailing" secondItem="hrL-M0-noF" secondAttribute="trailing" constant="15" id="Lcz-TS-KGJ"/>
+                                    <constraint firstItem="hrL-M0-noF" firstAttribute="centerY" secondItem="V4s-uF-3C8" secondAttribute="centerY" id="geS-HI-nUf"/>
+                                    <constraint firstItem="nt4-3k-PR3" firstAttribute="centerY" secondItem="V4s-uF-3C8" secondAttribute="centerY" id="hzo-tv-P8p"/>
+                                    <constraint firstItem="tUK-g9-yuq" firstAttribute="centerX" secondItem="V4s-uF-3C8" secondAttribute="centerX" id="nen-jc-lpE"/>
+                                    <constraint firstItem="nt4-3k-PR3" firstAttribute="leading" secondItem="V4s-uF-3C8" secondAttribute="leading" constant="15" id="tLd-uW-gIi"/>
                                 </constraints>
                                 <size key="customSize" width="375" height="100"/>
+                                <connections>
+                                    <outletCollection property="buttons" destination="nt4-3k-PR3" collectionClass="NSMutableArray" id="gf7-Uo-mTX"/>
+                                    <outletCollection property="buttons" destination="tUK-g9-yuq" collectionClass="NSMutableArray" id="dVE-6b-6LD"/>
+                                    <outletCollection property="buttons" destination="hrL-M0-noF" collectionClass="NSMutableArray" id="zwv-v9-Zni"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -498,6 +500,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="live" width="32" height="32"/>
         <image name="music" width="32" height="32"/>
+        <image name="news" width="32" height="32"/>
     </resources>
 </document>
