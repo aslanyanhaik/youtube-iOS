@@ -21,12 +21,12 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     //MARK: Methods
     func refreshContent()  {
         self.videoItems.removeAll()
-        fetchItemsList()
+        fetchItemsList(link: globalVariables.urlLink)
     }
    
-    func fetchItemsList() {
-        Video.getVideosList(fromURL: globalVariables.urlLink) { (items) -> (Void) in
-            self.itemsList = items
+    func fetchItemsList(link: URL) {
+        Video.getVideosList(fromURL: link) { (items) -> (Void) in
+            self.itemsList += items
             DispatchQueue.main.async(execute: {
                 self.collectionView?.reloadData()
                 UIApplication.shared().isNetworkActivityIndicatorVisible = false
@@ -52,7 +52,7 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         customization()
-        fetchItemsList()
+        fetchItemsList(link: globalVariables.urlLink)
     }
     
   
@@ -94,6 +94,12 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height
+        if bottomEdge >= scrollView.contentSize.height {
+            fetchItemsList(link: globalVariables.moreURLLink)
+        }
     }
     
    }

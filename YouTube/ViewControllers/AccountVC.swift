@@ -39,6 +39,7 @@ class AccountCollectionViewController: UICollectionViewController, UICollectionV
         
         //CollectionView customization
         self.collectionView?.contentInset = UIEdgeInsetsMake(21, 0, 0, 0)
+        self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(21, 0, 0, 0)
         
         //Refresh Control
         refresh.addTarget(self, action: #selector(AccountCollectionViewController.refreshContent), for: UIControlEvents.valueChanged)

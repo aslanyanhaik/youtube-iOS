@@ -23,6 +23,7 @@ class TrendingCollectionViewController: UICollectionViewController, UICollection
         
         //CollectionView customization
         self.collectionView?.contentInset = UIEdgeInsetsMake(21, 0, 0, 0)
+        self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(21, 0, 0, 0)
         
         //Refresh Control
         refresh.addTarget(self, action: #selector(TrendingCollectionViewController.refreshContent), for: UIControlEvents.valueChanged)
@@ -33,12 +34,12 @@ class TrendingCollectionViewController: UICollectionViewController, UICollection
     
     func refreshContent()  {
         self.videoItems.removeAll()
-        fetchItemsList()
+        fetchItemsList(link: globalVariables.moreURLLink)
     }
     
-    func fetchItemsList() {
-        Video.getVideosList(fromURL: globalVariables.urlLink) { (items) -> (Void) in
-            self.itemsList = items
+    func fetchItemsList(link: URL) {
+        Video.getVideosList(fromURL: link) { (items) -> (Void) in
+            self.itemsList += items
             DispatchQueue.main.async(execute: {
                 self.collectionView?.reloadData()
                 UIApplication.shared().isNetworkActivityIndicatorVisible = false
@@ -46,13 +47,14 @@ class TrendingCollectionViewController: UICollectionViewController, UICollection
             })
         }
     }
+
     
     //MARK: -  ViewController Lifecylce
     
     override func viewDidLoad() {
         super.viewDidLoad()
         customization()
-        fetchItemsList()
+        fetchItemsList(link: globalVariables.moreURLLink)
     }
     
     
@@ -103,6 +105,13 @@ class TrendingCollectionViewController: UICollectionViewController, UICollection
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height
+        if bottomEdge >= scrollView.contentSize.height {
+            fetchItemsList(link: globalVariables.urlLink)
+        }
     }
     
 }

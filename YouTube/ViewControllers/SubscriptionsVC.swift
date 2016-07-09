@@ -39,6 +39,7 @@ class SubscriptionsCollectionViewController: UICollectionViewController, UIColle
         
         //CollectionView customization
         self.collectionView?.contentInset = UIEdgeInsetsMake(21, 0, 0, 0)
+        self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(21, 0, 0, 0)
         
         //Refresh Control
         refresh.addTarget(self, action: #selector(SubscriptionsCollectionViewController.refreshContent), for: UIControlEvents.valueChanged)
