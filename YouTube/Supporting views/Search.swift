@@ -43,7 +43,6 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
     }()
     lazy var tableView: UITableView = {
         let tv: UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 68, width: self.frame.width, height: 288))
-        tv.isHidden = true
         return tv
     }()
     var items = [String]()
@@ -62,8 +61,8 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
         self.tableView.register(searchCell.self, forCellReuseIdentifier: "Cell")
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.addSubview(self.tableView)
         self.tableView.tableFooterView = UIView()
+        self.tableView.backgroundColor = UIColor.clear()
         self.searchField.delegate = self
         
 
@@ -82,6 +81,7 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
         
         self.searchField.text = ""
         self.items.removeAll()
+        self.tableView.removeFromSuperview()
         UIView.animate(withDuration: 0.2, animations: {
             self.backgroundView.alpha = 0
             self.searchView.alpha = 0
@@ -96,7 +96,7 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if (self.searchField.text == "" || self.searchField.text == nil) {
             self.items = []
-            self.tableView.isHidden = true
+            self.tableView.removeFromSuperview()
         } else{
             
             let _  = URLSession.shared().dataTask(with: requestSuggestionsURL(text: self.searchField.text!), completionHandler: { (data, response, error) in
@@ -104,7 +104,11 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
                     let json  = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSArray
                     self.items = json[1] as! [String]
                     DispatchQueue.main.async(execute: {
-                        self.tableView.isHidden = false
+                        if self.items.count > 0  {
+                            self.addSubview(self.tableView)
+                        } else {
+                            self.tableView.removeFromSuperview()
+                        }
                         self.tableView.reloadData()
                     })
                     
@@ -132,7 +136,7 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! searchCell
-        cell.itemLabel.text = items[indexPath.row]
+            cell.itemLabel.text = items[indexPath.row]
         cell.backgroundColor = UIColor.rbg(r: 245, g: 245, b: 245)
         cell.selectionStyle = .none
         return cell

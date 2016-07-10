@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		220E5E1E1D2E7C92001E60A3 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E5E191D2E7C92001E60A3 /* AccountVC.swift */; };
-		220E5E1F1D2E7C92001E60A3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E5E1A1D2E7C92001E60A3 /* HomeVC.swift */; };
 		220E5E201D2E7C92001E60A3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E5E1B1D2E7C92001E60A3 /* MainViewController.swift */; };
 		220E5E211D2E7C92001E60A3 /* SubscriptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E5E1C1D2E7C92001E60A3 /* SubscriptionsVC.swift */; };
 		220E5E221D2E7C92001E60A3 /* TrendingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E5E1D1D2E7C92001E60A3 /* TrendingVC.swift */; };
@@ -21,6 +20,8 @@
 		220E5E301D2E7D4E001E60A3 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E5E2E1D2E7D4E001E60A3 /* Video.swift */; };
 		220E5E321D2E7D6C001E60A3 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E5E311D2E7D6C001E60A3 /* GlobalVariables.swift */; };
 		22449DE71D315E3900F3F39D /* LauchVIew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22449DE61D315E3900F3F39D /* LauchVIew.xib */; };
+		226B84F31D329FBA006D6A0D /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B84F21D329FBA006D6A0D /* HomeVC.swift */; };
+		226B84F51D32A03F006D6A0D /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B84F41D32A03F006D6A0D /* FeedVC.swift */; };
 		22AA44671D1302FC00CA6185 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AA44661D1302FC00CA6185 /* AppDelegate.swift */; };
 		22AA446C1D1302FC00CA6185 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22AA446A1D1302FC00CA6185 /* Main.storyboard */; };
 		22AA446E1D1302FC00CA6185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22AA446D1D1302FC00CA6185 /* Assets.xcassets */; };
@@ -28,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		220E5E191D2E7C92001E60A3 /* AccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountVC.swift; path = ViewControllers/AccountVC.swift; sourceTree = "<group>"; };
-		220E5E1A1D2E7C92001E60A3 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeVC.swift; path = ViewControllers/HomeVC.swift; sourceTree = "<group>"; };
 		220E5E1B1D2E7C92001E60A3 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = ViewControllers/MainViewController.swift; sourceTree = "<group>"; };
 		220E5E1C1D2E7C92001E60A3 /* SubscriptionsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionsVC.swift; path = ViewControllers/SubscriptionsVC.swift; sourceTree = "<group>"; };
 		220E5E1D1D2E7C92001E60A3 /* TrendingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrendingVC.swift; path = ViewControllers/TrendingVC.swift; sourceTree = "<group>"; };
@@ -41,6 +41,8 @@
 		220E5E2E1D2E7D4E001E60A3 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Video.swift; path = Model/Video.swift; sourceTree = "<group>"; };
 		220E5E311D2E7D6C001E60A3 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalVariables.swift; path = Helpers/GlobalVariables.swift; sourceTree = "<group>"; };
 		22449DE61D315E3900F3F39D /* LauchVIew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LauchVIew.xib; sourceTree = "<group>"; };
+		226B84F21D329FBA006D6A0D /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeVC.swift; path = ViewControllers/HomeVC.swift; sourceTree = "<group>"; };
+		226B84F41D32A03F006D6A0D /* FeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedVC.swift; path = "Supporting views/FeedVC.swift"; sourceTree = "<group>"; };
 		22AA44631D1302FB00CA6185 /* YouTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AA44661D1302FC00CA6185 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22AA446B1D1302FC00CA6185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,10 +65,10 @@
 			isa = PBXGroup;
 			children = (
 				220E5E1B1D2E7C92001E60A3 /* MainViewController.swift */,
-				220E5E191D2E7C92001E60A3 /* AccountVC.swift */,
-				220E5E1A1D2E7C92001E60A3 /* HomeVC.swift */,
-				220E5E1C1D2E7C92001E60A3 /* SubscriptionsVC.swift */,
+				226B84F21D329FBA006D6A0D /* HomeVC.swift */,
 				220E5E1D1D2E7C92001E60A3 /* TrendingVC.swift */,
+				220E5E1C1D2E7C92001E60A3 /* SubscriptionsVC.swift */,
+				220E5E191D2E7C92001E60A3 /* AccountVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -101,6 +103,7 @@
 		2266A71C1D2E6C1B00B4B9B3 /* supporting views */ = {
 			isa = PBXGroup;
 			children = (
+				226B84F41D32A03F006D6A0D /* FeedVC.swift */,
 				220E5E231D2E7D1A001E60A3 /* CustomCollectionViewCell.swift */,
 				220E5E241D2E7D1A001E60A3 /* Search.swift */,
 				220E5E251D2E7D1A001E60A3 /* SettingsTable.swift */,
@@ -214,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				226B84F31D329FBA006D6A0D /* HomeVC.swift in Sources */,
 				22AA44671D1302FC00CA6185 /* AppDelegate.swift in Sources */,
 				220E5E211D2E7C92001E60A3 /* SubscriptionsVC.swift in Sources */,
 				220E5E2F1D2E7D4E001E60A3 /* Channel.swift in Sources */,
@@ -225,7 +229,7 @@
 				220E5E291D2E7D1A001E60A3 /* SettingsTable.swift in Sources */,
 				220E5E1E1D2E7C92001E60A3 /* AccountVC.swift in Sources */,
 				220E5E281D2E7D1A001E60A3 /* Search.swift in Sources */,
-				220E5E1F1D2E7C92001E60A3 /* HomeVC.swift in Sources */,
+				226B84F51D32A03F006D6A0D /* FeedVC.swift in Sources */,
 				220E5E271D2E7D1A001E60A3 /* CustomCollectionViewCell.swift in Sources */,
 				220E5E2A1D2E7D1A001E60A3 /* TabBar.swift in Sources */,
 			);

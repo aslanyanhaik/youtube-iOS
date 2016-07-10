@@ -9,43 +9,21 @@
 import UIKit
 
 
-class TrendingCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class TrendingCollectionViewController: FeedCollectionViewController {
     
     //MARK: - Properties
     
-    var itemsList = [[String : AnyObject]] ()
-    var videoItems = [Int : Video]()
-    let refresh = UIRefreshControl()
-    
-    
-    //MARK: Methods
-    func customization() {
-        
-        //CollectionView customization
-        self.collectionView?.contentInset = UIEdgeInsetsMake(21, 0, 0, 0)
-        self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(21, 0, 0, 0)
-        
-        //Refresh Control
-        refresh.addTarget(self, action: #selector(TrendingCollectionViewController.refreshContent), for: UIControlEvents.valueChanged)
-        self.refresh.tintColor = UIColor.rbg(r: 228, g: 34, b: 24)
-        self.collectionView?.addSubview(self.refresh)
-        
-    }
-    
-    func refreshContent()  {
-        self.videoItems.removeAll()
-        fetchItemsList(link: globalVariables.moreURLLink)
-    }
-    
-    func fetchItemsList(link: URL) {
-        Video.getVideosList(fromURL: link) { (items) -> (Void) in
-            self.itemsList += items
-            DispatchQueue.main.async(execute: {
-                self.collectionView?.reloadData()
-                UIApplication.shared().isNetworkActivityIndicatorVisible = false
-                self.refresh.endRefreshing()
-            })
+    override var downloadURL: URL {
+        get {
+            return globalVariables.moreURLLink
         }
+        set {}
+    }
+    override var moreDownloadURL: URL {
+        get {
+            return globalVariables.urlLink
+        }
+        set {}
     }
 
     
@@ -53,8 +31,7 @@ class TrendingCollectionViewController: UICollectionViewController, UICollection
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        customization()
-        fetchItemsList(link: globalVariables.moreURLLink)
+        
     }
     
     
@@ -93,7 +70,7 @@ class TrendingCollectionViewController: UICollectionViewController, UICollection
     
     // MARK: UICollectionViewDelegate
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var size = CGSize()
         if indexPath.row == 0 {
             size = CGSize.init(width: UIScreen.main().bounds.width, height: 100)
@@ -101,17 +78,6 @@ class TrendingCollectionViewController: UICollectionViewController, UICollection
         size = CGSize.init(width: UIScreen.main().bounds.width, height: 300)
         }
         return size
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height
-        if bottomEdge >= scrollView.contentSize.height {
-            fetchItemsList(link: globalVariables.urlLink)
-        }
     }
     
 }
@@ -139,13 +105,3 @@ class TrendingItemsCell: UICollectionViewCell {
         super.init(coder: aDecoder)
     }
 }
-
-
-
-
-
-
-
-
-
-
