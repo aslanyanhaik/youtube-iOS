@@ -25,6 +25,7 @@
 		22AA44671D1302FC00CA6185 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AA44661D1302FC00CA6185 /* AppDelegate.swift */; };
 		22AA446C1D1302FC00CA6185 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22AA446A1D1302FC00CA6185 /* Main.storyboard */; };
 		22AA446E1D1302FC00CA6185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22AA446D1D1302FC00CA6185 /* Assets.xcassets */; };
+		22BD935E1D33818500CD57A5 /* SubscriptionsProfilePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD935D1D33818500CD57A5 /* SubscriptionsProfilePicCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		22AA446B1D1302FC00CA6185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22AA446D1D1302FC00CA6185 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22AA44721D1302FC00CA6185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22BD935D1D33818500CD57A5 /* SubscriptionsProfilePicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionsProfilePicCell.swift; path = "Supporting views/SubscriptionsProfilePicCell.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		2266A71C1D2E6C1B00B4B9B3 /* supporting views */ = {
 			isa = PBXGroup;
 			children = (
+				22BD935D1D33818500CD57A5 /* SubscriptionsProfilePicCell.swift */,
 				226B84F41D32A03F006D6A0D /* FeedVC.swift */,
 				220E5E231D2E7D1A001E60A3 /* CustomCollectionViewCell.swift */,
 				220E5E241D2E7D1A001E60A3 /* Search.swift */,
@@ -220,6 +223,7 @@
 				226B84F31D329FBA006D6A0D /* HomeVC.swift in Sources */,
 				22AA44671D1302FC00CA6185 /* AppDelegate.swift in Sources */,
 				220E5E211D2E7C92001E60A3 /* SubscriptionsVC.swift in Sources */,
+				22BD935E1D33818500CD57A5 /* SubscriptionsProfilePicCell.swift in Sources */,
 				220E5E2F1D2E7D4E001E60A3 /* Channel.swift in Sources */,
 				220E5E2C1D2E7D33001E60A3 /* extensions.swift in Sources */,
 				220E5E321D2E7D6C001E60A3 /* GlobalVariables.swift in Sources */,
