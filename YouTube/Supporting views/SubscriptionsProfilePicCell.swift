@@ -25,10 +25,8 @@ class SubscriptionsProfilePicCell: UICollectionViewCell, UICollectionViewDelegat
                 do{
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String]
                     for item in json {
-                        let link = URL.init(string: item)!
-                        let data = try Data.init(contentsOf: link)
-                        let image = UIImage.init(data: data)
-                        self.items.append(image!)
+                        let image = UIImage.contentOfURL(link: item)
+                        self.items.append(image)
                     }
                 } catch _ {
                     print("error fetching the feed")
