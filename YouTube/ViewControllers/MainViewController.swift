@@ -61,6 +61,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         let tl = UILabel.init(frame: CGRect.init(x: 20, y: 5, width: 200, height: 30))
         tl.font = UIFont.systemFont(ofSize: 18)
         tl.textColor = UIColor.white()
+        tl.text = "Home"
         return tl
     }()
     
@@ -146,7 +147,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     
     func didSelectItem(atIndex: Int) {
-        self.titleLabel.text = self.items[atIndex]
         self.collectionView.scrollRectToVisible(CGRect.init(origin: CGPoint.init(x: (self.view.bounds.width * CGFloat(atIndex)), y: 0), size: self.view.bounds.size), animated: true)
     }
     

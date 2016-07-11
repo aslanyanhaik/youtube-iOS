@@ -26,6 +26,8 @@
 		22AA446C1D1302FC00CA6185 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22AA446A1D1302FC00CA6185 /* Main.storyboard */; };
 		22AA446E1D1302FC00CA6185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22AA446D1D1302FC00CA6185 /* Assets.xcassets */; };
 		22BD935E1D33818500CD57A5 /* SubscriptionsProfilePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD935D1D33818500CD57A5 /* SubscriptionsProfilePicCell.swift */; };
+		22BD93601D3394A200CD57A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD935F1D3394A200CD57A5 /* User.swift */; };
+		22BD93621D33953700CD57A5 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD93611D33953700CD57A5 /* Playlist.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		22AA446D1D1302FC00CA6185 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22AA44721D1302FC00CA6185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22BD935D1D33818500CD57A5 /* SubscriptionsProfilePicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionsProfilePicCell.swift; path = "Supporting views/SubscriptionsProfilePicCell.swift"; sourceTree = "<group>"; };
+		22BD935F1D3394A200CD57A5 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/User.swift; sourceTree = "<group>"; };
+		22BD93611D33953700CD57A5 /* Playlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Playlist.swift; path = Model/Playlist.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 		2241B9331D2281F400A8167B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				22BD935F1D3394A200CD57A5 /* User.swift */,
+				22BD93611D33953700CD57A5 /* Playlist.swift */,
 				220E5E2D1D2E7D4E001E60A3 /* Channel.swift */,
 				220E5E2E1D2E7D4E001E60A3 /* Video.swift */,
 			);
@@ -220,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22BD93601D3394A200CD57A5 /* User.swift in Sources */,
 				226B84F31D329FBA006D6A0D /* HomeVC.swift in Sources */,
 				22AA44671D1302FC00CA6185 /* AppDelegate.swift in Sources */,
 				220E5E211D2E7C92001E60A3 /* SubscriptionsVC.swift in Sources */,
@@ -230,6 +237,7 @@
 				220E5E301D2E7D4E001E60A3 /* Video.swift in Sources */,
 				220E5E201D2E7C92001E60A3 /* MainViewController.swift in Sources */,
 				220E5E221D2E7C92001E60A3 /* TrendingVC.swift in Sources */,
+				22BD93621D33953700CD57A5 /* Playlist.swift in Sources */,
 				220E5E291D2E7D1A001E60A3 /* SettingsTable.swift in Sources */,
 				220E5E1E1D2E7C92001E60A3 /* AccountVC.swift in Sources */,
 				220E5E281D2E7D1A001E60A3 /* Search.swift in Sources */,

@@ -12,48 +12,34 @@ import UIKit
 class AccountCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     //MARK: - Properties
-    
-    var itemsList = [[String : AnyObject]] ()
-    var videoItems = [Int : Video]()
-    let refresh = UIRefreshControl()
+    let menuTitles = ["History", "My Videos", "Notifications", "Watch Later"]
+    var items = 5
+    var user = User.init(name: "Loading", profilePic: UIImage(), backgroundImage: UIImage(), playlists: [Playlist]())
     
     
     //MARK: Methods
-    func refreshContent()  {
-        self.videoItems.removeAll()
-        fetchItemsList()
-    }
-    
-    func fetchItemsList() {
-        Video.getVideosList(fromURL: globalVariables.urlLink) { (items) -> (Void) in
-            self.itemsList = items
+    func fetchItem() {
+        User.fetchProfile(link: globalVariables.profileLink) { (newUser) in
+            self.user = newUser
+            self.items = newUser.playlists.count + 5
             DispatchQueue.main.async(execute: {
-                self.collectionView?.reloadData()
                 UIApplication.shared().isNetworkActivityIndicatorVisible = false
-                self.refresh.endRefreshing()
+                self.collectionView?.reloadData()
             })
         }
     }
     
+    
     func customization() {
-        
-        //CollectionView customization
         self.collectionView?.contentInset = UIEdgeInsetsMake(21, 0, 0, 0)
         self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(21, 0, 0, 0)
-        
-        //Refresh Control
-        refresh.addTarget(self, action: #selector(AccountCollectionViewController.refreshContent), for: UIControlEvents.valueChanged)
-        self.refresh.tintColor = UIColor.rbg(r: 228, g: 34, b: 24)
-        self.collectionView?.addSubview(self.refresh)
     }
     
     //MARK: -  ViewController Lifecylce
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         customization()
-        fetchItemsList()
+        fetchItem()
     }
     
     
@@ -61,35 +47,49 @@ class AccountCollectionViewController: UICollectionViewController, UICollectionV
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.itemsList.count
+        return self.items
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CustomCollectionViewCell
-        cell.resetCell()
-        if let video = videoItems[indexPath.row] {
-            cell.setupCell(videoItem: video)
-        } else{
-            Video.object(at: indexPath.row, fromList: itemsList, completiotion: { (video, index) in
-                self.videoItems[index] = video
-                DispatchQueue.main.async(execute: {
-                    self.collectionView?.reloadData()
-                    UIApplication.shared().isNetworkActivityIndicatorVisible = false
-                })
-            })
+        var returncell = UICollectionViewCell()
+        switch indexPath.row {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Header", for: indexPath) as! AccountHeaderCell
+            cell.name.text = self.user.name
+            cell.profilePic.image = self.user.profilePic
+            cell.backgroundImage.image = self.user.backgroundImage
+            returncell = cell
+        case 1...4:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Menu", for: indexPath) as! AccountMenuCell
+            cell.separator.isHidden = true
+            cell.menuTitles.text = self.menuTitles[indexPath.row - 1]
+            cell.menuIcon.image = UIImage.init(named: self.menuTitles[indexPath.row - 1])
+            if indexPath.row == 4 {
+                cell.separator.isHidden = false
+            }
+            returncell = cell
+        case 5...self.items:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Playlists", for: indexPath)as! AccountPlaylistCell
+            cell.pic.image = self.user.playlists[indexPath.row - 5].pic
+            cell.title.text = self.user.playlists[indexPath.row - 5].title
+            cell.numberOfVideos.text = "\(self.user.playlists[indexPath.row - 5].numberOfVideos) videos"
+            returncell = cell
+        default: break
         }
-        if indexPath.row == (self.itemsList.count - 1) {
-            cell.separatorView.isHidden = true
-        }
-        return cell
+    return returncell
     }
     
     // MARK: UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        
-        let size = CGSize.init(width: UIScreen.main().bounds.width, height: 300)
+        var size = CGSize.init(width: self.view.bounds.width, height: 70)
+        switch indexPath.row {
+        case 0:
+            size.height = 120
+        case 1...4:
+            size.height = 50
+        default: break
+        }
         return size
     }
     
@@ -98,3 +98,67 @@ class AccountCollectionViewController: UICollectionViewController, UICollectionV
     }
     
 }
+
+class AccountHeaderCell: UICollectionViewCell {
+    
+    //MARK: Properties
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
+    //MARK: Inits
+    override func awakeFromNib() {
+        self.profilePic.layer.cornerRadius = 25
+        self.profilePic.clipsToBounds = true
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+
+class AccountMenuCell: UICollectionViewCell {
+    
+    //MARK: Properties
+    @IBOutlet weak var menuIcon: UIImageView!
+    @IBOutlet weak var menuTitles: UILabel!
+    @IBOutlet weak var separator: UIView!
+    
+    //MARK: Inits
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+
+class AccountPlaylistCell: UICollectionViewCell {
+    
+    //MARK: Properties
+    @IBOutlet weak var pic: UIImageView!
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var numberOfVideos: UILabel!
+    
+    //MARK: Inits
+    override func awakeFromNib() {
+        self.pic.layer.cornerRadius = 5
+        self.pic.clipsToBounds = true
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+
+
+

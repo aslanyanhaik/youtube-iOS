@@ -47,7 +47,6 @@ class TrendingCollectionViewController: FeedCollectionViewController {
         
         if indexPath.row == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Top", for: indexPath) as! TrendingItemsCell
-            print("aa \(cell.subviews)")
             returncell = cell
         } else {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CustomCollectionViewCell
