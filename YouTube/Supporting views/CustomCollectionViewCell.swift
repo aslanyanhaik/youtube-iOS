@@ -44,7 +44,7 @@ import UIKit
         self.videoDescription.text = ""
     }
         
-        func setupCell(videoItem: Video)  {
+        func setupCell(videoItem: VideoItem)  {
         self.videoPic.image = videoItem.tumbnail
         self.videoTitle.text = videoItem.title
         self.channelPic.setImage(videoItem.channel.image, for: [])

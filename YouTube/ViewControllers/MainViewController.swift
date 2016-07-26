@@ -65,9 +65,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         return tl
     }()
     
+    
     //MARK: Methods
-    
-    
+  
     func customization()  {
         
         //CollectionView Customization
@@ -106,7 +106,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         self.navigationItem.rightBarButtonItems = [moreButton, searchButton]
         
-        // TitleBabel
+        // TitleLabel
         self.navigationController?.navigationBar.addSubview(self.titleLabel)
         
         //TabBar
@@ -121,6 +121,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             vc.didMove(toParentViewController: self)
             self.views.append(vc.view)
         }
+        
         
     }
     
@@ -170,6 +171,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         customization()
         didSelectItem(atIndex: 0)
         self.viewsInitialized = false
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

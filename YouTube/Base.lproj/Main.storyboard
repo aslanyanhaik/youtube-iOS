@@ -107,6 +107,71 @@
             </objects>
             <point key="canvasLocation" x="-119" y="915"/>
         </scene>
+        <!--PlayVC-->
+        <scene sceneID="jer-A4-Yxb">
+            <objects>
+                <viewController storyboardIdentifier="PlayVC" id="x8Y-1h-B9R" customClass="PlayVC" customModule="YouTube" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YTO-i8-6cK"/>
+                        <viewControllerLayoutGuide type="bottom" id="YaR-mP-NTQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mqd-fJ-YjO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Bu-eI-qq3">
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9Bu-eI-qq3" secondAttribute="height" multiplier="16:9" id="ozd-nX-828"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hbn-9n-K5X">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="79Z-yh-xXL" style="IBUITableViewCellStyleDefault" id="bsy-3X-YnD">
+                                        <frame key="frameInset" minY="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bsy-3X-YnD" id="fuZ-dh-5Hp">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="79Z-yh-xXL">
+                                                    <frame key="frameInset" minX="15" width="345" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="x8Y-1h-B9R" id="UfK-7U-Wj2"/>
+                                    <outlet property="delegate" destination="x8Y-1h-B9R" id="1bS-bo-dH1"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hbn-9n-K5X" firstAttribute="leading" secondItem="Mqd-fJ-YjO" secondAttribute="leading" id="6N6-jB-QLT"/>
+                            <constraint firstItem="YaR-mP-NTQ" firstAttribute="top" secondItem="hbn-9n-K5X" secondAttribute="bottom" id="HhC-U8-6Th"/>
+                            <constraint firstAttribute="trailing" secondItem="9Bu-eI-qq3" secondAttribute="trailing" id="HhG-LF-1zY"/>
+                            <constraint firstItem="9Bu-eI-qq3" firstAttribute="top" secondItem="Mqd-fJ-YjO" secondAttribute="top" id="b3q-8A-Zj9"/>
+                            <constraint firstAttribute="trailing" secondItem="hbn-9n-K5X" secondAttribute="trailing" id="ipO-vd-5kb"/>
+                            <constraint firstItem="9Bu-eI-qq3" firstAttribute="leading" secondItem="Mqd-fJ-YjO" secondAttribute="leading" id="k7R-bC-yFr"/>
+                            <constraint firstItem="hbn-9n-K5X" firstAttribute="top" secondItem="9Bu-eI-qq3" secondAttribute="bottom" id="saM-fg-iR7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="player" destination="9Bu-eI-qq3" id="GtJ-bD-dKe"/>
+                        <outlet property="tableView" destination="hbn-9n-K5X" id="64r-Jg-foZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8yE-S4-ce6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1320.8" y="231.63418290854574"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="VBS-Ts-hUi">
             <objects>

@@ -54,7 +54,7 @@ class TrendingCollectionViewController: FeedCollectionViewController {
                 if let video = videoItems[indexPath.row - 1] {
                     cell.setupCell(videoItem: video)
                 } else{
-                    Video.object(at: (indexPath.row - 1), fromList: itemsList, completiotion: { (video, index) in
+                    VideoItem.object(at: (indexPath.row - 1), fromList: itemsList, completiotion: { (video, index) in
                         self.videoItems[index] = video
                         DispatchQueue.main.async(execute: {
                             self.collectionView?.reloadData()

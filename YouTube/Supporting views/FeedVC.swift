@@ -14,7 +14,7 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
     //MARK: - Properties
     
     var itemsList = [[String : AnyObject]] ()
-    var videoItems = [Int : Video]()
+    var videoItems = [Int : VideoItem]()
     let refresh = UIRefreshControl()
    internal var downloadURL = globalVariables.urlLink
    internal var moreDownloadURL = globalVariables.moreURLLink
@@ -40,7 +40,7 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     func fetchItemsList(link: URL) {
-        Video.getVideosList(fromURL: downloadURL) { (items) -> (Void) in
+        VideoItem.getVideosList(fromURL: downloadURL) { (items) -> (Void) in
             self.itemsList += items
             DispatchQueue.main.async(execute: {
                 self.collectionView?.reloadData()
@@ -73,7 +73,7 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
         if let video = videoItems[indexPath.row] {
             cell.setupCell(videoItem: video)
         } else{
-            Video.object(at: (indexPath.row), fromList: itemsList, completiotion: { (video, index) in
+            VideoItem.object(at: (indexPath.row), fromList: itemsList, completiotion: { (video, index) in
                 self.videoItems[index] = video
                 DispatchQueue.main.async(execute: {
                     self.collectionView?.reloadData()
