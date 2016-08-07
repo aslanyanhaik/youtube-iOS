@@ -13,7 +13,6 @@ import UIKit
 
 
 struct globalVariables {
-    
     static let urlLink = URL.init(string: "http://mexonis.com/home.json")!
     static let moreURLLink = URL.init(string: "http://mexonis.com/more.json")!
     static let subscriptionsLink = URL.init(string: "http://mexonis.com/subscriptions.json")!
@@ -22,18 +21,13 @@ struct globalVariables {
     static let rect = CGRect.init(x: 0, y: 0, width: UIScreen.main().bounds.width, height: 44)
     static let width  = UIScreen.main().bounds.width
     static let height: CGFloat =  64
-    
-    
 }
 
-
     //MARK: Global Functions
-
 func secondsToHoursMinutesSeconds (seconds : Int) -> String {
     let hours = seconds / 3600
     let minutes = (seconds % 3600) / 60
     let second = (seconds % 3600) % 60
-    
     let hoursString: String = {
          let hs = String(hours)
         return hs
@@ -59,7 +53,6 @@ func secondsToHoursMinutesSeconds (seconds : Int) -> String {
         return ss
     }()
     
-    
     var label = ""
     if hours == 0 {
         label =  minutesString + ":" + secondsString
@@ -68,7 +61,6 @@ func secondsToHoursMinutesSeconds (seconds : Int) -> String {
     }
     return label
 }
-
 
 func requestSuggestionsURL(text: String) -> URL {
     let netText = text.addingPercentEncoding(withAllowedCharacters: CharacterSet())!

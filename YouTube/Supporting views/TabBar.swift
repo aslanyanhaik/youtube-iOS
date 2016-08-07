@@ -11,12 +11,9 @@ protocol TabBarDelegate {
 }
 
 import UIKit
-
 class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
-    
     //MARK: Properties
-    
     let identifier = "cell"
     let darkItems = ["homeDark", "trendingDark", "subscriptionsDark", "accountDark"]
     let items = ["home", "trending", "subscriptions", "account"]
@@ -27,7 +24,6 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
     }()
     
     lazy var collectionView: UICollectionView  = {
-        
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView.init(frame: CGRect.init(x: 0, y: 20, width: self.frame.width, height: (self.frame.height - 20)), collectionViewLayout: layout)
         cv.delegate = self
@@ -35,32 +31,25 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
         cv.backgroundColor = UIColor.clear()
         cv.isScrollEnabled = false
         return cv
-        
     }()
+    
     var delegate: TabBarDelegate?
     
-    
-  
     //MARK: CollectionView DataSources
-   
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.items.count
     }
-    
    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! TabBarCellCollectionViewCell
         cell.icon.image = UIImage.init(named: darkItems[indexPath.row])
         if indexPath.row == 0 {
-            cell.icon.image = UIImage.init(named: items[0])
-            
+        cell.icon.image = UIImage.init(named: items[0])
         }
         return cell
     }
     
     //MARK: CollectionView Delegates
-
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize.init(width: self.frame.width / 4, height: (self.frame.height - 20))
     }
@@ -74,43 +63,33 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
     }
     
     //MARK: Methods
-    
     func highlightItem(atIndex: Int)  {
         for index in  0...3 {
             let cell = collectionView.cellForItem(at: IndexPath.init(row: index, section: 0)) as! TabBarCellCollectionViewCell
             cell.icon.image = UIImage.init(named: darkItems[index])
-            
         }
-        
         let cell = collectionView.cellForItem(at: IndexPath.init(row: atIndex, section: 0)) as! TabBarCellCollectionViewCell
         cell.icon.image = UIImage.init(named: items[atIndex])
-        
     }
    
     //MARK: - Inits
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         collectionView.register(TabBarCellCollectionViewCell.self, forCellWithReuseIdentifier: identifier)
         self.backgroundColor = UIColor.rbg(r: 228, g: 34, b: 24)
         addSubview(self.collectionView)
         addSubview(self.whiteView)
-                
     }
-    
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
 }
 
 
 //TabBarCell Class
-
 class TabBarCellCollectionViewCell: UICollectionViewCell {
-    
     
     let icon = UIImageView()
     
@@ -122,7 +101,6 @@ class TabBarCellCollectionViewCell: UICollectionViewCell {
         let image = UIImage.init(named: "home")
         icon.image = image?.withRenderingMode(.alwaysTemplate)
         self.contentView.addSubview(icon)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

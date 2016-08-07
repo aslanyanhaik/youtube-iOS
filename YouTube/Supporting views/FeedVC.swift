@@ -12,7 +12,6 @@ import UIKit
 class FeedCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     //MARK: - Properties
-    
     var itemsList = [[String : AnyObject]] ()
     var videoItems = [Int : VideoItem]()
     let refresh = UIRefreshControl()
@@ -50,24 +49,19 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
         }
     }
     
-    
     //MARK: -  ViewController Lifecylce
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         customization()
         fetchItemsList(link: downloadURL)
     }
     
-    
     // MARK: UICollectionViewDataSource
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.itemsList.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CustomCollectionViewCell
         cell.resetCell()
         if let video = videoItems[indexPath.row] {
@@ -85,9 +79,7 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     // MARK: UICollectionViewDelegate
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         let size = CGSize.init(width: UIScreen.main().bounds.width, height: 300)
         return size
     }
@@ -101,6 +93,10 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
         if bottomEdge >= scrollView.contentSize.height {
             fetchItemsList(link: moreDownloadURL)
         }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        NotificationCenter.default().post(name: "open" as NSNotification.Name, object: nil)
     }
     
 }

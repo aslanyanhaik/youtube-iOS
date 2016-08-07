@@ -16,6 +16,12 @@ import UIKit
 class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     //MARK: Properties
+    let statusView: UIView = {
+        let st = UIView.init(frame: UIApplication.shared().statusBarFrame)
+        st.backgroundColor = UIColor.black()
+        st.alpha = 0.15
+        return st
+    }()
     
     lazy var searchView: UIView = {
        let sv = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.frame.width, height: 68))
@@ -47,11 +53,9 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
     }()
     var items = [String]()
     
-    
     var delegate:hideSearch?
     
     //MARK: Methods
-    
     func customization()  {
         self.addSubview(self.backgroundView)
         self.backgroundView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(Search.dismiss)))
@@ -64,8 +68,7 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
         self.tableView.tableFooterView = UIView()
         self.tableView.backgroundColor = UIColor.clear()
         self.searchField.delegate = self
-        
-
+        self.addSubview(self.statusView)
     }
     
     func animate()  {
@@ -76,9 +79,7 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
         })
     }
     
-    
     func  dismiss()  {
-        
         self.searchField.text = ""
         self.items.removeAll()
         self.tableView.removeFromSuperview()
@@ -92,13 +93,11 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
     }
     
     //MARK: TextField Delegates
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if (self.searchField.text == "" || self.searchField.text == nil) {
             self.items = []
             self.tableView.removeFromSuperview()
         } else{
-            
             let _  = URLSession.shared().dataTask(with: requestSuggestionsURL(text: self.searchField.text!), completionHandler: { (data, response, error) in
                 do {
                     let json  = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSArray
@@ -111,14 +110,10 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
                         }
                         self.tableView.reloadData()
                     })
-                    
-                    
                 } catch _ {
                     print("Something wrong happened")
                 }
-                
             }).resume()
-            
         }
         return true
     }
@@ -129,7 +124,6 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
     }
     
     //MARK: TableView Delegates and Datasources
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
@@ -149,9 +143,8 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.searchField.text = items[indexPath.row]
     }
+    
     //MARK: Inits
-    
-    
    override init(frame: CGRect) {
         super.init(frame: frame)
         customization()
@@ -159,12 +152,10 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
     }
     
     override func layoutSubviews() {
         self.tableView.separatorStyle = .none
-
     }
 }
 
@@ -179,19 +170,10 @@ class searchCell: UITableViewCell {
      override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: "Cell")
         self.addSubview(itemLabel)
-        
-        
     }
-    
     
    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
 }
-
-
-
-
-
-

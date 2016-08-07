@@ -22,6 +22,7 @@ class Settings: UIView,  UITableViewDelegate, UITableViewDataSource {
         tb.isScrollEnabled = false
         return tb
     }()
+    
     lazy var backgroundView: UIView = {
        let bv = UIView.init(frame: self.frame)
        bv.backgroundColor = UIColor.black()
@@ -32,7 +33,6 @@ class Settings: UIView,  UITableViewDelegate, UITableViewDataSource {
     var delegate: hideSettings?
     
     //MARK: Methods
-    
     func animate()  {
         UIView.animate(withDuration: 0.3, animations: {
         self.tableView.frame.origin.y -= 288
@@ -40,9 +40,7 @@ class Settings: UIView,  UITableViewDelegate, UITableViewDataSource {
         })
     }
     
-    
     func  dismiss()  {
-       
         UIView.animate(withDuration: 0.3, animations: {
             self.backgroundView.alpha = 0
             self.tableView.frame.origin.y += 288
@@ -52,8 +50,6 @@ class Settings: UIView,  UITableViewDelegate, UITableViewDataSource {
     }
     
     //MARK: TableView Delegate, DataSource methods
-    
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -79,7 +75,6 @@ class Settings: UIView,  UITableViewDelegate, UITableViewDataSource {
     }
   
     //Inits
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(Settings.dismiss)))
@@ -88,8 +83,6 @@ class Settings: UIView,  UITableViewDelegate, UITableViewDataSource {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

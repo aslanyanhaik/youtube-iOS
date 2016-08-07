@@ -12,8 +12,6 @@ import UIKit
     
         
     //MARK: Properties
-        
-    
     @IBOutlet weak var channelPic: UIButton!
     @IBOutlet weak var videoPic: UIImageView!
     @IBOutlet weak var videoTitle: UILabel!
@@ -21,9 +19,7 @@ import UIKit
     @IBOutlet weak var videoDuration: UILabel!
     @IBOutlet weak var separatorView: UIView!
        
-    
    //MARK: Methods
-        
     func customization()  {
         self.channelPic.layer.cornerRadius = 24
         self.channelPic.clipsToBounds  = true
@@ -34,7 +30,6 @@ import UIKit
     }
         
     //MARK: Methods
-        
     func resetCell()  {
         self.separatorView.isHidden = false
         self.videoPic.image = UIImage.init(named: "emptyTumbnail")
@@ -57,16 +52,12 @@ import UIKit
         self.videoDescription.text = description
         }
         
-        
     //MARK: Inits
-        
     override func awakeFromNib() {
         super.awakeFromNib()
         customization()
-        
     }
    
-        
     required init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
             

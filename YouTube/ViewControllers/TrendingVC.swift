@@ -12,39 +12,32 @@ import UIKit
 class TrendingCollectionViewController: FeedCollectionViewController {
     
     //MARK: - Properties
-    
     override var downloadURL: URL {
         get {
             return globalVariables.moreURLLink
         }
         set {}
     }
+    
     override var moreDownloadURL: URL {
         get {
             return globalVariables.urlLink
         }
         set {}
     }
-
     
     //MARK: -  ViewController Lifecylce
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
-    
     // MARK: UICollectionViewDataSource
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.itemsList.count + 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       
         var returncell = UICollectionViewCell()
-        
         if indexPath.row == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Top", for: indexPath) as! TrendingItemsCell
             returncell = cell
@@ -68,7 +61,6 @@ class TrendingCollectionViewController: FeedCollectionViewController {
     }
     
     // MARK: UICollectionViewDelegate
-    
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var size = CGSize()
         if indexPath.row == 0 {
@@ -81,8 +73,7 @@ class TrendingCollectionViewController: FeedCollectionViewController {
     
 }
 
-    //MARK TopCellClass
-
+//MARK TopCellClass
 class TrendingItemsCell: UICollectionViewCell {
     
     @IBOutlet var buttons: [UIButton]!
@@ -95,7 +86,6 @@ class TrendingItemsCell: UICollectionViewCell {
     }
     
     //MARK: Inits
-  
     override func awakeFromNib() {
         roundCorners()
     }

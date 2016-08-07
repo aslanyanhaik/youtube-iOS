@@ -29,7 +29,6 @@ class AccountCollectionViewController: UICollectionViewController, UICollectionV
         }
     }
     
-    
     func customization() {
         self.collectionView?.contentInset = UIEdgeInsetsMake(21, 0, 0, 0)
         self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(21, 0, 0, 0)
@@ -42,10 +41,7 @@ class AccountCollectionViewController: UICollectionViewController, UICollectionV
         fetchItem()
     }
     
-    
     // MARK: UICollectionViewDataSource
-    
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.items
     }
@@ -80,7 +76,6 @@ class AccountCollectionViewController: UICollectionViewController, UICollectionV
     }
     
     // MARK: UICollectionViewDelegate
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var size = CGSize.init(width: self.view.bounds.width, height: 70)
         switch indexPath.row {

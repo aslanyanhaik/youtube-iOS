@@ -5,16 +5,110 @@
 //  Created by Haik Aslanyan on 7/25/16.
 //  Copyright © 2016 Haik Aslanyan. All rights reserved.
 //
+protocol PlayerVCDelegate {
+    func didMinimize()
+    func didmaximize()
+    func swipeToMinimize(translation: CGFloat, fromState: stateOfVC, toState: stateOfVC)
+    func didEndedSwipe(toState: stateOfVC)
+}
+
+enum stateOfVC {
+    case minimized
+    case fullScreen
+    case hidden
+}
 
 import UIKit
-
-class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
+    
     //MARK: Properties
     @IBOutlet weak var player: UIView!
     @IBOutlet weak var tableView: UITableView!
-    internal var link: URL = globalVariables.videoLink
+    @IBOutlet weak var minimizeButton: UIButton!
+    let link: URL = globalVariables.videoLink
     var video: Video?
+    var delegate: PlayerVCDelegate?
+    var state = stateOfVC.hidden
+    
+    //MARK: Methods
+    func customization() {
+        self.view.backgroundColor = UIColor.clear()
+        self.player.layer.anchorPoint.apply(transform: CGAffineTransform.init(translationX: -0.5, y: -0.5))
+        self.tableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
+        self.player.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(PlayVC.tapPlayView)))
+        NotificationCenter.default().addObserver(self, selector: #selector(PlayVC.tapPlayView), name: "open", object: nil)
+    }
+
+    func animate()  {
+        switch self.state {
+        case .fullScreen:
+            UIView.animate(withDuration: 0.3, animations: {
+                self.minimizeButton.alpha = 1
+                self.tableView.alpha = 1
+                self.player.transform = CGAffineTransform.identity
+                UIApplication.shared().isStatusBarHidden = true
+            })
+        case .minimized:
+            UIView.animate(withDuration: 0.3, animations: {
+                self.minimizeButton.alpha = 0
+                self.tableView.alpha = 0
+                let scale = CGAffineTransform.init(scaleX: 0.5, y: 0.5)
+                let trasform = scale.concat(CGAffineTransform.init(translationX: -self.player.bounds.width/4, y: -self.player.bounds.height/4))
+                self.player.transform = trasform
+                UIApplication.shared().isStatusBarHidden = false
+            })
+        default: break
+        }
+    }
+    
+    func changeValues(scaleFactor: CGFloat) {
+        self.minimizeButton.alpha = 1 - scaleFactor
+        self.tableView.alpha = 1 - scaleFactor
+        let scale = CGAffineTransform.init(scaleX: (1 - 0.5 * scaleFactor), y: (1 - 0.5 * scaleFactor))
+        let trasform = scale.concat(CGAffineTransform.init(translationX: -(self.player.bounds.width / 4 * scaleFactor), y: -(self.player.bounds.height / 4 * scaleFactor)))
+        self.player.transform = trasform
+    }
+    
+    func tapPlayView()  {
+        self.state = .fullScreen
+        self.delegate?.didmaximize()
+        self.animate()
+    }
+    
+    @IBAction func minimize(_ sender: UIButton) {
+        self.state = .minimized
+        self.delegate?.didMinimize()
+        self.animate()
+    }
+    
+    @IBAction func minimizeGesture(_ sender: UIPanGestureRecognizer) {
+        switch self.state {
+        case .fullScreen:
+            self.state = .minimized
+            let factor = (abs(sender.translation(in: nil).y) / UIScreen.main().bounds.height)
+            self.changeValues(scaleFactor: factor)
+            self.delegate?.swipeToMinimize(translation: factor, fromState: .fullScreen, toState: self.state)
+        case .minimized:
+            let velocity = sender.velocity(in: nil)
+            if abs(velocity.y) > 0 {
+                self.state = .fullScreen
+                let factor = 1 - (abs(sender.translation(in: nil).y) / UIScreen.main().bounds.height)
+                self.changeValues(scaleFactor: factor)
+                self.delegate?.swipeToMinimize(translation: factor, fromState: .minimized, toState: self.state)
+            }
+            else {
+                    self.state = .hidden
+                    let factor: CGFloat = -abs(sender.translation(in: self.view).x)
+                print(factor)
+                    self.delegate?.swipeToMinimize(translation: factor, fromState: .minimized, toState: self.state)
+                }
+        default: break
+        }
+        if sender.state == .ended {
+            self.animate()
+            self.delegate?.didEndedSwipe(toState: self.state)
+        }
+    }
     
     //MARK: Delegate & dataSource methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,7 +141,7 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.tumbnail.image = self.video?.suggestedVideos[indexPath.row - 1].thumbnail
             returnCell = cell
         }
-              return returnCell
+        return returnCell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -64,7 +158,7 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //MARK: ViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
+        self.customization()
         Video.download(link: self.link) { (video) in
             self.video = video
             DispatchQueue.main.async(execute: {
@@ -72,7 +166,6 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             })
         }
     }
-
  }
 
 class headerCell: UITableViewCell {
@@ -103,5 +196,4 @@ class videoCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
 }

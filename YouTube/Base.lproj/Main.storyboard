@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="x8Y-1h-B9R">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="IXR-Mk-kYq">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11103.10"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -111,7 +112,7 @@
         <!--PlayVC-->
         <scene sceneID="jer-A4-Yxb">
             <objects>
-                <viewController storyboardIdentifier="PlayVC" id="x8Y-1h-B9R" customClass="PlayVC" customModule="YouTube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlayVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="x8Y-1h-B9R" customClass="PlayVC" customModule="YouTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YTO-i8-6cK"/>
                         <viewControllerLayoutGuide type="bottom" id="YaR-mP-NTQ"/>
@@ -121,10 +122,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Bu-eI-qq3">
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9Bu-eI-qq3" secondAttribute="height" multiplier="16:9" id="ozd-nX-828"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="hyU-uM-3Zt" appends="YES" id="Rvr-kL-bSP"/>
+                                </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hbn-9n-K5X">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -133,7 +138,7 @@
                                         <frame key="frameInset" minY="28" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bsy-3X-YnD" id="fuZ-dh-5Hp">
-                                            <frame key="frameInset" width="375" height="199"/>
+                                            <frame key="frameInset" width="375" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Cource &amp; Update! (Chat App: Firebase)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsn-C1-ZfO">
@@ -233,7 +238,7 @@
                                         <frame key="frameInset" minY="228" width="375" height="116"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wbB-wx-uhq" id="kUP-oh-OXM">
-                                            <frame key="frameInset" width="375" height="115"/>
+                                            <frame key="frameInset" width="375" height="116"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lMI-Co-q9J">
@@ -278,31 +283,49 @@
                                     <outlet property="delegate" destination="x8Y-1h-B9R" id="1bS-bo-dH1"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8t-1k-fRG">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="4dj-z2-RQR"/>
+                                    <constraint firstAttribute="height" constant="30" id="Ds0-8h-VS4"/>
+                                </constraints>
+                                <state key="normal" image="minimize"/>
+                                <connections>
+                                    <action selector="minimize:" destination="x8Y-1h-B9R" eventType="touchUpInside" id="mpf-jM-wPd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="X8t-1k-fRG" firstAttribute="top" secondItem="YTO-i8-6cK" secondAttribute="bottom" constant="12" id="3fe-Pl-1W3"/>
                             <constraint firstItem="hbn-9n-K5X" firstAttribute="leading" secondItem="Mqd-fJ-YjO" secondAttribute="leading" id="6N6-jB-QLT"/>
                             <constraint firstItem="YaR-mP-NTQ" firstAttribute="top" secondItem="hbn-9n-K5X" secondAttribute="bottom" id="HhC-U8-6Th"/>
                             <constraint firstAttribute="trailing" secondItem="9Bu-eI-qq3" secondAttribute="trailing" id="HhG-LF-1zY"/>
                             <constraint firstItem="9Bu-eI-qq3" firstAttribute="top" secondItem="Mqd-fJ-YjO" secondAttribute="top" id="b3q-8A-Zj9"/>
+                            <constraint firstItem="X8t-1k-fRG" firstAttribute="leading" secondItem="Mqd-fJ-YjO" secondAttribute="leadingMargin" constant="20" id="ego-A5-SnR"/>
                             <constraint firstAttribute="trailing" secondItem="hbn-9n-K5X" secondAttribute="trailing" id="ipO-vd-5kb"/>
                             <constraint firstItem="9Bu-eI-qq3" firstAttribute="leading" secondItem="Mqd-fJ-YjO" secondAttribute="leading" id="k7R-bC-yFr"/>
                             <constraint firstItem="hbn-9n-K5X" firstAttribute="top" secondItem="9Bu-eI-qq3" secondAttribute="bottom" id="saM-fg-iR7"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="minimizeButton" destination="X8t-1k-fRG" id="aiM-iI-XDA"/>
                         <outlet property="player" destination="9Bu-eI-qq3" id="GtJ-bD-dKe"/>
                         <outlet property="tableView" destination="hbn-9n-K5X" id="64r-Jg-foZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8yE-S4-ce6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="hyU-uM-3Zt">
+                    <connections>
+                        <action selector="minimizeGesture:" destination="x8Y-1h-B9R" id="1SO-0S-xzs"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1320.8" y="231.63418290854574"/>
+            <point key="canvasLocation" x="-119" y="1628"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--NavVC-->
         <scene sceneID="VBS-Ts-hUi">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IXR-Mk-kYq" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IXR-Mk-kYq" customClass="NavVC" customModule="YouTube" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="mbv-fJ-8Zp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -310,7 +333,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BbS-ua-1aR" kind="relationship" relationship="rootViewController" id="rDp-kt-QoF"/>
+                        <segue destination="BbS-ua-1aR" kind="relationship" relationship="rootViewController" id="RDE-Ph-tCm"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3On-42-oCh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -320,7 +343,7 @@
         <!--Main View Controller-->
         <scene sceneID="aUg-1j-7qx">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BbS-ua-1aR" customClass="MainViewController" customModule="YouTube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainVC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BbS-ua-1aR" customClass="MainViewController" customModule="YouTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g4N-fV-P1D"/>
                         <viewControllerLayoutGuide type="bottom" id="wcO-fk-p0I"/>
@@ -330,7 +353,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="G3p-6R-CdC"/>
+                    <navigationItem key="navigationItem" id="G3p-6R-CdC">
+                        <rightBarButtonItems>
+                            <barButtonItem image="nav_more_icon" id="wZ3-IW-evB">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="handleMore:" destination="BbS-ua-1aR" id="VhL-Dk-xx4"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="search_icon" id="u3K-ZL-qhY">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="handleSearch:" destination="BbS-ua-1aR" id="VaQ-i7-hNg"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TnM-i6-I6O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -488,7 +526,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pnc-GP-8aR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="562.39999999999998" y="913.49325337331345"/>
+            <point key="canvasLocation" x="535" y="913"/>
         </scene>
         <!--Subscriptions Collection View Controller-->
         <scene sceneID="83e-pd-3Gk">
@@ -627,7 +665,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Jf-jZ-mm5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1224.8" y="914.392803598201"/>
+            <point key="canvasLocation" x="1198" y="914"/>
         </scene>
         <!--Account Collection View Controller-->
         <scene sceneID="xjh-aw-XzB">
@@ -792,13 +830,16 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="brq-KB-JPg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2256.8000000000002" y="899.10044977511257"/>
+            <point key="canvasLocation" x="1860" y="914"/>
         </scene>
     </scenes>
     <resources>
         <image name="live" width="32" height="32"/>
+        <image name="minimize" width="20" height="10"/>
         <image name="music" width="32" height="32"/>
+        <image name="nav_more_icon" width="24" height="24"/>
         <image name="news" width="32" height="32"/>
+        <image name="search_icon" width="24" height="24"/>
         <image name="thumbDown" width="25" height="25"/>
         <image name="thumbUp" width="25" height="25"/>
     </resources>

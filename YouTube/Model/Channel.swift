@@ -12,13 +12,11 @@ import UIKit
 class Channel {
     
     //MARK Properties
-    
     let name: String
     let image: UIImage
     
     
     //MARK: Inits
-    
     init(name: String, image: UIImage) {
         self.name = name
         self.image = image

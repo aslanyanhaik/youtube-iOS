@@ -17,9 +17,7 @@ class SubscriptionsCollectionViewController: FeedCollectionViewController {
         super.viewDidLoad()
     }
     
-    
     // MARK: UICollectionViewDataSource
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.itemsList.count + 1
     }
@@ -49,9 +47,7 @@ class SubscriptionsCollectionViewController: FeedCollectionViewController {
     }
     
     // MARK: UICollectionViewDelegate
-    
    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
     var size = CGSize.init(width: UIScreen.main().bounds.width, height: 300)
     if indexPath.row == 0 {
         size = CGSize.init(width: UIScreen.main().bounds.width, height: 70)

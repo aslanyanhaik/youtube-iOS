@@ -11,12 +11,10 @@ import UIKit
 class SubscriptionsProfilePicCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     //MARK: Properties
-    
     @IBOutlet weak var collectionView: UICollectionView!
     var items = [UIImage]()
     
     //MARK: Methods
-    
     func fetchImages()  {
         let _ = URLSession.shared().dataTask(with: globalVariables.subscriptionsLink) { (data, response, error) in
             if error != nil {
@@ -39,7 +37,6 @@ class SubscriptionsProfilePicCell: UICollectionViewCell, UICollectionViewDelegat
     }
     
     //MARK: CollectionView delegates and datasources
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.items.count
     }
@@ -60,7 +57,6 @@ class SubscriptionsProfilePicCell: UICollectionViewCell, UICollectionViewDelegat
     }
     
     //MARK: Inits
-    
     override func awakeFromNib() {
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
@@ -84,6 +80,7 @@ class ProfilePic: UICollectionViewCell {
         pv.backgroundColor = UIColor.gray()
         return pv
     }()
+    
     //MARK: Inits
     override func awakeFromNib() {
         self.addSubview(profileImage)

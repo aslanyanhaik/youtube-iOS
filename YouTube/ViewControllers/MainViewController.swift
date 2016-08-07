@@ -12,7 +12,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     
     //MARK: Properties
-    
     var views = [UIView]()
     let items = ["Home", "Trending", "Subscriptions", "Account"]
     var viewsInitialized = false
@@ -36,13 +35,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         let tb = TabBar.init(frame: CGRect.init(x: 0, y: 0, width: globalVariables.width, height: 64))
         tb.delegate = self
         return tb
-    }()
-    
-    let statusView: UIView = {
-        let st = UIView.init(frame: CGRect.init(x: 0, y: 0, width: globalVariables.width, height: 20))
-        st.backgroundColor = UIColor.black()
-        st.alpha = 0.15
-        return st
     }()
     
     lazy var settings: Settings = {
@@ -74,37 +66,15 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.collectionView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
         self.view.addSubview(self.collectionView)
         
-        
         //NavigationController Customization
-        self.navigationController?.hidesBarsOnSwipe = true
+       // self.navigationController?.hidesBarsOnSwipe = true
         self.navigationController?.view.backgroundColor = UIColor.rbg(r: 228, g: 34, b: 24)
-        
-        //StaturBar background View
-        if let window  = UIApplication.shared().keyWindow {
-            window.addSubview(self.statusView)
-        }
-        
-        //NavigationBar customization
+        self.navigationController?.navigationItem.hidesBackButton = true
         
         //NavigationBar color and shadow
         self.navigationController?.navigationBar.barTintColor = UIColor.rbg(r: 228, g: 34, b: 24)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        
-        // Buttons
-        let searchButton: UIBarButtonItem = {
-            let sb = UIBarButtonItem.init(image: UIImage.init(named: "search_icon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(MainViewController.handleSearch))
-            sb.tintColor = UIColor.white()
-            return sb
-        }()
-        
-        let moreButton: UIBarButtonItem = {
-            let  mb = UIBarButtonItem.init(image: UIImage.init(named: "nav_more_icon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(MainViewController.handleMore))
-            mb.tintColor = UIColor.white()
-            return mb
-        }()
-        
-        self.navigationItem.rightBarButtonItems = [moreButton, searchButton]
         
         // TitleLabel
         self.navigationController?.navigationBar.addSubview(self.titleLabel)
@@ -121,32 +91,24 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             vc.didMove(toParentViewController: self)
             self.views.append(vc.view)
         }
-        
-        
     }
     
-    
-    
     //MARK: Search and Settings
-    
-    func handleSearch()  {
+    @IBAction func handleSearch(_ sender: AnyObject) {
         if let window = UIApplication.shared().keyWindow {
-            window.insertSubview(self.search, belowSubview: self.statusView)
+            window.addSubview(self.search)
             self.search.animate()
         }
     }
     
-    func handleMore()  {
+    @IBAction func handleMore(_ sender: AnyObject) {
         if let window = UIApplication.shared().keyWindow {
             window.addSubview(self.settings)
             self.settings.animate()
         }
     }
     
-    
     //MARK: Delegates implementation
-    
-    
     func didSelectItem(atIndex: Int) {
         self.collectionView.scrollRectToVisible(CGRect.init(origin: CGPoint.init(x: (self.view.bounds.width * CGFloat(atIndex)), y: 0), size: self.view.bounds.size), animated: true)
     }
@@ -162,16 +124,14 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             self.search.removeFromSuperview()
         }
     }
-    
+   
     //MARK: VieController lifecyle
-    
     override func viewDidLoad() {
         self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         super.viewDidLoad()
         customization()
         didSelectItem(atIndex: 0)
         self.viewsInitialized = false
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -179,26 +139,19 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     //MARK: CollectionView DataSources
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.views.count
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         cell.contentView.addSubview(self.views[indexPath.row])
         return cell
-        
     }
     
     //MARK: CollectionView Delegates
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
                return CGSize.init(width: self.view.bounds.width, height: (self.view.bounds.height + 22))
-
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -210,6 +163,3 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
 }
-
-
-

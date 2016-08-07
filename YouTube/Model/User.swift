@@ -19,7 +19,6 @@ class User {
 
     
     //MARK: Methods
-    
     class func fetchProfile(link: URL, completition: ((User) -> Void)) {
         UIApplication.shared().isNetworkActivityIndicatorVisible = true
         let _ =  URLSession.shared().dataTask(with: link) { (data, response, error) in
@@ -39,7 +38,6 @@ class User {
                             let playlistItem = Playlist.init(pic: pic, title: title, numberOfVideos: numberOfItems)
                             playlists.append(playlistItem)
                         }
-                    
                     let user = User.init(name: name, profilePic: profilePic, backgroundImage: backgroundImage, playlists: playlists)
                     completition(user)
                 } catch _ {
