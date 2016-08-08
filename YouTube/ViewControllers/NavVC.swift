@@ -64,13 +64,12 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
             })
         }
     }
-    ///////////////
-    func positionDuringSwipe(scaleFactor: CGFloat, state: stateOfVC) -> CGPoint {
-        let absolutScaleFactor = CGFloat.abs(scaleFactor)
-        let width = UIScreen.main().bounds.width * absolutScaleFactor * 0.005
+
+    func positionDuringSwipe(scaleFactor: CGFloat) -> CGPoint {
+        let width = UIScreen.main().bounds.width * 0.5 * scaleFactor
         let height = width * 9 / 16
-        let x = ((UIScreen.main().bounds.width - 10) * absolutScaleFactor / 100) - width
-        let y = ((UIScreen.main().bounds.height - 10) * absolutScaleFactor / 100) - height
+        let x = (UIScreen.main().bounds.width - 10) * scaleFactor - width
+        let y = (UIScreen.main().bounds.height - 10) * scaleFactor - height
         let coordinate = CGPoint.init(x: x, y: y)
         return coordinate
     }
@@ -88,14 +87,14 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
         self.animatePlayView(toState: toState)
     }
     
-    func swipeToMinimize(translation: CGFloat, fromState: stateOfVC, toState: stateOfVC){
+    func swipeToMinimize(translation: CGFloat, toState: stateOfVC){
         switch toState {
         case .fullScreen:
-            print("needs to be implemented")
+            self.playVC.view.frame.origin = self.positionDuringSwipe(scaleFactor: translation)
         case .hidden:
             self.playVC.view.frame.origin.x = UIScreen.main().bounds.width/2 - abs(translation) - 10
         case .minimized:
-            print("minimizing")
+            self.playVC.view.frame.origin = self.positionDuringSwipe(scaleFactor: translation)
         }
     }
     

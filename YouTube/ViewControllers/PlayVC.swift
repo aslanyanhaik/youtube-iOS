@@ -8,19 +8,8 @@
 protocol PlayerVCDelegate {
     func didMinimize()
     func didmaximize()
-    func swipeToMinimize(translation: CGFloat, fromState: stateOfVC, toState: stateOfVC)
+    func swipeToMinimize(translation: CGFloat, toState: stateOfVC)
     func didEndedSwipe(toState: stateOfVC)
-}
-
-enum stateOfVC {
-    case minimized
-    case fullScreen
-    case hidden
-}
-enum Direction {
-    case up
-    case left
-    case none
 }
 
 import UIKit
@@ -35,7 +24,6 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
     var delegate: PlayerVCDelegate?
     var state = stateOfVC.hidden
     var direction = Direction.none
-
     
     //MARK: Methods
     func customization() {
@@ -102,18 +90,18 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
         case .fullScreen:
             let factor = (abs(sender.translation(in: nil).y) / UIScreen.main().bounds.height)
             self.changeValues(scaleFactor: factor)
-            self.delegate?.swipeToMinimize(translation: factor, fromState: .fullScreen, toState: .minimized)
+            self.delegate?.swipeToMinimize(translation: factor, toState: .minimized)
             finalState = .minimized
         case .minimized:
                 if self.direction == .left {
                 finalState = .hidden
                 let factor: CGFloat = sender.translation(in: nil).x
-                self.delegate?.swipeToMinimize(translation: factor, fromState: .minimized, toState: .hidden)
+                self.delegate?.swipeToMinimize(translation: factor, toState: .hidden)
             } else {
                 finalState = .fullScreen
                 let factor = 1 - (abs(sender.translation(in: nil).y) / UIScreen.main().bounds.height)
                 self.changeValues(scaleFactor: factor)
-                self.delegate?.swipeToMinimize(translation: factor, fromState: .minimized, toState: .fullScreen)
+                self.delegate?.swipeToMinimize(translation: factor, toState: .fullScreen)
             }
         default: break
         }

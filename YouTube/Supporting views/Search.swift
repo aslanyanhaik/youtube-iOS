@@ -6,7 +6,7 @@
 //  Copyright © 2016 Haik Aslanyan. All rights reserved.
 //
 
-protocol hideSearch {
+protocol SearchDelegate {
     func hideSearchView(status : Bool)
 
 }
@@ -53,7 +53,7 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
     }()
     var items = [String]()
     
-    var delegate:hideSearch?
+    var delegate:SearchDelegate?
     
     //MARK: Methods
     func customization()  {

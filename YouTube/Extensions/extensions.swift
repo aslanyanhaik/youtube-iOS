@@ -32,3 +32,14 @@ extension UIImage {
     return image
     }
 }
+
+enum stateOfVC {
+    case minimized
+    case fullScreen
+    case hidden
+}
+enum Direction {
+    case up
+    case left
+    case none
+}

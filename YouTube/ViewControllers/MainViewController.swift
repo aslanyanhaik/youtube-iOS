@@ -8,8 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, hideSettings, hideSearch, TabBarDelegate   {
-    
+class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, SettingsDelegate, SearchDelegate, TabBarDelegate   {
     
     //MARK: Properties
     var views = [UIView]()

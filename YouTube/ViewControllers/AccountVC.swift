@@ -16,7 +16,6 @@ class AccountCollectionViewController: UICollectionViewController, UICollectionV
     var items = 5
     var user = User.init(name: "Loading", profilePic: UIImage(), backgroundImage: UIImage(), playlists: [Playlist]())
     
-    
     //MARK: Methods
     func fetchItem() {
         User.fetchProfile(link: globalVariables.profileLink) { (newUser) in

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol hideSettings {
+protocol SettingsDelegate {
     func hideSettingsView(status : Bool)
 }
 
@@ -30,7 +30,7 @@ class Settings: UIView,  UITableViewDelegate, UITableViewDataSource {
         return bv
     }()
     
-    var delegate: hideSettings?
+    var delegate: SettingsDelegate?
     
     //MARK: Methods
     func animate()  {
