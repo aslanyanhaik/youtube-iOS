@@ -25,13 +25,13 @@ class VideoItem {
         var items = [[String : AnyObject]]()
         URLSession.shared().dataTask(with: fromURL) { (data, response, error) in
             if error != nil {
-            print("Please check your internet connection")
+            showNotification()
             } else{
                     do{
                         let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                         items = json as! [[String : AnyObject]]
                         } catch _ {
-                    print("error fetching the feed")
+                    showNotification()
                     }
                 completition(items)
         }

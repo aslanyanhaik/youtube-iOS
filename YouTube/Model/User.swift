@@ -41,10 +41,10 @@ class User {
                     let user = User.init(name: name, profilePic: profilePic, backgroundImage: backgroundImage, playlists: playlists)
                     completition(user)
                 } catch _ {
-                    print("failed to fetch data")
+                    showNotification()
                 }
             } else {
-                print("Please check your internet connection")
+                showNotification()
             }
         }.resume()
     }

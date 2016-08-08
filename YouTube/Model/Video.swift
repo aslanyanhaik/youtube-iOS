@@ -69,7 +69,7 @@ class Video {
                                                 suggestedVideos: suggestedVideos)
                     completiotion(video)
                 } catch _ {
-                    print("error downloading video")
+                  showNotification()
                 }
             }
         }.resume()

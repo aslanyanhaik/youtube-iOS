@@ -67,3 +67,14 @@ func requestSuggestionsURL(text: String) -> URL {
     let url = URL.init(string: "https://api.bing.com/osjson.aspx?query=\(netText)")!
     return url
 }
+
+func showNotification() {
+    let alert = UIAlertController(title: "Oops!", message:"Please check your internet connection", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in })
+    let navigationController = UIApplication.shared().windows[0].rootViewController as! UINavigationController
+    let activeViewCont = navigationController.visibleViewController!
+    activeViewCont.present(alert, animated: true, completion: nil)
+}
+
+
+
