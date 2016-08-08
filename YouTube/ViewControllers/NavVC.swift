@@ -93,9 +93,9 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
         case .fullScreen:
             print("needs to be implemented")
         case .hidden:
-            self.playVC.view.frame.origin.x = translation
-        default:
-            break
+            self.playVC.view.frame.origin.x = UIScreen.main().bounds.width/2 - abs(translation) - 10
+        case .minimized:
+            print("minimizing")
         }
     }
     

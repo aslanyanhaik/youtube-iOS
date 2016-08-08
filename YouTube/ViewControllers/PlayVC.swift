@@ -17,6 +17,11 @@ enum stateOfVC {
     case fullScreen
     case hidden
 }
+enum Direction {
+    case up
+    case left
+    case none
+}
 
 import UIKit
 class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
@@ -29,6 +34,8 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
     var video: Video?
     var delegate: PlayerVCDelegate?
     var state = stateOfVC.hidden
+    var direction = Direction.none
+
     
     //MARK: Methods
     func customization() {
@@ -82,29 +89,36 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
     }
     
     @IBAction func minimizeGesture(_ sender: UIPanGestureRecognizer) {
+        if sender.state == .began {
+            let velocity = sender.velocity(in: nil)
+            if abs(velocity.x) < abs(velocity.y) {
+                self.direction = .up
+            } else {
+                self.direction = .left
+            }
+        }
+        var finalState = stateOfVC.fullScreen
         switch self.state {
         case .fullScreen:
-            self.state = .minimized
             let factor = (abs(sender.translation(in: nil).y) / UIScreen.main().bounds.height)
             self.changeValues(scaleFactor: factor)
-            self.delegate?.swipeToMinimize(translation: factor, fromState: .fullScreen, toState: self.state)
+            self.delegate?.swipeToMinimize(translation: factor, fromState: .fullScreen, toState: .minimized)
+            finalState = .minimized
         case .minimized:
-            let velocity = sender.velocity(in: nil)
-            if abs(velocity.y) > 0 {
-                self.state = .fullScreen
+                if self.direction == .left {
+                finalState = .hidden
+                let factor: CGFloat = sender.translation(in: nil).x
+                self.delegate?.swipeToMinimize(translation: factor, fromState: .minimized, toState: .hidden)
+            } else {
+                finalState = .fullScreen
                 let factor = 1 - (abs(sender.translation(in: nil).y) / UIScreen.main().bounds.height)
                 self.changeValues(scaleFactor: factor)
-                self.delegate?.swipeToMinimize(translation: factor, fromState: .minimized, toState: self.state)
+                self.delegate?.swipeToMinimize(translation: factor, fromState: .minimized, toState: .fullScreen)
             }
-            else {
-                    self.state = .hidden
-                    let factor: CGFloat = -abs(sender.translation(in: self.view).x)
-                print(factor)
-                    self.delegate?.swipeToMinimize(translation: factor, fromState: .minimized, toState: self.state)
-                }
         default: break
         }
         if sender.state == .ended {
+            self.state = finalState
             self.animate()
             self.delegate?.didEndedSwipe(toState: self.state)
         }
