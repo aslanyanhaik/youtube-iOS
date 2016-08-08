@@ -13,6 +13,7 @@ protocol PlayerVCDelegate {
 }
 
 import UIKit
+import AVFoundation
 class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     
     //MARK: Properties
@@ -24,6 +25,7 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
     var delegate: PlayerVCDelegate?
     var state = stateOfVC.hidden
     var direction = Direction.none
+    var videoPlayer = AVPlayer.init()
     
     //MARK: Methods
     func customization() {
@@ -45,12 +47,12 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
             })
         case .minimized:
             UIView.animate(withDuration: 0.3, animations: {
+                UIApplication.shared().isStatusBarHidden = false
                 self.minimizeButton.alpha = 0
                 self.tableView.alpha = 0
                 let scale = CGAffineTransform.init(scaleX: 0.5, y: 0.5)
                 let trasform = scale.concat(CGAffineTransform.init(translationX: -self.player.bounds.width/4, y: -self.player.bounds.height/4))
                 self.player.transform = trasform
-                UIApplication.shared().isStatusBarHidden = false
             })
         default: break
         }
@@ -65,6 +67,7 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
     }
     
     func tapPlayView()  {
+        self.videoPlayer.play()
         self.state = .fullScreen
         self.delegate?.didmaximize()
         self.animate()
@@ -109,6 +112,9 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
             self.state = finalState
             self.animate()
             self.delegate?.didEndedSwipe(toState: self.state)
+            if self.state == .hidden {
+                self.videoPlayer.pause()
+            }
         }
     }
     
@@ -164,6 +170,13 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
         Video.download(link: self.link) { (video) in
             self.video = video
             DispatchQueue.main.async(execute: {
+                self.videoPlayer = AVPlayer.init(url: video.videoLink)
+                let playerLayer = AVPlayerLayer.init(player: self.videoPlayer)
+                playerLayer.frame =  self.player.bounds
+                self.player.layer.addSublayer(playerLayer)
+                if self.state != .hidden {
+                    self.videoPlayer.play()
+                }
                 self.tableView.reloadData()
             })
         }
