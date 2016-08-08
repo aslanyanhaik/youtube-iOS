@@ -15,8 +15,9 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
     var itemsList = [[String : AnyObject]] ()
     var videoItems = [Int : VideoItem]()
     let refresh = UIRefreshControl()
-   internal var downloadURL = globalVariables.urlLink
-   internal var moreDownloadURL = globalVariables.moreURLLink
+    var lastContentOffset: CGFloat = 0.0
+    internal var downloadURL = globalVariables.urlLink
+    internal var moreDownloadURL = globalVariables.moreURLLink
     
     
     //MARK: Methods
@@ -97,6 +98,18 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         NotificationCenter.default().post(name: "open" as NSNotification.Name, object: nil)
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (self.lastContentOffset > scrollView.contentOffset.y) {
+            NotificationCenter.default().post(name: "hide" as NSNotification.Name, object: false)
+        } else {
+            NotificationCenter.default().post(name: "hide" as NSNotification.Name, object: true)
+        }
+    }
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        self.lastContentOffset = scrollView.contentOffset.y;
     }
     
 }

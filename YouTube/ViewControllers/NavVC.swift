@@ -41,7 +41,6 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
 
     //Methods
     func customization()  {
-        self.view.addSubview(self.statusView)
         self.view.addSubview(self.playVC.view)
         let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "MainVC") as! MainViewController
         self.addChildViewController(mainVC)
@@ -102,5 +101,13 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.customization()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if let window = UIApplication.shared().keyWindow {
+            window.addSubview(self.playVC.view)
+            window.addSubview(self.statusView)
+        }
     }
 }

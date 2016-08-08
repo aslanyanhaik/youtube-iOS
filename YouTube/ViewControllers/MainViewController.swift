@@ -58,7 +58,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     
     //MARK: Methods
-  
     func customization()  {
         
         //CollectionView Customization
@@ -66,9 +65,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.view.addSubview(self.collectionView)
         
         //NavigationController Customization
-       // self.navigationController?.hidesBarsOnSwipe = true
         self.navigationController?.view.backgroundColor = UIColor.rbg(r: 228, g: 34, b: 24)
         self.navigationController?.navigationItem.hidesBackButton = true
+        self.navigationItem.hidesBackButton = true
         
         //NavigationBar color and shadow
         self.navigationController?.navigationBar.barTintColor = UIColor.rbg(r: 228, g: 34, b: 24)
@@ -131,6 +130,12 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         customization()
         didSelectItem(atIndex: 0)
         self.viewsInitialized = false
+        NotificationCenter.default().addObserver(self, selector: #selector(MainViewController.hideBar(notification:)), name: "hide", object: nil)
+    }
+    
+    func hideBar(notification: NSNotification)  {
+        let state = notification.object as! Bool
+        self.navigationController?.setNavigationBarHidden(state, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
