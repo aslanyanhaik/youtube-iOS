@@ -10,7 +10,6 @@ import UIKit
 
 
 // uicolor init simplified
-
 extension UIColor{
     class func rbg(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
         let color = UIColor.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
@@ -30,6 +29,16 @@ extension UIImage {
         print("error downloading images")
     }
     return image
+    }
+}
+
+//UIViewController alert
+extension UIViewController {
+    
+    func showNotification() {
+        let alert = UIAlertController(title: "Oops!", message:"Please check your internet connection", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in })
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

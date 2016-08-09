@@ -141,6 +141,7 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
             cell.channelPic.layer.cornerRadius = 25
             cell.channelPic.clipsToBounds = true
             cell.channelSubscribers.text = "\(self.video!.channelSubscribers) subscribers"
+            cell.selectionStyle = .none
             returnCell = cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! videoCell

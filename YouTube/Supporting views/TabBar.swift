@@ -12,7 +12,8 @@ protocol TabBarDelegate {
 
 import UIKit
 class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
+    
+    
     //MARK: Properties
     let identifier = "cell"
     let darkItems = ["homeDark", "trendingDark", "subscriptionsDark", "accountDark"]
@@ -22,7 +23,6 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
         wv.backgroundColor = UIColor.rbg(r: 245, g: 245, b: 245)
         return wv
     }()
-    
     lazy var collectionView: UICollectionView  = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView.init(frame: CGRect.init(x: 0, y: 20, width: self.frame.width, height: (self.frame.height - 20)), collectionViewLayout: layout)
@@ -32,20 +32,19 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
         cv.isScrollEnabled = false
         return cv
     }()
-    
     var delegate: TabBarDelegate?
     
     //MARK: CollectionView DataSources
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.items.count
     }
-   
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! TabBarCellCollectionViewCell
         cell.icon.image = UIImage.init(named: darkItems[indexPath.row])
         if indexPath.row == 0 {
-        cell.icon.image = UIImage.init(named: items[0])
-        }
+            cell.icon.image = UIImage.init(named: items[0])
+            }
         return cell
     }
     
@@ -71,7 +70,7 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
         let cell = collectionView.cellForItem(at: IndexPath.init(row: atIndex, section: 0)) as! TabBarCellCollectionViewCell
         cell.icon.image = UIImage.init(named: items[atIndex])
     }
-   
+    
     //MARK: - Inits
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -80,12 +79,12 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
         addSubview(self.collectionView)
         addSubview(self.whiteView)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
+
 
 //TabBarCell Class
 class TabBarCellCollectionViewCell: UICollectionViewCell {
@@ -105,5 +104,4 @@ class TabBarCellCollectionViewCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

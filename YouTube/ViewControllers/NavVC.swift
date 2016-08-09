@@ -38,13 +38,6 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
     let fullScreenOrigin = CGPoint.init(x: 0, y: 0)
 
     //Methods
-    func customization()  {
-        if let window = UIApplication.shared().keyWindow {
-            window.addSubview(self.statusView)
-            window.addSubview(self.playVC.view)
-        }
-    }
-    
     func animatePlayView(toState: stateOfVC) {
         switch toState {
         case .fullScreen:
@@ -95,7 +88,6 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
         }
     }
     
-    
     //MARK: ViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +95,9 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.customization()
+        if let window = UIApplication.shared().keyWindow {
+            window.addSubview(self.statusView)
+            window.addSubview(self.playVC.view)
+        }
     }
 }

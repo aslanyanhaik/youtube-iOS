@@ -14,7 +14,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     //MARK: Properties
     var views = [UIView]()
     let items = ["Home", "Trending", "Subscriptions", "Account"]
-    var viewsInitialized = false
+    var viewsAreInitialized = false
     lazy var collectionView: UICollectionView  = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -90,6 +90,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             vc.didMove(toParentViewController: self)
             self.views.append(vc.view)
         }
+        self.viewsAreInitialized = true
     }
     
     //MARK: Search and Settings
@@ -105,6 +106,11 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             window.addSubview(self.settings)
             self.settings.animate()
         }
+    }
+    
+    func hideBar(notification: NSNotification)  {
+        let state = notification.object as! Bool
+        self.navigationController?.setNavigationBarHidden(state, animated: true)
     }
     
     //MARK: Delegates implementation
@@ -130,17 +136,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewDidLoad()
         customization()
         didSelectItem(atIndex: 0)
-        self.viewsInitialized = false
         NotificationCenter.default().addObserver(self, selector: #selector(MainViewController.hideBar(notification:)), name: "hide", object: nil)
-    }
-    
-    func hideBar(notification: NSNotification)  {
-        let state = notification.object as! Bool
-        self.navigationController?.setNavigationBarHidden(state, animated: true)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        self.viewsInitialized = true
     }
     
     //MARK: CollectionView DataSources
@@ -160,12 +156,11 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.tabBar.whiteView.frame.origin.x = (scrollView.contentOffset.x / 4)
         let scrollIndex = Int(round(scrollView.contentOffset.x / self.view.bounds.width))
-        if self.viewsInitialized {
-        self.tabBar.highlightItem(atIndex: scrollIndex)
-        }
         self.titleLabel.text = self.items[scrollIndex]
-
+        if self.viewsAreInitialized {
+            self.tabBar.whiteView.frame.origin.x = (scrollView.contentOffset.x / 4)
+            self.tabBar.highlightItem(atIndex: scrollIndex)
+        }
     }
 }

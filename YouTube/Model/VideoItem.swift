@@ -25,13 +25,15 @@ class VideoItem {
         var items = [[String : AnyObject]]()
         URLSession.shared().dataTask(with: fromURL) { (data, response, error) in
             if error != nil {
-            showNotification()
+                let vc = UIApplication.shared().windows[0].rootViewController!
+                vc.showNotification()
             } else{
                     do{
                         let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                         items = json as! [[String : AnyObject]]
                         } catch _ {
-                    showNotification()
+                            let vc = UIApplication.shared().windows[0].rootViewController!
+                            vc.showNotification()
                     }
                 completition(items)
         }

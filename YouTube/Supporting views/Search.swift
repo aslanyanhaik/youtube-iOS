@@ -8,7 +8,6 @@
 
 protocol SearchDelegate {
     func hideSearchView(status : Bool)
-
 }
 
 import UIKit
@@ -99,19 +98,23 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
             self.tableView.removeFromSuperview()
         } else{
             let _  = URLSession.shared().dataTask(with: requestSuggestionsURL(text: self.searchField.text!), completionHandler: { (data, response, error) in
-                do {
-                    let json  = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSArray
-                    self.items = json[1] as! [String]
-                    DispatchQueue.main.async(execute: {
-                        if self.items.count > 0  {
-                            self.addSubview(self.tableView)
-                        } else {
-                            self.tableView.removeFromSuperview()
-                        }
-                        self.tableView.reloadData()
-                    })
-                } catch _ {
-                    print("Something wrong happened")
+                if error == nil {
+                    do {
+                        let json  = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSArray
+                        self.items = json[1] as! [String]
+                        DispatchQueue.main.async(execute: {
+                            if self.items.count > 0  {
+                                self.addSubview(self.tableView)
+                            } else {
+                                self.tableView.removeFromSuperview()
+                            }
+                            self.tableView.reloadData()
+                        })
+                    } catch _ {
+                        print("Something wrong happened")
+                    }
+                } else {
+                    print("error downloading suggestions")
                 }
             }).resume()
         }
