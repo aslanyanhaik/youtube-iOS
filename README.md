@@ -5,6 +5,6 @@ Fully working video player, and animations
 
 <img src="http://i.giphy.com/hwCahHAD1tNHa.gif" class="ajax-loader">
 
-Thanks Brian Voong for support 
+Thanks <a href="https://twitter.com/buildthatapp">Brian Voong</a> for support 
 
-<a href="htp://letsbuildthatapp.com">Lets Build That App</a>
+<a href="http://letsbuildthatapp.com">Lets Build That App</a>
