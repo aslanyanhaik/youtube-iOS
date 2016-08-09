@@ -13,9 +13,7 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
     //MARK: Properties
     lazy var playVC: PlayVC = {
         let pvc: PlayVC = self.storyboard?.instantiateViewController(withIdentifier: "PlayVC") as! PlayVC
-        self.addChildViewController(pvc)
         pvc.view.frame = CGRect.init(origin: self.hiddenOrigin, size: UIScreen.main().bounds.size)
-        pvc.didMove(toParentViewController: self)
         pvc.delegate = self
         return pvc
     }()
@@ -25,7 +23,7 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
         st.alpha = 0.15
         return st
     }()
-    let hiddenOrigin: CGPoint = {
+        let hiddenOrigin: CGPoint = {
         let y = UIScreen.main().bounds.height - (UIScreen.main().bounds.width * 9 / 32) - 10
         let x = -UIScreen.main().bounds.width
         let coordinate = CGPoint.init(x: x, y: y)
@@ -41,10 +39,10 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
 
     //Methods
     func customization()  {
-        self.view.addSubview(self.playVC.view)
-        let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "MainVC") as! MainViewController
-        self.addChildViewController(mainVC)
-        mainVC.didMove(toParentViewController: self)
+        if let window = UIApplication.shared().keyWindow {
+            window.addSubview(self.statusView)
+            window.addSubview(self.playVC.view)
+        }
     }
     
     func animatePlayView(toState: stateOfVC) {
@@ -97,17 +95,14 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
         }
     }
     
+    
     //MARK: ViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.customization()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        if let window = UIApplication.shared().keyWindow {
-            window.addSubview(self.playVC.view)
-            window.addSubview(self.statusView)
-        }
+        self.customization()
     }
 }
