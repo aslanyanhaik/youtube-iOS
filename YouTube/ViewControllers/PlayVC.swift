@@ -29,11 +29,11 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
     
     //MARK: Methods
     func customization() {
-        self.view.backgroundColor = UIColor.clear()
-        self.player.layer.anchorPoint.apply(transform: CGAffineTransform.init(translationX: -0.5, y: -0.5))
+        self.view.backgroundColor = UIColor.clear
+        self.player.layer.anchorPoint.applying(CGAffineTransform.init(translationX: -0.5, y: -0.5))
         self.tableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         self.player.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(PlayVC.tapPlayView)))
-        NotificationCenter.default().addObserver(self, selector: #selector(PlayVC.tapPlayView), name: "open", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PlayVC.tapPlayView), name: "open" as NSNotification.Name, object: nil)
     }
 
     func animate()  {
@@ -43,15 +43,15 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
                 self.minimizeButton.alpha = 1
                 self.tableView.alpha = 1
                 self.player.transform = CGAffineTransform.identity
-                UIApplication.shared().isStatusBarHidden = true
+                UIApplication.shared.isStatusBarHidden = true
             })
         case .minimized:
             UIView.animate(withDuration: 0.3, animations: {
-                UIApplication.shared().isStatusBarHidden = false
+                UIApplication.shared.isStatusBarHidden = false
                 self.minimizeButton.alpha = 0
                 self.tableView.alpha = 0
                 let scale = CGAffineTransform.init(scaleX: 0.5, y: 0.5)
-                let trasform = scale.concat(CGAffineTransform.init(translationX: -self.player.bounds.width/4, y: -self.player.bounds.height/4))
+                let trasform = scale.concatenating(CGAffineTransform.init(translationX: -self.player.bounds.width/4, y: -self.player.bounds.height/4))
                 self.player.transform = trasform
             })
         default: break
@@ -62,7 +62,7 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
         self.minimizeButton.alpha = 1 - scaleFactor
         self.tableView.alpha = 1 - scaleFactor
         let scale = CGAffineTransform.init(scaleX: (1 - 0.5 * scaleFactor), y: (1 - 0.5 * scaleFactor))
-        let trasform = scale.concat(CGAffineTransform.init(translationX: -(self.player.bounds.width / 4 * scaleFactor), y: -(self.player.bounds.height / 4 * scaleFactor)))
+        let trasform = scale.concatenating(CGAffineTransform.init(translationX: -(self.player.bounds.width / 4 * scaleFactor), y: -(self.player.bounds.height / 4 * scaleFactor)))
         self.player.transform = trasform
     }
     
@@ -91,7 +91,7 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
         var finalState = stateOfVC.fullScreen
         switch self.state {
         case .fullScreen:
-            let factor = (abs(sender.translation(in: nil).y) / UIScreen.main().bounds.height)
+            let factor = (abs(sender.translation(in: nil).y) / UIScreen.main.bounds.height)
             self.changeValues(scaleFactor: factor)
             self.delegate?.swipeToMinimize(translation: factor, toState: .minimized)
             finalState = .minimized
@@ -102,7 +102,7 @@ class PlayVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGe
                 self.delegate?.swipeToMinimize(translation: factor, toState: .hidden)
             } else {
                 finalState = .fullScreen
-                let factor = 1 - (abs(sender.translation(in: nil).y) / UIScreen.main().bounds.height)
+                let factor = 1 - (abs(sender.translation(in: nil).y) / UIScreen.main.bounds.height)
                 self.changeValues(scaleFactor: factor)
                 self.delegate?.swipeToMinimize(translation: factor, toState: .fullScreen)
             }

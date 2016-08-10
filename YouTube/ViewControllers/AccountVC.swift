@@ -22,7 +22,7 @@ class AccountCollectionViewController: UICollectionViewController, UICollectionV
             self.user = newUser
             self.items = newUser.playlists.count + 5
             DispatchQueue.main.async(execute: {
-                UIApplication.shared().isNetworkActivityIndicatorVisible = false
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 self.collectionView?.reloadData()
             })
         }

@@ -23,9 +23,9 @@ import UIKit
     func customization()  {
         self.channelPic.layer.cornerRadius = 24
         self.channelPic.clipsToBounds  = true
-        self.videoDuration.backgroundColor = UIColor.black().withAlphaComponent(0.5)
+        self.videoDuration.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         self.videoDuration.layer.borderWidth = 0.5
-        self.videoDuration.layer.borderColor = UIColor.white().cgColor
+        self.videoDuration.layer.borderColor = UIColor.white.cgColor
         self.videoDuration.sizeToFit()
     }
         

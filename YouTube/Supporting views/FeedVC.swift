@@ -44,7 +44,7 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
             self.itemsList += items
             DispatchQueue.main.async(execute: {
                 self.collectionView?.reloadData()
-                UIApplication.shared().isNetworkActivityIndicatorVisible = false
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 self.refresh.endRefreshing()
             })
         }
@@ -72,7 +72,7 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
                 self.videoItems[index] = video
                 DispatchQueue.main.async(execute: {
                     self.collectionView?.reloadData()
-                    UIApplication.shared().isNetworkActivityIndicatorVisible = false
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 })
             })
         }
@@ -81,7 +81,7 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
     
     // MARK: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = CGSize.init(width: UIScreen.main().bounds.width, height: 300)
+        let size = CGSize.init(width: UIScreen.main.bounds.width, height: 300)
         return size
     }
     
@@ -97,14 +97,14 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        NotificationCenter.default().post(name: "open" as NSNotification.Name, object: nil)
+        NotificationCenter.default.post(name: "open" as NSNotification.Name, object: nil)
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (self.lastContentOffset > scrollView.contentOffset.y) {
-            NotificationCenter.default().post(name: "hide" as NSNotification.Name, object: false)
+            NotificationCenter.default.post(name: "hide" as NSNotification.Name, object: false)
         } else {
-            NotificationCenter.default().post(name: "hide" as NSNotification.Name, object: true)
+            NotificationCenter.default.post(name: "hide" as NSNotification.Name, object: true)
         }
     }
     

@@ -37,7 +37,7 @@ class SubscriptionsCollectionViewController: FeedCollectionViewController {
                     self.videoItems[index] = video
                     DispatchQueue.main.async(execute: {
                         self.collectionView?.reloadData()
-                        UIApplication.shared().isNetworkActivityIndicatorVisible = false
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     })
                 })
             }
@@ -48,9 +48,9 @@ class SubscriptionsCollectionViewController: FeedCollectionViewController {
     
     // MARK: UICollectionViewDelegate
    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    var size = CGSize.init(width: UIScreen.main().bounds.width, height: 300)
+    var size = CGSize.init(width: UIScreen.main.bounds.width, height: 300)
     if indexPath.row == 0 {
-        size = CGSize.init(width: UIScreen.main().bounds.width, height: 70)
+        size = CGSize.init(width: UIScreen.main.bounds.width, height: 70)
     }
     return size
     }

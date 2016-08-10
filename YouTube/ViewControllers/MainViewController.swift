@@ -20,11 +20,11 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        let cv: UICollectionView = UICollectionView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main().bounds.width, height: (self.view.bounds.height)), collectionViewLayout: layout)
+        let cv: UICollectionView = UICollectionView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: (self.view.bounds.height)), collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
         cv.showsHorizontalScrollIndicator = false
-        cv.backgroundColor = UIColor.clear()
+        cv.backgroundColor = UIColor.clear
         cv.bounces = false
         cv.isPagingEnabled = true
         cv.isDirectionalLockEnabled = true
@@ -38,13 +38,13 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     }()
     
     lazy var settings: Settings = {
-        let st = Settings.init(frame: UIScreen.main().bounds)
+        let st = Settings.init(frame: UIScreen.main.bounds)
         st.delegate = self
         return st
     }()
     
     lazy var search: Search = {
-        let se = Search.init(frame: UIScreen.main().bounds)
+        let se = Search.init(frame: UIScreen.main.bounds)
         se.delegate = self
         return se
     }()
@@ -52,7 +52,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     let titleLabel: UILabel = {
         let tl = UILabel.init(frame: CGRect.init(x: 20, y: 5, width: 200, height: 30))
         tl.font = UIFont.systemFont(ofSize: 18)
-        tl.textColor = UIColor.white()
+        tl.textColor = UIColor.white
         tl.text = "Home"
         return tl
     }()
@@ -95,14 +95,14 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     //MARK: Search and Settings
     @IBAction func handleSearch(_ sender: AnyObject) {
-        if let window = UIApplication.shared().keyWindow {
+        if let window = UIApplication.shared.keyWindow {
             window.addSubview(self.search)
             self.search.animate()
         }
     }
     
     @IBAction func handleMore(_ sender: AnyObject) {
-        if let window = UIApplication.shared().keyWindow {
+        if let window = UIApplication.shared.keyWindow {
             window.addSubview(self.settings)
             self.settings.animate()
         }
@@ -136,7 +136,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewDidLoad()
         customization()
         didSelectItem(atIndex: 0)
-        NotificationCenter.default().addObserver(self, selector: #selector(MainViewController.hideBar(notification:)), name: "hide", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.hideBar(notification:)), name: "hide" as NSNotification.Name, object: nil)
     }
     
     //MARK: CollectionView DataSources

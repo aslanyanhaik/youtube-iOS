@@ -28,7 +28,7 @@ class TabBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICo
         let cv = UICollectionView.init(frame: CGRect.init(x: 0, y: 20, width: self.frame.width, height: (self.frame.height - 20)), collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
-        cv.backgroundColor = UIColor.clear()
+        cv.backgroundColor = UIColor.clear
         cv.isScrollEnabled = false
         return cv
     }()
@@ -93,7 +93,7 @@ class TabBarCellCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clear()
+        self.backgroundColor = UIColor.clear
         let width = (self.contentView.bounds.width - 30) / 2
         icon.frame = CGRect.init(x: width, y: 2, width: 30, height: 30)
         let image = UIImage.init(named: "home")
