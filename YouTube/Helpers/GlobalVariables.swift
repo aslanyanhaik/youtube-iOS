@@ -68,5 +68,9 @@ func requestSuggestionsURL(text: String) -> URL {
     return url
 }
 
+func showNotification() {
+    print("Please check your internet connection")
+}
+
 
 

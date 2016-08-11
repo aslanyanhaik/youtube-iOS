@@ -41,12 +41,10 @@ class User {
                     let user = User.init(name: name, profilePic: profilePic, backgroundImage: backgroundImage, playlists: playlists)
                     completition(user)
                 } catch _ {
-                    let vc = UIApplication.shared.windows[0].rootViewController!
-                    vc.showNotification()
-                }
+                        showNotification()
+}
             } else {
-                let vc = UIApplication.shared.windows[0].rootViewController!
-                vc.showNotification()
+                showNotification()
             }
         }.resume()
     }

@@ -69,8 +69,7 @@ class Video {
                                                 suggestedVideos: suggestedVideos)
                     completiotion(video)
                 } catch _ {
-                    let vc = UIApplication.shared.windows[0].rootViewController!
-                    vc.showNotification()
+                    showNotification()
                 }
             }
         }.resume()

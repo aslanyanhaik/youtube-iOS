@@ -15,6 +15,7 @@ class AccountCollectionViewController: UICollectionViewController, UICollectionV
     let menuTitles = ["History", "My Videos", "Notifications", "Watch Later"]
     var items = 5
     var user = User.init(name: "Loading", profilePic: UIImage(), backgroundImage: UIImage(), playlists: [Playlist]())
+    var lastContentOffset: CGFloat = 0.0
     
     //MARK: Methods
     func fetchItem() {
@@ -89,6 +90,14 @@ class AccountCollectionViewController: UICollectionViewController, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (self.lastContentOffset > scrollView.contentOffset.y) {
+            NotificationCenter.default.post(name: "hide" as NSNotification.Name, object: false)
+        } else {
+            NotificationCenter.default.post(name: "hide" as NSNotification.Name, object: true)
+        }
     }
     
 }
