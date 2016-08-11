@@ -16,7 +16,7 @@ class SubscriptionsProfilePicCell: UICollectionViewCell, UICollectionViewDelegat
     
     //MARK: Methods
     func fetchImages()  {
-        let _ = URLSession.shared().dataTask(with: globalVariables.subscriptionsLink) { (data, response, error) in
+        let _ = URLSession.shared.dataTask(with: globalVariables.subscriptionsLink) { (data, response, error) in
             if error != nil {
                 print("Please check your internet connection")
             } else{
@@ -77,7 +77,7 @@ class ProfilePic: UICollectionViewCell {
         let pv = UIImageView.init(frame: CGRect.init(x: 10, y: 10, width: 50, height: 50))
         pv.layer.cornerRadius = 25
         pv.clipsToBounds = true
-        pv.backgroundColor = UIColor.gray()
+        pv.backgroundColor = UIColor.gray
         return pv
     }()
     

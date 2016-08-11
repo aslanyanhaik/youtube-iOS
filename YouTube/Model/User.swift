@@ -20,8 +20,8 @@ class User {
     
     //MARK: Methods
     class func fetchProfile(link: URL, completition: ((User) -> Void)) {
-        UIApplication.shared().isNetworkActivityIndicatorVisible = true
-        let _ =  URLSession.shared().dataTask(with: link) { (data, response, error) in
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        let _ =  URLSession.shared.dataTask(with: link) { (data, response, error) in
             if error == nil {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String : AnyObject]
@@ -41,11 +41,11 @@ class User {
                     let user = User.init(name: name, profilePic: profilePic, backgroundImage: backgroundImage, playlists: playlists)
                     completition(user)
                 } catch _ {
-                    let vc = UIApplication.shared().windows[0].rootViewController!
+                    let vc = UIApplication.shared.windows[0].rootViewController!
                     vc.showNotification()
                 }
             } else {
-                let vc = UIApplication.shared().windows[0].rootViewController!
+                let vc = UIApplication.shared.windows[0].rootViewController!
                 vc.showNotification()
             }
         }.resume()

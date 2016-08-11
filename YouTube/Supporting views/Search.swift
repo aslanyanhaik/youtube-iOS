@@ -16,21 +16,21 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
     
     //MARK: Properties
     let statusView: UIView = {
-        let st = UIView.init(frame: UIApplication.shared().statusBarFrame)
-        st.backgroundColor = UIColor.black()
+        let st = UIView.init(frame: UIApplication.shared.statusBarFrame)
+        st.backgroundColor = UIColor.black
         st.alpha = 0.15
         return st
     }()
     
     lazy var searchView: UIView = {
        let sv = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.frame.width, height: 68))
-        sv.backgroundColor = UIColor.white()
+        sv.backgroundColor = UIColor.white
         sv.alpha = 0
         return sv
     }()
     lazy var backgroundView: UIView = {
         let bv = UIView.init(frame: self.frame)
-        bv.backgroundColor = UIColor.black()
+        bv.backgroundColor = UIColor.black
         bv.alpha = 0
         return bv
     }()
@@ -65,7 +65,7 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.tableFooterView = UIView()
-        self.tableView.backgroundColor = UIColor.clear()
+        self.tableView.backgroundColor = UIColor.clear
         self.searchField.delegate = self
         self.addSubview(self.statusView)
     }
@@ -97,7 +97,7 @@ class Search: UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDel
             self.items = []
             self.tableView.removeFromSuperview()
         } else{
-            let _  = URLSession.shared().dataTask(with: requestSuggestionsURL(text: self.searchField.text!), completionHandler: { (data, response, error) in
+            let _  = URLSession.shared.dataTask(with: requestSuggestionsURL(text: self.searchField.text!), completionHandler: { (data, response, error) in
                 if error == nil {
                     do {
                         let json  = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSArray
@@ -166,7 +166,7 @@ class searchCell: UITableViewCell {
     
     lazy var itemLabel: UILabel = {
         let il: UILabel = UILabel.init(frame: CGRect.init(x: 48, y: 0, width: self.contentView.bounds.width - 48, height: self.contentView.bounds.height))
-        il.textColor = UIColor.gray()
+        il.textColor = UIColor.gray
         return il
     }()
     

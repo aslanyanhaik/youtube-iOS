@@ -51,7 +51,7 @@ class TrendingCollectionViewController: FeedCollectionViewController {
                         self.videoItems[index] = video
                         DispatchQueue.main.async(execute: {
                             self.collectionView?.reloadData()
-                            UIApplication.shared().isNetworkActivityIndicatorVisible = false
+                            UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         })
                     })
                 }
@@ -64,9 +64,9 @@ class TrendingCollectionViewController: FeedCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var size = CGSize()
         if indexPath.row == 0 {
-            size = CGSize.init(width: UIScreen.main().bounds.width, height: 100)
+            size = CGSize.init(width: UIScreen.main.bounds.width, height: 100)
         } else {
-        size = CGSize.init(width: UIScreen.main().bounds.width, height: 300)
+        size = CGSize.init(width: UIScreen.main.bounds.width, height: 300)
         }
         return size
     }

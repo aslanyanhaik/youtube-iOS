@@ -37,7 +37,7 @@ class Video {
     
     //MARK: Methods
     class func download(link: URL, completiotion: ((Video) -> Void))  {
-        URLSession.shared().dataTask(with: link) { (data, _, error) in
+        URLSession.shared.dataTask(with: link) { (data, _, error) in
             if error == nil {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String : AnyObject]
@@ -69,7 +69,7 @@ class Video {
                                                 suggestedVideos: suggestedVideos)
                     completiotion(video)
                 } catch _ {
-                    let vc = UIApplication.shared().windows[0].rootViewController!
+                    let vc = UIApplication.shared.windows[0].rootViewController!
                     vc.showNotification()
                 }
             }

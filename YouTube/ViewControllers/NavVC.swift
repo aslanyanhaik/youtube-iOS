@@ -13,25 +13,25 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
     //MARK: Properties
     lazy var playVC: PlayVC = {
         let pvc: PlayVC = self.storyboard?.instantiateViewController(withIdentifier: "PlayVC") as! PlayVC
-        pvc.view.frame = CGRect.init(origin: self.hiddenOrigin, size: UIScreen.main().bounds.size)
+        pvc.view.frame = CGRect.init(origin: self.hiddenOrigin, size: UIScreen.main.bounds.size)
         pvc.delegate = self
         return pvc
     }()
     let statusView: UIView = {
-        let st = UIView.init(frame: UIApplication.shared().statusBarFrame)
-        st.backgroundColor = UIColor.black()
+        let st = UIView.init(frame: UIApplication.shared.statusBarFrame)
+        st.backgroundColor = UIColor.black
         st.alpha = 0.15
         return st
     }()
         let hiddenOrigin: CGPoint = {
-        let y = UIScreen.main().bounds.height - (UIScreen.main().bounds.width * 9 / 32) - 10
-        let x = -UIScreen.main().bounds.width
+        let y = UIScreen.main.bounds.height - (UIScreen.main.bounds.width * 9 / 32) - 10
+        let x = -UIScreen.main.bounds.width
         let coordinate = CGPoint.init(x: x, y: y)
         return coordinate
     }()
     let minimizedOrigin: CGPoint = {
-        let x = UIScreen.main().bounds.width/2 - 10
-        let y = UIScreen.main().bounds.height - (UIScreen.main().bounds.width * 9 / 32) - 10
+        let x = UIScreen.main.bounds.width/2 - 10
+        let y = UIScreen.main.bounds.height - (UIScreen.main.bounds.width * 9 / 32) - 10
         let coordinate = CGPoint.init(x: x, y: y)
         return coordinate
     }()
@@ -56,10 +56,10 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
     }
 
     func positionDuringSwipe(scaleFactor: CGFloat) -> CGPoint {
-        let width = UIScreen.main().bounds.width * 0.5 * scaleFactor
+        let width = UIScreen.main.bounds.width * 0.5 * scaleFactor
         let height = width * 9 / 16
-        let x = (UIScreen.main().bounds.width - 10) * scaleFactor - width
-        let y = (UIScreen.main().bounds.height - 10) * scaleFactor - height
+        let x = (UIScreen.main.bounds.width - 10) * scaleFactor - width
+        let y = (UIScreen.main.bounds.height - 10) * scaleFactor - height
         let coordinate = CGPoint.init(x: x, y: y)
         return coordinate
     }
@@ -82,7 +82,7 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
         case .fullScreen:
             self.playVC.view.frame.origin = self.positionDuringSwipe(scaleFactor: translation)
         case .hidden:
-            self.playVC.view.frame.origin.x = UIScreen.main().bounds.width/2 - abs(translation) - 10
+            self.playVC.view.frame.origin.x = UIScreen.main.bounds.width/2 - abs(translation) - 10
         case .minimized:
             self.playVC.view.frame.origin = self.positionDuringSwipe(scaleFactor: translation)
         }
@@ -95,7 +95,7 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        if let window = UIApplication.shared().keyWindow {
+        if let window = UIApplication.shared.keyWindow {
             window.addSubview(self.statusView)
             window.addSubview(self.playVC.view)
         }

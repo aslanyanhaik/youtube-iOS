@@ -25,7 +25,7 @@ class Settings: UIView,  UITableViewDelegate, UITableViewDataSource {
     
     lazy var backgroundView: UIView = {
        let bv = UIView.init(frame: self.frame)
-       bv.backgroundColor = UIColor.black()
+       bv.backgroundColor = UIColor.black
         bv.alpha = 0
         return bv
     }()

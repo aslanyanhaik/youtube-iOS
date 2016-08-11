@@ -21,18 +21,18 @@ class VideoItem {
 
     //MARK: Download the list of items
     class func getVideosList(fromURL: URL, completition: ([[String : AnyObject]]) -> (Void)) {
-        UIApplication.shared().isNetworkActivityIndicatorVisible = true
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         var items = [[String : AnyObject]]()
-        URLSession.shared().dataTask(with: fromURL) { (data, response, error) in
+        URLSession.shared.dataTask(with: fromURL) { (data, response, error) in
             if error != nil {
-                let vc = UIApplication.shared().windows[0].rootViewController!
+                let vc = UIApplication.shared.windows[0].rootViewController!
                 vc.showNotification()
             } else{
                     do{
                         let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                         items = json as! [[String : AnyObject]]
                         } catch _ {
-                            let vc = UIApplication.shared().windows[0].rootViewController!
+                            let vc = UIApplication.shared.windows[0].rootViewController!
                             vc.showNotification()
                     }
                 completition(items)
@@ -42,8 +42,8 @@ class VideoItem {
     
     //MARK: single item download
     class func object(at: Int, fromList: Array<[String : AnyObject]>, completiotion: ((VideoItem, Int) -> Void))  {
-        UIApplication.shared().isNetworkActivityIndicatorVisible = true
-        DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosUserInteractive).async(execute: {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        DispatchQueue.global(qos: .userInteractive).async(execute: {
             let item = fromList[at]
             let title  = item["title"] as! String
             let tumbnail = UIImage.contentOfURL(link: item["thumbnail_image_name"] as! String)
