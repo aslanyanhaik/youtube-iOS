@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11191" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="IXR-Mk-kYq">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11156"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -743,7 +742,7 @@
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wH9-aS-yed">
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="190" id="FCZ-0Q-bwv"/>
+                                                <constraint firstAttribute="width" constant="200" id="FCZ-0Q-bwv"/>
                                                 <constraint firstAttribute="height" constant="21" id="z9t-zi-WmQ"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -783,7 +782,7 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4M-nX-ngl">
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="130" id="g3A-Tc-BnP"/>
+                                                <constraint firstAttribute="width" constant="150" id="g3A-Tc-BnP"/>
                                                 <constraint firstAttribute="height" constant="21" id="gda-aY-hIh"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
