@@ -94,9 +94,9 @@ class AccountCollectionViewController: UICollectionViewController, UICollectionV
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (self.lastContentOffset > scrollView.contentOffset.y) {
-            NotificationCenter.default.post(name: "hide" as NSNotification.Name, object: false)
+            NotificationCenter.default.post(name: NSNotification.Name("hide"), object: false)
         } else {
-            NotificationCenter.default.post(name: "hide" as NSNotification.Name, object: true)
+            NotificationCenter.default.post(name: NSNotification.Name("hide"), object: true)
         }
     }
     
