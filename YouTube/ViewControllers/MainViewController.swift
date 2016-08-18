@@ -136,7 +136,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewDidLoad()
         customization()
         didSelectItem(atIndex: 0)
-        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.hideBar(notification:)), name: "hide" as NSNotification.Name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.hideBar(notification:)), name: NSNotification.Name("hide"), object: nil)
     }
     
     //MARK: CollectionView DataSources

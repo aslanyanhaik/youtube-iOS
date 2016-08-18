@@ -20,7 +20,7 @@ class VideoItem {
     let duration: Int
 
     //MARK: Download the list of items
-    class func getVideosList(fromURL: URL, completition: ([[String : AnyObject]]) -> (Void)) {
+    class func getVideosList(fromURL: URL, completition: @escaping ([[String : AnyObject]]) -> (Void)) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         var items = [[String : AnyObject]]()
         URLSession.shared.dataTask(with: fromURL) { (data, response, error) in
