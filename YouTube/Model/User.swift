@@ -19,7 +19,7 @@ class User {
 
     
     //MARK: Methods
-    class func fetchProfile(link: URL, completition: ((User) -> Void)) {
+    class func fetchProfile(link: URL, completition: @escaping ((User) -> Void)) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         let _ =  URLSession.shared.dataTask(with: link) { (data, response, error) in
             if error == nil {

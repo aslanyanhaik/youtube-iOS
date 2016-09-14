@@ -36,7 +36,7 @@ class Video {
     }
     
     //MARK: Methods
-    class func download(link: URL, completiotion: ((Video) -> Void))  {
+    class func download(link: URL, completiotion: @escaping ((Video) -> Void))  {
         URLSession.shared.dataTask(with: link) { (data, _, error) in
             if error == nil {
                 do {
