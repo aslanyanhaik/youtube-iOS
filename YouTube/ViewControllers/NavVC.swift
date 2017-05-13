@@ -11,6 +11,8 @@ import UIKit
 class NavVC: UINavigationController, PlayerVCDelegate  {
 
     //MARK: Properties
+    
+    @IBOutlet var playerView: UIView!
     lazy var playVC: PlayVC = {
         let pvc: PlayVC = self.storyboard?.instantiateViewController(withIdentifier: "PlayVC") as! PlayVC
         pvc.view.frame = CGRect.init(origin: self.hiddenOrigin, size: UIScreen.main.bounds.size)
