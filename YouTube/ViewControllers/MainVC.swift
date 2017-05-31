@@ -31,6 +31,7 @@ class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     //MARK: Methods
     func customization()  {
+        self.view.backgroundColor = UIColor.rbg(r: 228, g: 34, b: 24)
         //CollectionView Setup
         self.collectionView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
         self.collectionView.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: (self.view.bounds.height))

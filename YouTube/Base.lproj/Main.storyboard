@@ -874,14 +874,14 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TrendingCell" rowHeight="70" id="1iC-uN-9lf">
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1iC-uN-9lf" id="hh4-Lu-bnZ">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="1iC-uN-9lf" id="hh4-Lu-bnZ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="gMi-1g-UGz">
+                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="gMi-1g-UGz">
                                                     <rect key="frame" x="14" y="11" width="347" height="32"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaJ-mX-vFW">
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaJ-mX-vFW">
                                                             <rect key="frame" x="0.0" y="0.0" width="89" height="32"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="32" id="Fnz-yZ-Dqb"/>
@@ -891,7 +891,7 @@
                                                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNE-1j-rf9">
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNE-1j-rf9">
                                                             <rect key="frame" x="129" y="0.0" width="89" height="32"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="32" id="e9U-aD-zuh"/>
@@ -901,7 +901,7 @@
                                                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWM-gt-BjB">
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWM-gt-BjB">
                                                             <rect key="frame" x="258" y="0.0" width="89" height="32"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="32" id="Rbc-l6-WWa"/>
@@ -1050,7 +1050,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H4z-ax-9yb">
-                                <rect key="frame" x="0.0" y="64" width="375" height="573"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Header" rowHeight="120" id="vS7-wy-332" customClass="AccountHeaderCell" customModule="YouTube" customModuleProvider="target">
@@ -1204,7 +1204,7 @@
                             <constraint firstItem="H4z-ax-9yb" firstAttribute="top" secondItem="Qje-LE-mkz" secondAttribute="bottom" id="9JK-4X-1np"/>
                             <constraint firstAttribute="trailing" secondItem="H4z-ax-9yb" secondAttribute="trailing" id="GAK-EV-y3k"/>
                             <constraint firstItem="H4z-ax-9yb" firstAttribute="leading" secondItem="MQs-ls-4t6" secondAttribute="leading" id="f4E-2f-GW4"/>
-                            <constraint firstItem="VQX-7h-Dqp" firstAttribute="top" secondItem="H4z-ax-9yb" secondAttribute="bottom" constant="30" id="mjR-0j-m3a"/>
+                            <constraint firstItem="VQX-7h-Dqp" firstAttribute="top" secondItem="H4z-ax-9yb" secondAttribute="bottom" id="mjR-0j-m3a"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
