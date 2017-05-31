@@ -15,38 +15,20 @@ class User {
     let name: String
     let profilePic: UIImage
     let backgroundImage: UIImage
-    let playlists: Array<Playlist>
+    var playlists = [Playlist]()
 
-    
     //MARK: Methods
-    class func fetchProfile(link: URL, completition: @escaping ((User) -> Void)) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        let _ =  URLSession.shared.dataTask(with: link) { (data, response, error) in
-            if error == nil {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String : AnyObject]
-                    
-                    let name = json["name"] as! String
-                    let profilePic = UIImage.contentOfURL(link: (json["profilePic"] as! String))
-                    let backgroundImage = UIImage.contentOfURL(link: (json["backgroundImage"] as! String))
-                    var playlists = [Playlist]()
-                        let list  = json["playlists"] as! [[String : AnyObject]]
-                        for item in list {
-                            let numberOfItems = item["numberOfVideos"] as! Int
-                            let title = item["title"] as! String
-                            let pic = UIImage.contentOfURL(link: item["pic"] as! String)
-                            let playlistItem = Playlist.init(pic: pic, title: title, numberOfVideos: numberOfItems)
-                            playlists.append(playlistItem)
-                        }
-                    let user = User.init(name: name, profilePic: profilePic, backgroundImage: backgroundImage, playlists: playlists)
-                    completition(user)
-                } catch _ {
-                        showNotification()
-}
-            } else {
-                showNotification()
-            }
-        }.resume()
+    class func fetchData(completion: @escaping ((User) -> Void)) {
+        //Dummy Data
+        let data = ["pl-swift": "Swift Tutorials", "pl-node": "NodeJS Tutorials", "pl-javascript": "JavaScript ES6 / ES2015 Tutorials", "pl-angular": "Angular 2 Tutorials", "pl-rest": "REST API Tutorials (Node, Express & Mongo)", "pl-react": "React development", "pl-mongo": "Mongo db"]
+        let user = User.init(name: "Haik Aslanyan", profilePic: UIImage.init(named: "profilePic")!, backgroundImage: UIImage.init(named: "banner")!, playlists: [Playlist]())
+        for (key, value) in data {
+            let image = UIImage.init(named: key)
+            let name = value
+            let playlist = Playlist.init(pic: image!, title: name, numberOfVideos: Int(arc4random_uniform(50)))
+            user.playlists.append(playlist)
+        }
+        completion(user)
     }
     
     //MARK: Inits
@@ -56,5 +38,17 @@ class User {
         self.playlists = playlists
         self.name = name
     }
+}
+
+struct Playlist {
     
+    let pic: UIImage
+    let title: String
+    let numberOfVideos: Int
+    
+    init(pic: UIImage, title: String, numberOfVideos: Int) {
+        self.pic = pic
+        self.title = title
+        self.numberOfVideos = numberOfVideos
+    }
 }

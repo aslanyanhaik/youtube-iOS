@@ -12,67 +12,90 @@ import UIKit
 class Video {
     
     //MARK: Properties
-    let videoLink: URL
+    let thumbnail: UIImage
     let title: String
-    let viewCount: Int
+    let views: Int
+    let channel: Channel
+    let duration: Int
+    var videoLink: URL!
     let likes: Int
     let disLikes: Int
-    let channelTitle: String
-    let channelPic: UIImage
-    let channelSubscribers: Int
     var suggestedVideos = [SuggestedVideo]()
     
     //MARK: Inits
-    init(videoLink: URL, title: String, viewCount: Int, likes: Int, disLikes: Int, channelTitle: String, channelPic: UIImage, channelSubscribers: Int, suggestedVideos: [SuggestedVideo]) {
-        self.videoLink = videoLink
+    init(title: String, channelName: String) {
+        self.thumbnail = UIImage.init(named: title)!
         self.title = title
-        self.viewCount = viewCount
-        self.likes = likes
-        self.disLikes = disLikes
-        self.channelTitle = channelTitle
-        self.channelPic = channelPic
-        self.channelSubscribers = channelSubscribers
-        self.suggestedVideos = suggestedVideos
+        self.views = Int(arc4random_uniform(1000000))
+        self.duration = Int(arc4random_uniform(400))
+        self.likes = Int(arc4random_uniform(1000))
+        self.disLikes = Int(arc4random_uniform(1000))
+        self.channel = Channel.init(name: channelName, image: UIImage.init(named: channelName)!)
     }
     
     //MARK: Methods
-    class func download(link: URL, completiotion: @escaping ((Video) -> Void))  {
-        URLSession.shared.dataTask(with: link) { (data, _, error) in
-            if error == nil {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String : AnyObject]
-                    let videoLink = URL.init(string: (json["videoLink"] as! String))
-                    let title = json["title"] as! String
-                    let viewCount = json["viewCount"] as! Int
-                    let likes = json["likes"] as! Int
-                    let disLikes = json["disLikes"] as! Int
-                    let channelTitle = json["channelTitle"] as! String
-                    let channelPic = UIImage.contentOfURL(link: (json["channelPic"] as! String))
-                    let channelSubscribers = json["channelSubscribers"] as! Int
-                    let suggestedVideosList = json["suggestedVideos"] as! [[String : String]]
-                    var suggestedVideos = [SuggestedVideo]()
-                    for item in suggestedVideosList {
-                        let videoTitle = item["title"]!
-                        let thumbnail = UIImage.contentOfURL(link: item["thumbnail_image_name"]!)
-                        let name = item["name"]!
-                        let suggestedItem = SuggestedVideo.init(title: videoTitle, name: name, thumbnail: thumbnail)
-                        suggestedVideos.append(suggestedItem)
-                    }
-                    let video = Video.init(videoLink: videoLink!,
-                                               title: title,
-                                            viewCount: viewCount,
-                                                likes: likes,
-                                                disLikes: disLikes,
-                                                channelTitle: channelTitle,
-                                                channelPic: channelPic,
-                                                channelSubscribers: channelSubscribers,
-                                                suggestedVideos: suggestedVideos)
-                    completiotion(video)
-                } catch _ {
-                    showNotification()
-                }
-            }
-        }.resume()
+    class func fetchVideos(completion: @escaping (([Video]) -> Void)) {
+        let video1 = Video.init(title: "What Does Jared Kushner Believe?", channelName: "Nerdwriter1")
+        let video2 = Video.init(title: "Moore's Law Is Ending... So, What's Next?", channelName: "Seeker")
+        let video3 = Video.init(title: "What Bill Gates is afraid of", channelName: "Vox")
+        let video4 = Video.init(title: "Why Can't America Have a Grown-Up Healthcare Conversation?", channelName: "vlogbrothers")
+        let video5 = Video.init(title: "A New History for Humanity – The Human Era", channelName: "Kurzgesagt – In a Nutshell")
+        let video6 = Video.init(title: "Neural Network that Changes Everything - Computerphile", channelName: "Computerphile")
+        let video7 = Video.init(title: "TensorFlow Basics - Deep Learning with Neural Networks p. 2", channelName: "sentdex")
+        let video8 = Video.init(title: "Scott Galloway: The Retailer Growing Faster Than Amazon", channelName: "L2inc")
+        var items = [video1, video2, video3, video4, video5, video6, video7, video8]
+        items.shuffle()
+        completion(items)
     }
     
+    class func fetchVideo(completion: @escaping ((Video) -> Void)) {
+        let video = Video.init(title: "Big Buck Bunny", channelName: "Blender Foundation")
+        video.videoLink = URL.init(string: "http://sample-videos.com/video/mp4/360/big_buck_bunny_360p_10mb.mp4")!
+        let suggestedVideo1 = SuggestedVideo.init(title: "What Does Jared Kushner Believe?", channelName: "Nerdwriter1")
+        let suggestedVideo2 = SuggestedVideo.init(title: "Moore's Law Is Ending... So, What's Next?", channelName: "Seeker")
+        let suggestedVideo3 = SuggestedVideo.init(title: "What Bill Gates is afraid of", channelName: "Vox")
+        let suggestedVideo4 = SuggestedVideo.init(title: "Why Can't America Have a Grown-Up Healthcare Conversation?", channelName: "vlogbrothers")
+        let suggestedVideo5 = SuggestedVideo.init(title: "TensorFlow Basics - Deep Learning with Neural Networks p. 2", channelName: "sentdex")
+        let items = [suggestedVideo1, suggestedVideo2, suggestedVideo3, suggestedVideo4, suggestedVideo5]
+        video.suggestedVideos = items
+        completion(video)
+    }
+}
+
+struct SuggestedVideo {
+    
+    let title: String
+    let channelName: String
+    let thumbnail: UIImage
+    
+    init(title: String, channelName:String) {
+        self.title = title
+        self.channelName = channelName
+        self.thumbnail = UIImage.init(named: title)!
+    }
+}
+
+class Channel {
+    
+    let name: String
+    let image: UIImage
+    var subscribers = 0
+    
+    class func fetchData(completion: @escaping (([Channel]) -> Void)) {
+        var items = [Channel]()
+        for i in 0...18 {
+            let name = ""
+            let image = UIImage.init(named: "channel\(i)")
+            let channel = Channel.init(name: name, image: image!)
+            items.append(channel)
+        }
+        items.shuffle()
+        completion(items)
+    }
+
+    
+    init(name: String, image: UIImage) {
+        self.name = name
+        self.image = image
+    }
 }
