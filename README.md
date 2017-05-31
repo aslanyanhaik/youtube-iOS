@@ -17,7 +17,6 @@ Purpose of this repo is to show how ViewControllers can be managed.
 ## Getting Started
 
 All extra views are located in Navigation Controller and Main View Controller in storyboard.
-
 <h3 align="center">
 <img src="Screen Shot.jpg" alt="Screenshot of extra views" />
 </h3>
