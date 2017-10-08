@@ -39,7 +39,7 @@ class TabBarView: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDa
         NotificationCenter.default.addObserver(self, selector: #selector(self.animateMenu(notification:)), name: Notification.Name.init(rawValue: "scrollMenu"), object: nil)
     }
     
-    func animateMenu(notification: Notification) {
+    @objc func animateMenu(notification: Notification) {
         if let info = notification.userInfo {
             let userInfo = info as! [String: CGFloat]
             self.whiteBarLeadingConstraint.constant = self.whiteBar.bounds.width * userInfo["length"]!

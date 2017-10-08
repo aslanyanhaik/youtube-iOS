@@ -107,7 +107,7 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeTitle(notification:)), name: Notification.Name.init(rawValue: "scrollMenu"), object: nil)
     }
     
-    func showSearch()  {
+    @objc func showSearch()  {
         self.searchView.alpha = 0
         self.searchView.isHidden = false
         UIView.animate(withDuration: 0.2, animations: {
@@ -117,7 +117,7 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
         }
     }
     
-    func showSettings() {
+    @objc func showSettings() {
         self.settingsView.isHidden = false
         self.settingsView.tableViewBottomConstraint.constant = 0
         UIView.animate(withDuration: 0.3) { 
@@ -126,7 +126,7 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
         }
     }
     
-    func changeTitle(notification: Notification)  {
+    @objc func changeTitle(notification: Notification)  {
         if let info = notification.userInfo {
             let userInfo = info as! [String: CGFloat]
             self.titleLabel.text = self.names[Int(round(userInfo["length"]!))]

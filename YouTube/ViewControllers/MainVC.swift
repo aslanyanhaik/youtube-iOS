@@ -60,14 +60,14 @@ class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         NotificationCenter.default.addObserver(self, selector: #selector(self.hideBar(notification:)), name: NSNotification.Name("hide"), object: nil)
     }
     
-    func scrollViews(notification: Notification) {
+    @objc func scrollViews(notification: Notification) {
         if let info = notification.userInfo {
             let userInfo = info as! [String: Int]
             self.collectionView.scrollToItem(at: IndexPath.init(row: userInfo["index"]!, section: 0), at: .centeredHorizontally, animated: true)
         }
     }
     
-    func hideBar(notification: NSNotification)  {
+    @objc func hideBar(notification: NSNotification)  {
         let state = notification.object as! Bool
         self.navigationController?.setNavigationBarHidden(state, animated: true)
     }

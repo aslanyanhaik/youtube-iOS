@@ -84,7 +84,7 @@ class PlayerView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureR
         self.player.transform = trasform
     }
     
-    func tapPlayView()  {
+    @objc func tapPlayView()  {
         self.videoPlayer.play()
         self.state = .fullScreen
         self.delegate?.didmaximize()
@@ -180,7 +180,7 @@ class PlayerView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureR
             weakSelf.videoPlayer = AVPlayer.init(url: weakSelf.video.videoLink)
             let playerLayer = AVPlayerLayer.init(player: weakSelf.videoPlayer)
             playerLayer.frame = weakSelf.player.frame
-            playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+            playerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
             
             weakSelf.player.layer.addSublayer(playerLayer)
             if weakSelf.state != .hidden {
