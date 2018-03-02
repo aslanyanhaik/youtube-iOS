@@ -98,35 +98,76 @@ class PlayerView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureR
     }
     
     @IBAction func minimizeGesture(_ sender: UIPanGestureRecognizer) {
-        if sender.state == .began {
-            let velocity = sender.velocity(in: nil)
-            if abs(velocity.x) < abs(velocity.y) {
-                self.direction = .up
+        let velocity = sender.velocity(in: nil)
+        if abs(velocity.x) < abs(velocity.y) {
+            if velocity.y > 0 {
+                self.direction = .down
             } else {
-                self.direction = .left
+                self.direction = .up
             }
+        } else {
+            self.direction = .left
         }
+        //        print(self.direction)
+        
         var finalState = stateOfVC.fullScreen
-        switch self.state {
-        case .fullScreen:
-            let factor = (abs(sender.translation(in: nil).y) / UIScreen.main.bounds.height)
-            self.changeValues(scaleFactor: factor)
-            self.delegate?.swipeToMinimize(translation: factor, toState: .minimized)
+        //        print(sender.translation(in: nil).y)
+        switch self.direction {
+        case .down:
+            var factor = CGFloat(0.0);
+            if self.state == .fullScreen {
+                if sender.translation(in: nil).y > 0 {
+                    factor = sender.translation(in: nil).y / UIScreen.main.bounds.height
+                } else {
+                    factor = CGFloat(0.0);
+                }
+                
+                self.changeValues(scaleFactor: factor)
+                self.delegate?.swipeToMinimize(translation: factor, toState: .minimized)
+            } else if self.state == .minimized {
+                if sender.translation(in: nil).y < 0 {
+                    factor = 1 - (abs(sender.translation(in: nil).y) / UIScreen.main.bounds.height)
+                } else {
+                    factor = CGFloat(1.0);
+                }
+                
+                self.changeValues(scaleFactor: factor)
+                self.delegate?.swipeToMinimize(translation: factor, toState: .minimized)
+            }
             finalState = .minimized
-        case .minimized:
-            if self.direction == .left {
+        case .up:
+            var factor = CGFloat(0.0);
+            if self.state == .fullScreen {
+                if sender.translation(in: nil).y > 0 {
+                    factor = (abs(sender.translation(in: nil).y) / UIScreen.main.bounds.height)
+                } else {
+                    factor = CGFloat(0.0);
+                }
+                
+                self.changeValues(scaleFactor: factor)
+                self.delegate?.swipeToMinimize(translation: factor, toState: .fullScreen)
+            } else if self.state == .minimized {
+                if sender.translation(in: nil).y < 0 {
+                    factor = 1 - (abs(sender.translation(in: nil).y) / UIScreen.main.bounds.height)
+                } else {
+                    factor = CGFloat(1.0);
+                }
+                
+                self.changeValues(scaleFactor: factor)
+                self.delegate?.swipeToMinimize(translation: factor, toState: .minimized)
+            }
+            finalState = .fullScreen
+        case .left:
+            if self.state == .minimized {
                 finalState = .hidden
                 let factor: CGFloat = sender.translation(in: nil).x
                 self.delegate?.swipeToMinimize(translation: factor, toState: .hidden)
-            } else {
-                finalState = .fullScreen
-                let factor = 1 - (abs(sender.translation(in: nil).y) / UIScreen.main.bounds.height)
-                self.changeValues(scaleFactor: factor)
-                self.delegate?.swipeToMinimize(translation: factor, toState: .fullScreen)
             }
         default: break
         }
+        
         if sender.state == .ended {
+            print("end")
             self.state = finalState
             self.animate()
             self.delegate?.didEndedSwipe(toState: self.state)
@@ -135,6 +176,7 @@ class PlayerView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureR
             }
         }
     }
+    
     
     //MARK: Delegate & dataSource methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

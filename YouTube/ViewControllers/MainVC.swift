@@ -79,6 +79,7 @@ class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        cell.contentView.frame = collectionView.frame
         cell.contentView.addSubview(self.views[indexPath.row])
         return cell
     }
