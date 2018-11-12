@@ -22,7 +22,7 @@
 
 import UIKit
 
-class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class MainVC: UIViewController{
     
     //MARK: Properties
     @IBOutlet var tabBarView: TabBarView!
@@ -59,39 +59,6 @@ class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViews(notification:)), name: Notification.Name.init(rawValue: "didSelectMenu"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.hideBar(notification:)), name: NSNotification.Name("hide"), object: nil)
     }
-    
-    @objc func scrollViews(notification: Notification) {
-        if let info = notification.userInfo {
-            let userInfo = info as! [String: Int]
-            self.collectionView.scrollToItem(at: IndexPath.init(row: userInfo["index"]!, section: 0), at: .centeredHorizontally, animated: true)
-        }
-    }
-    
-    @objc func hideBar(notification: NSNotification)  {
-        let state = notification.object as! Bool
-        self.navigationController?.setNavigationBarHidden(state, animated: true)
-    }
-    
-    //MARK: Delegates
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.views.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        cell.contentView.addSubview(self.views[indexPath.row])
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: self.collectionView.bounds.width, height: (self.collectionView.bounds.height + 22))
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-       let scrollIndex = scrollView.contentOffset.x / self.view.bounds.width
-        NotificationCenter.default.post(name: Notification.Name.init(rawValue: "scrollMenu"), object: nil, userInfo: ["length": scrollIndex])
-    }
-    
     //MARK: ViewController lifecyle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,3 +69,40 @@ class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         NotificationCenter.default.removeObserver(self)
     }
 }
+
+extension MainVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+  @objc func scrollViews(notification: Notification) {
+    if let info = notification.userInfo {
+      let userInfo = info as! [String: Int]
+      self.collectionView.scrollToItem(at: IndexPath.init(row: userInfo["index"]!, section: 0), at: .centeredHorizontally, animated: true)
+    }
+  }
+  
+  @objc func hideBar(notification: NSNotification)  {
+    let state = notification.object as! Bool
+    self.navigationController?.setNavigationBarHidden(state, animated: true)
+  }
+  
+  //MARK: Delegates
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return self.views.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+    cell.contentView.addSubview(self.views[indexPath.row])
+    return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize.init(width: self.collectionView.bounds.width, height: (self.collectionView.bounds.height + 22))
+  }
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    let scrollIndex = scrollView.contentOffset.x / self.view.bounds.width
+    NotificationCenter.default.post(name: Notification.Name.init(rawValue: "scrollMenu"), object: nil, userInfo: ["length": scrollIndex])
+  }
+}
+
+
+
