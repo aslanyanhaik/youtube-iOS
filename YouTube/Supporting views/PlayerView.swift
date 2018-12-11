@@ -180,7 +180,7 @@ class PlayerView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureR
             weakSelf.videoPlayer = AVPlayer.init(url: weakSelf.video.videoLink)
             let playerLayer = AVPlayerLayer.init(player: weakSelf.videoPlayer)
             playerLayer.frame = weakSelf.player.frame
-            playerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+            playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
             
             weakSelf.player.layer.addSublayer(playerLayer)
             if weakSelf.state != .hidden {
