@@ -58,7 +58,7 @@ class Video {
         let video7 = Video.init(title: "TensorFlow Basics - Deep Learning with Neural Networks p. 2", channelName: "sentdex")
         let video8 = Video.init(title: "Scott Galloway: The Retailer Growing Faster Than Amazon", channelName: "L2inc")
         var items = [video1, video2, video3, video4, video5, video6, video7, video8]
-        items.shuffle()
+        items.myShuffle()
         completion(items)
     }
     
@@ -103,7 +103,7 @@ class Channel {
             let channel = Channel.init(name: name, image: image!)
             items.append(channel)
         }
-        items.shuffle()
+        items.myShuffle()
         completion(items)
     }
 

@@ -43,7 +43,7 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISc
                 return
             }
             weakSelf.videos = response
-            weakSelf.videos.shuffle()
+            weakSelf.videos.myShuffle()
             weakSelf.tableView.reloadData()
         }
     }

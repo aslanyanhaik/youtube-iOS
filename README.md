@@ -23,7 +23,7 @@ All extra views are located in Navigation Controller and Main View Controller in
 
 ## Compatibility
 
-This project is written in Swift 3.0 and requires Xcode 8.2 to build and run.
+This project is written in Swift 3.0 and requires Xcode 8.2 or newer to build and run.
 
 Youtube iOS Template is compatible with iOS 9.1+.
 
