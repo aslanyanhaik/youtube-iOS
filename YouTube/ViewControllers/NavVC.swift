@@ -51,7 +51,7 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
         let settingsButton = UIButton.init(type: .system)
         settingsButton.setImage(UIImage.init(named: "navSettings"), for: .normal)
         settingsButton.tintColor = UIColor.white
-        settingsButton.addTarget(self, action: #selector(self.showSettings), for: UIControlEvents.touchUpInside)
+        settingsButton.addTarget(self, action: #selector(self.showSettings), for: UIControl.Event.touchUpInside)
         self.navigationBar.addSubview(settingsButton)
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
         let _ = NSLayoutConstraint.init(item: self.navigationBar, attribute: .height, relatedBy: .equal, toItem: settingsButton, attribute: .height, multiplier: 1.0, constant: 0).isActive = true
@@ -62,7 +62,7 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
         let searchButton = UIButton.init(type: .system)
         searchButton.setImage(UIImage.init(named: "navSearch"), for: .normal)
         searchButton.tintColor = UIColor.white
-        searchButton.addTarget(self, action: #selector(self.showSearch), for: UIControlEvents.touchUpInside)
+        searchButton.addTarget(self, action: #selector(self.showSearch), for: UIControl.Event.touchUpInside)
         self.navigationBar.addSubview(searchButton)
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         let _ = NSLayoutConstraint.init(item: self.navigationBar, attribute: .height, relatedBy: .equal, toItem: searchButton, attribute: .height, multiplier: 1.0, constant: 0).isActive = true
@@ -87,18 +87,19 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
         //SearchView setup
         self.view.addSubview(self.searchView)
         self.searchView.translatesAutoresizingMaskIntoConstraints = false
-        let _ = NSLayoutConstraint.init(item: self.view, attribute: .top, relatedBy: .equal, toItem: self.searchView, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
-        let _ = NSLayoutConstraint.init(item: self.view, attribute: .left, relatedBy: .equal, toItem: self.searchView, attribute: .left, multiplier: 1.0, constant: 0).isActive = true
-        let _ = NSLayoutConstraint.init(item: self.view, attribute: .right, relatedBy: .equal, toItem: self.searchView, attribute: .right, multiplier: 1.0, constant: 0).isActive = true
-        let _ = NSLayoutConstraint.init(item: self.view, attribute: .bottom, relatedBy: .equal, toItem: self.searchView, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+        guard let v = self.view else { return }
+        let _ = NSLayoutConstraint.init(item: v, attribute: .top, relatedBy: .equal, toItem: self.searchView, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+        let _ = NSLayoutConstraint.init(item: v, attribute: .left, relatedBy: .equal, toItem: self.searchView, attribute: .left, multiplier: 1.0, constant: 0).isActive = true
+        let _ = NSLayoutConstraint.init(item: v, attribute: .right, relatedBy: .equal, toItem: self.searchView, attribute: .right, multiplier: 1.0, constant: 0).isActive = true
+        let _ = NSLayoutConstraint.init(item: v, attribute: .bottom, relatedBy: .equal, toItem: self.searchView, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
         self.searchView.isHidden = true
         //SettingsView setup
         self.view.addSubview(self.settingsView)
         self.settingsView.translatesAutoresizingMaskIntoConstraints = false
-        let _ = NSLayoutConstraint.init(item: self.view, attribute: .top, relatedBy: .equal, toItem: self.settingsView, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
-        let _ = NSLayoutConstraint.init(item: self.view, attribute: .left, relatedBy: .equal, toItem: self.settingsView, attribute: .left, multiplier: 1.0, constant: 0).isActive = true
-        let _ = NSLayoutConstraint.init(item: self.view, attribute: .right, relatedBy: .equal, toItem: self.settingsView, attribute: .right, multiplier: 1.0, constant: 0).isActive = true
-        let _ = NSLayoutConstraint.init(item: self.view, attribute: .bottom, relatedBy: .equal, toItem: self.settingsView, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+        let _ = NSLayoutConstraint.init(item: v, attribute: .top, relatedBy: .equal, toItem: self.settingsView, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+        let _ = NSLayoutConstraint.init(item: v, attribute: .left, relatedBy: .equal, toItem: self.settingsView, attribute: .left, multiplier: 1.0, constant: 0).isActive = true
+        let _ = NSLayoutConstraint.init(item: v, attribute: .right, relatedBy: .equal, toItem: self.settingsView, attribute: .right, multiplier: 1.0, constant: 0).isActive = true
+        let _ = NSLayoutConstraint.init(item: v, attribute: .bottom, relatedBy: .equal, toItem: self.settingsView, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
         self.settingsView.isHidden = true
         //PLayerView setup
         self.playerView.frame = CGRect.init(origin: self.hiddenOrigin, size: UIScreen.main.bounds.size)
@@ -181,6 +182,20 @@ class NavVC: UINavigationController, PlayerVCDelegate  {
         case .minimized:
             self.playerView.frame.origin = self.positionDuringSwipe(scaleFactor: translation)
         }
+    }
+    
+    func setPreferStatusBarHidden(_ preferHidden: Bool) {
+        self.isHidden = preferHidden
+    }
+    
+    var isHidden = true {
+        didSet {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return isHidden
     }
     
     //MARK: ViewController lifecycle

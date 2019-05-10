@@ -49,7 +49,7 @@ class SubscriptionsCell: UITableViewCell, UICollectionViewDataSource, UICollecti
     func customization() {
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        self.collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10)
+        self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         Channel.fetchData { [weak self] channels in
             guard let weakSelf = self else {
                 return

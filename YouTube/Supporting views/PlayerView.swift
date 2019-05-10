@@ -25,6 +25,7 @@ protocol PlayerVCDelegate {
     func didmaximize()
     func swipeToMinimize(translation: CGFloat, toState: stateOfVC)
     func didEndedSwipe(toState: stateOfVC)
+    func setPreferStatusBarHidden(_ preferHidden: Bool)
 }
 
 import UIKit
@@ -46,7 +47,7 @@ class PlayerView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureR
         self.backgroundColor = UIColor.clear
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 90
         self.player.layer.anchorPoint.applying(CGAffineTransform.init(translationX: -0.5, y: -0.5))
         self.tableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
@@ -61,11 +62,11 @@ class PlayerView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureR
                 self.minimizeButton.alpha = 1
                 self.tableView.alpha = 1
                 self.player.transform = CGAffineTransform.identity
-                UIApplication.shared.isStatusBarHidden = true
+                self.delegate?.setPreferStatusBarHidden(true)
             })
         case .minimized:
             UIView.animate(withDuration: 0.3, animations: {
-                UIApplication.shared.isStatusBarHidden = false
+                self.delegate?.setPreferStatusBarHidden(false)
                 self.minimizeButton.alpha = 0
                 self.tableView.alpha = 0
                 let scale = CGAffineTransform.init(scaleX: 0.5, y: 0.5)
@@ -180,7 +181,7 @@ class PlayerView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureR
             weakSelf.videoPlayer = AVPlayer.init(url: weakSelf.video.videoLink)
             let playerLayer = AVPlayerLayer.init(player: weakSelf.videoPlayer)
             playerLayer.frame = weakSelf.player.frame
-            playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+            playerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
             
             weakSelf.player.layer.addSublayer(playerLayer)
             if weakSelf.state != .hidden {

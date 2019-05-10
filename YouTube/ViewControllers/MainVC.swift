@@ -33,14 +33,15 @@ class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     func customization()  {
         self.view.backgroundColor = UIColor.rbg(r: 228, g: 34, b: 24)
         //CollectionView Setup
-        self.collectionView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
+        self.collectionView.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
         self.collectionView.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: (self.view.bounds.height))
         //TabbarView setup
         self.view.addSubview(self.tabBarView)
         self.tabBarView.translatesAutoresizingMaskIntoConstraints = false
-        let _ = NSLayoutConstraint.init(item: self.view, attribute: .top, relatedBy: .equal, toItem: self.tabBarView, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
-        let _ = NSLayoutConstraint.init(item: self.view, attribute: .left, relatedBy: .equal, toItem: self.tabBarView, attribute: .left, multiplier: 1.0, constant: 0).isActive = true
-        let _ = NSLayoutConstraint.init(item: self.view, attribute: .right, relatedBy: .equal, toItem: self.tabBarView, attribute: .right, multiplier: 1.0, constant: 0).isActive = true
+        guard let v = self.view else { return }
+        let _ = NSLayoutConstraint.init(item: v, attribute: .top, relatedBy: .equal, toItem: self.tabBarView, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+        let _ = NSLayoutConstraint.init(item: v, attribute: .left, relatedBy: .equal, toItem: self.tabBarView, attribute: .left, multiplier: 1.0, constant: 0).isActive = true
+        let _ = NSLayoutConstraint.init(item: v, attribute: .right, relatedBy: .equal, toItem: self.tabBarView, attribute: .right, multiplier: 1.0, constant: 0).isActive = true
         self.tabBarView.heightAnchor.constraint(equalToConstant: 64).isActive = true
         //ViewController init
         let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC")
@@ -49,8 +50,8 @@ class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         let accountVC = self.storyboard?.instantiateViewController(withIdentifier: "AccountVC")
         let viewControllers = [homeVC, trendingVC, subscriptionsVC, accountVC]
         for vc in viewControllers {
-            self.addChildViewController(vc!)
-            vc!.didMove(toParentViewController: self)
+            self.addChild(vc!)
+            vc!.didMove(toParent: self)
             vc!.view.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height - 44))
             self.views.append(vc!.view)
         }
