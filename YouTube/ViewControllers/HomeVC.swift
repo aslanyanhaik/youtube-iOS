@@ -31,9 +31,9 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISc
     
     //MARK: Methods
     func customization() {
-        self.tableView.contentInset = UIEdgeInsetsMake(50, 0, 30, 0)
-        self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 30, 0)
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 30, right: 0)
+        self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 30, right: 0)
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 300
     }
     
