@@ -31,6 +31,7 @@
 		227DED47228AB8C50038D2FF /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227DED46228AB8C50038D2FF /* UIStoryboardExtension.swift */; };
 		227DED49228AB8EF0038D2FF /* ThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227DED48228AB8EF0038D2FF /* ThemeService.swift */; };
 		227DED4B228AB9050038D2FF /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227DED4A228AB9050038D2FF /* DateService.swift */; };
+		227DED4D228AD2470038D2FF /* TabBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227DED4C228AD2470038D2FF /* TabBarCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		227DED46228AB8C50038D2FF /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
 		227DED48228AB8EF0038D2FF /* ThemeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeService.swift; sourceTree = "<group>"; };
 		227DED4A228AB9050038D2FF /* DateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
+		227DED4C228AD2470038D2FF /* TabBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +235,7 @@
 		227DED35228AB7330038D2FF /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				227DED4C228AD2470038D2FF /* TabBarCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				227DED47228AB8C50038D2FF /* UIStoryboardExtension.swift in Sources */,
 				227DED1E228AB4AE0038D2FF /* PlayerView.swift in Sources */,
 				227DED32228AB70C0038D2FF /* SubscriptionsViewController.swift in Sources */,
+				227DED4D228AD2470038D2FF /* TabBarCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

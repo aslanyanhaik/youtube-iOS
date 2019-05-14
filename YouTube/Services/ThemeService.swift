@@ -24,8 +24,7 @@ import UIKit
 
 class ThemeService {
   
-  static let blueColor = UIColor(red: 129.0/255.0, green: 144.0/255.0, blue: 255.0/255.0, alpha: 1)
-  static let purpleColor = UIColor(red: 161.0/255.0, green: 114.0/255.0, blue: 255.0/255.0, alpha: 1)
-  
+  static let redColor = UIColor(red: 238.0/255.0, green: 34.0/255.0, blue: 24.0/255.0, alpha: 1)
+  static let darkRedColor = UIColor(red: 92.0/255.0, green: 13.0/255.0, blue: 9.0/255.0, alpha: 1)
   
 }
