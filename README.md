@@ -1,12 +1,12 @@
 # Youtube iOS Template
 
 [![License](http://img.shields.io/badge/License-MIT-green.svg?style=flat)](https://github.com/aslanyanhaik/Quick-Chat/blob/master/LICENSE)
-[![Swift 3](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://swift.org)
+[![Swift 5](https://img.shields.io/badge/Swift-5.0-orange.svg?style=flat)](https://swift.org)
 [![Twitter: @aslanyanhaik](https://img.shields.io/badge/Contact-Twitter-blue.svg?style=flat)](https://twitter.com/aslanyanhaik)
 
 
 
-Youtube iOS Template is developed by [Haik Aslanyan](https://twitter.com/aslanyanhaik) and written in Swift 3.
+Youtube iOS Template is developed by [Haik Aslanyan](https://twitter.com/aslanyanhaik) and written in Swift 5.
 
 Purpose of this repo is to show how ViewControllers can be managed.
 
@@ -23,9 +23,9 @@ All extra views are located in Navigation Controller and Main View Controller in
 
 ## Compatibility
 
-This project is written in Swift 3.0 and requires Xcode 8.2 or newer to build and run.
+This project is written in Swift 5.0 and requires Xcode 10.0 or newer to build and run.
 
-Youtube iOS Template is compatible with iOS 9.1+.
+Youtube iOS Template is compatible with iOS 12+.
 
 ## Author
 
@@ -33,6 +33,6 @@ Youtube iOS Template is compatible with iOS 9.1+.
 
 ## License
 
-Copyright 2017 Haik Aslanyan.
+Copyright 2019 Haik Aslanyan.
 
 Licensed under MIT License: https://opensource.org/licenses/MIT
