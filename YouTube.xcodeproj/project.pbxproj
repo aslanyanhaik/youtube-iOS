@@ -11,7 +11,7 @@
 		227DED07228AB0DE0038D2FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 227DED06228AB0DE0038D2FF /* Assets.xcassets */; };
 		227DED0A228AB0DE0038D2FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 227DED08228AB0DE0038D2FF /* LaunchScreen.storyboard */; };
 		227DED1E228AB4AE0038D2FF /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227DED1D228AB4AE0038D2FF /* PlayerView.swift */; };
-		227DED20228AB4F20038D2FF /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227DED1F228AB4F10038D2FF /* UIViewExtension.swift */; };
+		227DED20228AB4F20038D2FF /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227DED1F228AB4F10038D2FF /* DesignableView.swift */; };
 		227DED23228AB5170038D2FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 227DED22228AB5170038D2FF /* Main.storyboard */; };
 		227DED25228AB5330038D2FF /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227DED24228AB5330038D2FF /* MainNavigationController.swift */; };
 		227DED27228AB5620038D2FF /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227DED26228AB5620038D2FF /* TabBarView.swift */; };
@@ -32,6 +32,7 @@
 		227DED49228AB8EF0038D2FF /* ThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227DED48228AB8EF0038D2FF /* ThemeService.swift */; };
 		227DED4B228AB9050038D2FF /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227DED4A228AB9050038D2FF /* DateService.swift */; };
 		227DED4D228AD2470038D2FF /* TabBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227DED4C228AD2470038D2FF /* TabBarCell.swift */; };
+		22D200A5228AEF7100C4C956 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D200A4228AEF7100C4C956 /* UIViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +42,7 @@
 		227DED09228AB0DE0038D2FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		227DED0B228AB0DE0038D2FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		227DED1D228AB4AE0038D2FF /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		227DED1F228AB4F10038D2FF /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		227DED1F228AB4F10038D2FF /* DesignableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		227DED22228AB5170038D2FF /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		227DED24228AB5330038D2FF /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		227DED26228AB5620038D2FF /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
@@ -62,6 +63,7 @@
 		227DED48228AB8EF0038D2FF /* ThemeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeService.swift; sourceTree = "<group>"; };
 		227DED4A228AB9050038D2FF /* DateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		227DED4C228AD2470038D2FF /* TabBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCell.swift; sourceTree = "<group>"; };
+		22D200A4228AEF7100C4C956 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 				227DED42228AB8890038D2FF /* OptionalExtension.swift */,
 				227DED44228AB8A90038D2FF /* NSObjectExtension.swift */,
 				227DED46228AB8C50038D2FF /* UIStoryboardExtension.swift */,
+				22D200A4228AEF7100C4C956 /* UIViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -243,7 +246,7 @@
 		227DED36228AB73E0038D2FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				227DED1F228AB4F10038D2FF /* UIViewExtension.swift */,
+				227DED1F228AB4F10038D2FF /* DesignableView.swift */,
 				227DED1D228AB4AE0038D2FF /* PlayerView.swift */,
 				227DED26228AB5620038D2FF /* TabBarView.swift */,
 			);
@@ -334,7 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				227DED43228AB88A0038D2FF /* OptionalExtension.swift in Sources */,
-				227DED20228AB4F20038D2FF /* UIViewExtension.swift in Sources */,
+				227DED20228AB4F20038D2FF /* DesignableView.swift in Sources */,
 				227DED30228AB6F00038D2FF /* TrendingViewController.swift in Sources */,
 				227DED3A228AB7BE0038D2FF /* ObjectVideo.swift in Sources */,
 				227DED34228AB71F0038D2FF /* ProfileViewController.swift in Sources */,
@@ -351,6 +354,7 @@
 				227DED2E228AB6D90038D2FF /* HomeViewController.swift in Sources */,
 				227DED47228AB8C50038D2FF /* UIStoryboardExtension.swift in Sources */,
 				227DED1E228AB4AE0038D2FF /* PlayerView.swift in Sources */,
+				22D200A5228AEF7100C4C956 /* UIViewExtension.swift in Sources */,
 				227DED32228AB70C0038D2FF /* SubscriptionsViewController.swift in Sources */,
 				227DED4D228AD2470038D2FF /* TabBarCell.swift in Sources */,
 			);

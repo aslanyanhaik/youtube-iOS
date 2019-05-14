@@ -29,6 +29,8 @@ class MainViewController: UIViewController {
   @IBOutlet weak var collectionView: UICollectionView!
   
   //MARK: Properties
+  private let titleLabel = UILabel()
+  private let titleNames = ["Home", "Trending", "Subscriptions", "Account"]
   lazy var nestedViews: [UIView] = {
     let homeVC: HomeViewController = UIStoryboard.controller(storyboard: .pages)
     let trendingVC: TrendingViewController = UIStoryboard.controller(storyboard: .pages)
@@ -52,8 +54,27 @@ class MainViewController: UIViewController {
 //MARK: Private methods
 extension MainViewController {
   
-  func customization() {
+  private func customization() {
     tabBarView.delegate = self
+    titleLabel.textAlignment = .left
+    titleLabel.text = titleNames.first
+    titleLabel.textColor = .white
+    navigationController?.navigationBar.addSubview(titleLabel)
+    titleLabel.pinEdgesToSuperView(insets: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0))
+  }
+}
+
+//MARK: IBActions
+extension MainViewController {
+  
+  @IBAction func settingsPressed(_ sender: Any) {
+    let vc: SettingsViewController = UIStoryboard.controller(storyboard: .actions)
+    present(vc, animated: true)
+  }
+  
+  @IBAction func searchPressed(_ sender: Any) {
+    let vc: SearchViewController = UIStoryboard.controller(storyboard: .actions)
+    present(vc, animated: true)
   }
 }
 
@@ -85,5 +106,8 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     let scrollIndex = scrollView.contentOffset.x / view.bounds.width
     tabBarView.animate(offset: scrollIndex)
+    let index = Int(round(scrollIndex))
+    guard titleNames.indices.contains(index) else { return }
+    titleLabel.text = titleNames[index]
   }
 }

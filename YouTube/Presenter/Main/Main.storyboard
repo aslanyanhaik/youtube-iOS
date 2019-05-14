@@ -18,7 +18,14 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="EMx-M7-Ooy">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.93333333330000001" green="0.1333333333" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="kwX-r1-aYF">
@@ -141,7 +148,21 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vei-yJ-ape"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Deh-iY-6dS"/>
+                    <navigationItem key="navigationItem" id="Deh-iY-6dS">
+                        <rightBarButtonItems>
+                            <barButtonItem image="navSettings" id="WJ4-3z-Wdw">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="settingsPressed:" destination="HRO-8a-Gug" id="e7C-DN-UAK"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="navSearch" id="eyu-xl-tVr">
+                                <connections>
+                                    <action selector="searchPressed:" destination="HRO-8a-Gug" id="M7j-MR-RsV"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="lq9-CB-lzd" id="nCr-4u-nr3"/>
                         <outlet property="tabBarView" destination="XHN-YA-2Pd" id="Am0-M2-nP5"/>
@@ -152,4 +173,8 @@
             <point key="canvasLocation" x="599" y="154"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="navSearch" width="24" height="24"/>
+        <image name="navSettings" width="24" height="24"/>
+    </resources>
 </document>
