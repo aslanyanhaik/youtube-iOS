@@ -69,7 +69,7 @@ extension MainViewController {
   
   @IBAction func settingsPressed(_ sender: Any) {
     let vc: SettingsViewController = UIStoryboard.controller(storyboard: .actions)
-    present(vc, animated: true)
+    present(vc, animated: false)
   }
   
   @IBAction func searchPressed(_ sender: Any) {
