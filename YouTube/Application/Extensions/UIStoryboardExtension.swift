@@ -33,10 +33,8 @@ extension UIStoryboard {
   }
   
   enum StoryboardEnum: String {
-    case auth = "Auth"
-    case conversations = "Conversations"
-    case profile = "Profile"
-    case previews = "Previews"
-    case messages = "Messages"
+    case main = "Main"
+    case pages = "Pages"
+    case actions = "Actions"
   }
 }

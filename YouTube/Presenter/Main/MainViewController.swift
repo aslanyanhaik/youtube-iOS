@@ -29,17 +29,23 @@ class MainViewController: UIViewController {
   @IBOutlet weak var collectionView: UICollectionView!
   
   //MARK: Properties
-  lazy var controllers: [UIViewController] = {
-    //    let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC")
-    //    let trendingVC = self.storyboard?.instantiateViewController(withIdentifier: "TrendingVC")
-    //    let subscriptionsVC = self.storyboard?.instantiateViewController(withIdentifier: "SubscriptionsVC")
-    //    let accountVC = self.storyboard?.instantiateViewController(withIdentifier: "AccountVC")
-
+  lazy var nestedViews: [UIView] = {
+    let homeVC: HomeViewController = UIStoryboard.controller(storyboard: .pages)
+    let trendingVC: TrendingViewController = UIStoryboard.controller(storyboard: .pages)
+    let subscriptionsVC: SubscriptionsViewController = UIStoryboard.controller(storyboard: .pages)
+    let accountVC: ProfileViewController = UIStoryboard.controller(storyboard: .pages)
+    let controllers = [homeVC, trendingVC, subscriptionsVC, accountVC]
+    controllers.forEach({ controller in
+      self.addChild(controller)
+      controller.didMove(toParent: self)
+    })
+    return controllers.map({$0.view})
   }()
 
   //MARK: ViewController lifecyle
   override func viewDidLoad() {
     super.viewDidLoad()
+    customization()
   }
 }
 
@@ -53,77 +59,31 @@ extension MainViewController {
 
 //MARK: Tabbar delegate
 extension MainViewController: TabBarViewDelegate {
+  
   func tabBar(didSelect index: Int) {
-    
+    collectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: true)
   }
 }
+
+//MARK: UICollectionView delegate & datasource
+extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
   
-//  func customization()  {
-//
-//
-//    //ViewController init
-//    let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC")
-//    let trendingVC = self.storyboard?.instantiateViewController(withIdentifier: "TrendingVC")
-//    let subscriptionsVC = self.storyboard?.instantiateViewController(withIdentifier: "SubscriptionsVC")
-//    let accountVC = self.storyboard?.instantiateViewController(withIdentifier: "AccountVC")
-//    let viewControllers = [homeVC, trendingVC, subscriptionsVC, accountVC]
-//    for vc in viewControllers {
-//      self.addChild(vc!)
-//      vc!.didMove(toParent: self)
-//      vc!.view.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height - 44))
-//      self.views.append(vc!.view)
-//    }
-//    self.collectionView.reloadData()
-//    //NotificationCenter setup
-//    NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViews(notification:)), name: Notification.Name.init(rawValue: "didSelectMenu"), object: nil)
-//    NotificationCenter.default.addObserver(self, selector: #selector(self.hideBar(notification:)), name: NSNotification.Name("hide"), object: nil)
-//  }
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return nestedViews.count
+  }
   
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+    cell.addSubview(nestedViews[indexPath.row])
+    return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return collectionView.bounds.size
+  }
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    let scrollIndex = scrollView.contentOffset.x / view.bounds.width
+    tabBarView.animate(offset: scrollIndex)
+  }
 }
-
-
-/*
- 
- 
- class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
- 
- //MARK: Properties
- var views = [UIView]()
- 
- //MARK: Methods
- 
- 
- @objc func scrollViews(notification: Notification) {
- if let info = notification.userInfo {
- let userInfo = info as! [String: Int]
- self.collectionView.scrollToItem(at: IndexPath.init(row: userInfo["index"]!, section: 0), at: .centeredHorizontally, animated: true)
- }
- }
- 
- @objc func hideBar(notification: NSNotification)  {
- let state = notification.object as! Bool
- self.navigationController?.setNavigationBarHidden(state, animated: true)
- }
- 
- //MARK: Delegates
- func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
- return self.views.count
- }
- 
- func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
- let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
- cell.contentView.addSubview(self.views[indexPath.row])
- return cell
- }
- 
- func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
- return CGSize.init(width: self.collectionView.bounds.width, height: (self.collectionView.bounds.height + 22))
- }
- 
- func scrollViewDidScroll(_ scrollView: UIScrollView) {
- let scrollIndex = scrollView.contentOffset.x / self.view.bounds.width
- NotificationCenter.default.post(name: Notification.Name.init(rawValue: "scrollMenu"), object: nil, userInfo: ["length": scrollIndex])
- }
- 
-
- */

@@ -23,11 +23,8 @@
 import UIKit
 
 protocol TabBarViewDelegate: class {
-  
   func tabBar(didSelect index: Int)
-  
 }
-
 
 class TabBarView: UIView {
   
@@ -47,22 +44,21 @@ class TabBarView: UIView {
     collectionView.dataSource = self
   }
   
-  
   override func layoutSubviews() {
     super.layoutSubviews()
     collectionView.collectionViewLayout.invalidateLayout()
   }
-//
-//  @objc func animateMenu(notification: Notification) {
-//    if let info = notification.userInfo {
-//      let userInfo = info as! [String: CGFloat]
-//      self.whiteBarLeadingConstraint.constant = self.whiteBar.bounds.width * userInfo["length"]!
-//      self.selectedIndex = Int(round(userInfo["length"]!))
-//      self.layoutIfNeeded()
-//      self.collectionView.reloadData()
-//    }
-//  }
+}
+
+//MARK: Public  methods
+extension TabBarView {
   
+  func animate(offset: CGFloat) {
+    whiteBarLeadingConstraint.constant = whiteBar.bounds.width * offset
+    selectedIndex = Int(round(offset))
+    layoutIfNeeded()
+    collectionView.reloadData()
+  }
 }
 
 //MARK: UICollectionView datasource & delegate
