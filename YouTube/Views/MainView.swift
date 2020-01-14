@@ -40,11 +40,11 @@ struct MainView: View {
         Image(systemName: "rectangle.stack.fill")
         Text("Subscriptions")
       }.tag(2)
-      InboxView().tabItem {
+      PlaceholderView(placeholder: ObjectPlaceholder.inbox).tabItem {
         Image(systemName: "envelope.fill")
         Text("Inbox")
       }.tag(3)
-      LibraryView().tabItem {
+      PlaceholderView(placeholder: ObjectPlaceholder.library).tabItem {
         Image(systemName: "play.rectangle.fill")
         Text("Library")
       }.tag(4)

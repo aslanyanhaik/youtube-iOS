@@ -39,11 +39,12 @@ struct NavigationHeaderView: View {
         Button(action: {
           //
         }) {
-          Image(systemName: "person.crop.circle").foregroundColor(.white)
+          Image(systemName: "person.circle.fill").foregroundColor(.white)
         }
       }.padding().background(Color(.systemGray4))
     }
   }
+  
 }
 
 
