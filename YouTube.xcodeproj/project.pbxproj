@@ -20,7 +20,7 @@
 		22BDC14F23C396DD0050CD8C /* SubscriptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDC14E23C396DD0050CD8C /* SubscriptionsView.swift */; };
 		22BDC15123C397050050CD8C /* InboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDC15023C397050050CD8C /* InboxView.swift */; };
 		22BDC15623C397B70050CD8C /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDC15423C397260050CD8C /* LibraryView.swift */; };
-		22BEEA5523CDB8D500D5D25C /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEEA5423CDB8D500D5D25C /* ViewHelper.swift */; };
+		22BEEA5523CDB8D500D5D25C /* NavigationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEEA5423CDB8D500D5D25C /* NavigationHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +39,7 @@
 		22BDC14E23C396DD0050CD8C /* SubscriptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsView.swift; sourceTree = "<group>"; };
 		22BDC15023C397050050CD8C /* InboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxView.swift; sourceTree = "<group>"; };
 		22BDC15423C397260050CD8C /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
-		22BEEA5423CDB8D500D5D25C /* ViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelper.swift; sourceTree = "<group>"; };
+		22BEEA5423CDB8D500D5D25C /* NavigationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +93,7 @@
 				22BDC14623C390C00050CD8C /* FeedView.swift */,
 				22BDC14823C390CD0050CD8C /* TopBarView.swift */,
 				22BDC15423C397260050CD8C /* LibraryView.swift */,
+				22BEEA5423CDB8D500D5D25C /* NavigationHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -109,7 +110,6 @@
 			children = (
 				22BDC10723C38E1A0050CD8C /* AppDelegate.swift */,
 				22BDC10923C38E1A0050CD8C /* SceneDelegate.swift */,
-				22BEEA5423CDB8D500D5D25C /* ViewHelper.swift */,
 				22BDC10D23C38E1C0050CD8C /* Assets.xcassets */,
 				22BDC11223C38E1C0050CD8C /* LaunchScreen.storyboard */,
 				22BDC11523C38E1C0050CD8C /* Info.plist */,
@@ -211,7 +211,7 @@
 				22BDC10A23C38E1A0050CD8C /* SceneDelegate.swift in Sources */,
 				22BDC15123C397050050CD8C /* InboxView.swift in Sources */,
 				22BDC15623C397B70050CD8C /* LibraryView.swift in Sources */,
-				22BEEA5523CDB8D500D5D25C /* ViewHelper.swift in Sources */,
+				22BEEA5523CDB8D500D5D25C /* NavigationHeaderView.swift in Sources */,
 				22BDC14523C390870050CD8C /* MainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

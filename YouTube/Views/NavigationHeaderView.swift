@@ -27,19 +27,19 @@ struct NavigationHeaderView: View {
   var body: some View {
     VStack(spacing: 0) {
       Color(.systemGray4).edgesIgnoringSafeArea(.top).frame(height: 0)
-      HStack {
-        Image(systemName: "camera")
+      HStack(spacing: 25) {
+        Image("logo").resizable().aspectRatio(contentMode: .fit).frame(height: 20)
         Spacer()
         
         Button(action: {
           //
         }) {
-          Image(systemName: "camera")
+          Image(systemName: "magnifyingglass").foregroundColor(.white)
         }
         Button(action: {
           //
         }) {
-          Image(systemName: "search")
+          Image(systemName: "person.crop.circle").foregroundColor(.white)
         }
       }.padding().background(Color(.systemGray4))
     }
