@@ -6,11 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "Screen Shot 2020-01-08 at 1.57.52 PM.png",
+      "filename" : "logo.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "logo-1.png",
       "scale" : "3x"
     }
   ],

@@ -27,7 +27,7 @@ struct InboxView: View {
     ZStack {
       Color(.systemGray5).edgesIgnoringSafeArea(.all)
       VStack {
-        ViewHelper.navigationTopView()
+        NavigationHeaderView()
         VStack {
           Spacer()
           Image(systemName: "bell.fill").resizable().scaledToFit().frame(width: 100, height: 150, alignment: .center).padding(.bottom).foregroundColor(Color(.systemGray2))

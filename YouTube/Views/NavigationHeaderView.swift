@@ -22,8 +22,9 @@
 
 import SwiftUI
 
-struct ViewHelper {
-  static func navigationTopView() -> some View {
+struct NavigationHeaderView: View {
+  
+  var body: some View {
     VStack(spacing: 0) {
       Color(.systemGray4).edgesIgnoringSafeArea(.top).frame(height: 0)
       HStack {
@@ -44,3 +45,14 @@ struct ViewHelper {
     }
   }
 }
+
+
+struct NavigationHeaderView_Previews: PreviewProvider {
+  static var previews: some View {
+    NavigationHeaderView()
+  }
+}
+
+
+
+
