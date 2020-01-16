@@ -20,17 +20,39 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import Combine
-import Foundation
+import SwiftUI
 
-class ObjectVideo: Identifiable, Decodable {
+struct NavigationHeaderView: View {
   
-  let id = UUID()
-  let imageURL: String
-  let name: String
-  let channelImageURL: String
-  let channelName: String
-  let viewsCount: Int
-  let duration: Int
-  
+  var body: some View {
+    VStack(spacing: 0) {
+      Color(.systemGray5)
+        .edgesIgnoringSafeArea(.top)
+        .frame(height: 0)
+      HStack(spacing: 25) {
+        Image("logo")
+          .resizable()
+          .aspectRatio(contentMode: .fit)
+          .frame(height: 20)
+        Spacer()
+        Button(action: {}) {
+          Image(systemName: "magnifyingglass")
+            .foregroundColor(.white)
+        }
+        Button(action: {}) {
+          Image(systemName: "person.circle.fill")
+            .foregroundColor(.white)
+        }
+      }
+      .padding()
+      .background(Color(.systemGray5))
+    }
+  }
+}
+
+
+struct NavigationHeaderView_Previews: PreviewProvider {
+  static var previews: some View {
+    NavigationHeaderView()
+  }
 }

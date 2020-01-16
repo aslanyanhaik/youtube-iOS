@@ -20,7 +20,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import Foundation
+import SwiftUI
 import Combine
 
 class FeedManager: ObservableObject {
@@ -29,10 +29,44 @@ class FeedManager: ObservableObject {
   @Published var items = [ObjectVideo]()
   
   func fetchItems() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-      self.mode = .error
+    let parameters =  ["part": "contentDetails", "chart": "mostPopular", "regionCode": "US", "maxResults": "50"]
+    fetch(of: ObjectFeed.self, parameters:  parameters) {[weak self] result in
+      switch result {
+        case .success(let feedItems):
+          let ids = String(feedItems.map{$0.id}.reduce("", {$0 + "," + $1}).dropFirst().dropLast())
+          self?.fetch(of: ObjectVideo.self, parameters: ["part": "snippet", "id": ids], completion: {[weak self] response in
+            switch response {
+              case .failure(_):
+                DispatchQueue.main.async {[weak self] in
+                  self?.mode = .error
+              }
+              case .success(let videoItems):
+                DispatchQueue.main.async {[weak self] in
+                  self?.items = videoItems
+                  self?.mode = .completed
+              }
+            }
+          })
+        case .failure(_):
+          DispatchQueue.main.async {[weak self] in
+            self?.mode = .error
+        }
+      }
     }
-    
+  }
+  
+  
+  private func fetch<T: Decodable>(of type: T.Type, parameters: [String: Any], completion: @escaping (Result<[T], NetworkError>) -> Void) {
+    URLSession.shared.dataTask(with: URLBuilder.url(parameters: parameters)) { (data, _, _) in
+      guard let data = data else { completion(.failure(NetworkError())); return }
+      let decoder = JSONDecoder()
+      decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+      guard let item = try? decoder.decode(ObjectContainer<T>.self, from: data) else {
+        completion(.failure(NetworkError()))
+        return
+      }
+      completion(.success(item.items))
+    }.resume()
   }
   
   init() {}
@@ -44,4 +78,6 @@ extension FeedManager {
     case error
     case completed
   }
+  
+  private struct NetworkError: Error {}
 }

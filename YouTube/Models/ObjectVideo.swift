@@ -20,29 +20,45 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+import Combine
+import Foundation
 
-import UIKit
-import SwiftUI
+struct ObjectVideo: Identifiable, Decodable {
+  
+  let id: String
+  var imageURLString: String {
+    "https://img.youtube.com/vi/\(id)/hqdefault.jpg"
+  }
+  var title: String {
+    snippet.title
+  }
+  var description: String {
+    snippet.description
+  }
+  var channelTitle: String {
+    snippet.channelTitle
+  }
+  var channelId: String {
+    snippet.channelId
+  }
+  lazy var publishedDate: String = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    return formatter.string(from: snippet.publishedAt)
+  }()
+  private let snippet: ObjectSnippet
+}
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
-  var window: UIWindow?
-
-
-  func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-    
-    UITableView.appearance().separatorStyle = .none
-    UITableView.appearance().backgroundColor = .clear
-    UITableView.appearance().separatorColor = .clear
-    
-    let contentView = MainView()
-    let stateManager = StateManager()
-    if let windowScene = scene as? UIWindowScene {
-        let window = UIWindow(windowScene: windowScene)
-      window.rootViewController = UIHostingController(rootView: contentView.environmentObject(stateManager))
-        self.window = window
-        window.makeKeyAndVisible()
-    }
+extension ObjectVideo {
+  private struct ObjectSnippet: Decodable {
+    let publishedAt: Date
+    let channelId: String
+    let title: String
+    let description: String
+    let channelTitle: String
   }
 }
+
+
+
 

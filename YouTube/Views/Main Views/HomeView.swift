@@ -20,29 +20,47 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-
-import UIKit
 import SwiftUI
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
-  var window: UIWindow?
-
-
-  func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-    
-    UITableView.appearance().separatorStyle = .none
-    UITableView.appearance().backgroundColor = .clear
-    UITableView.appearance().separatorColor = .clear
-    
-    let contentView = MainView()
-    let stateManager = StateManager()
-    if let windowScene = scene as? UIWindowScene {
-        let window = UIWindow(windowScene: windowScene)
-      window.rootViewController = UIHostingController(rootView: contentView.environmentObject(stateManager))
-        self.window = window
-        window.makeKeyAndVisible()
+struct HomeView: View {
+  
+  @EnvironmentObject var stateManager: StateManager
+  @ObservedObject var feedManager = FeedManager()
+  
+  var body: some View {
+    ZStack {
+      Color(.black).edgesIgnoringSafeArea(.all)
+      VStack(spacing: 0) {
+        NavigationHeaderView()
+        if feedManager.mode == .completed {
+          List(feedManager.items) {
+            VideoItemView($0)
+          }.padding(.horizontal, -20)
+        }
+        if feedManager.mode == .error {
+          VStack {
+            Text("error")
+          }
+        }
+        if feedManager.mode == .fetching {
+          VStack {
+            Spacer()
+            Text("fetching")
+            Spacer()
+          }
+        }
+      }
     }
+  }
+  
+  init() {
+    feedManager.fetchItems()
+  }
+}
+
+struct HomeView_Previews: PreviewProvider {
+  static var previews: some View {
+    HomeView().environmentObject(StateManager())
   }
 }
 

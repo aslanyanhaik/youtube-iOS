@@ -20,29 +20,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+import Foundation
 
-import UIKit
-import SwiftUI
-
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
-  var window: UIWindow?
-
-
-  func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-    
-    UITableView.appearance().separatorStyle = .none
-    UITableView.appearance().backgroundColor = .clear
-    UITableView.appearance().separatorColor = .clear
-    
-    let contentView = MainView()
-    let stateManager = StateManager()
-    if let windowScene = scene as? UIWindowScene {
-        let window = UIWindow(windowScene: windowScene)
-      window.rootViewController = UIHostingController(rootView: contentView.environmentObject(stateManager))
-        self.window = window
-        window.makeKeyAndVisible()
-    }
-  }
+struct ObjectContainer<T: Decodable>: Decodable {
+  
+  let items: Array<T>
+  
 }
-

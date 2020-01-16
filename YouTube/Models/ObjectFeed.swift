@@ -20,47 +20,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct HomeView: View {
+struct ObjectFeed: Decodable {
   
-  @EnvironmentObject var stateManager: StateManager
-  @ObservedObject var feedManager = FeedManager()
+  let id: String
   
-  var body: some View {
-    ZStack {
-      Color(.systemGray5).edgesIgnoringSafeArea(.all)
-      VStack(spacing: 0) {
-        NavigationHeaderView()
-        if feedManager.mode == .completed {
-          List(feedManager.items) { _ in
-            VideoItemView()
-          }
-        }
-        if feedManager.mode == .error {
-          VStack {
-            Text("error")
-          }
-        }
-        if feedManager.mode == .fetching {
-          VStack {
-            Spacer()
-            Text("fetching")
-            Spacer()
-          }
-        }
-      }
-    }
-  }
-  
-  init() {
-    feedManager.fetchItems()
-  }
 }
-
-struct HomeView_Previews: PreviewProvider {
-  static var previews: some View {
-    HomeView().environmentObject(StateManager())
-  }
-}
-

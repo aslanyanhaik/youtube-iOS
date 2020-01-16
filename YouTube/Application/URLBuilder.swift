@@ -20,29 +20,21 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+import Foundation
 
-import UIKit
-import SwiftUI
-
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
-  var window: UIWindow?
-
-
-  func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-    
-    UITableView.appearance().separatorStyle = .none
-    UITableView.appearance().backgroundColor = .clear
-    UITableView.appearance().separatorColor = .clear
-    
-    let contentView = MainView()
-    let stateManager = StateManager()
-    if let windowScene = scene as? UIWindowScene {
-        let window = UIWindow(windowScene: windowScene)
-      window.rootViewController = UIHostingController(rootView: contentView.environmentObject(stateManager))
-        self.window = window
-        window.makeKeyAndVisible()
+struct URLBuilder {
+  
+  static func url(parameters: [String: Any]) -> URL {
+    var component = URLComponents()
+    component.scheme = "https"
+    component.path = Constants.APIEntryPoint
+    var queries = [URLQueryItem]()
+    parameters.forEach { (key, value) in
+      let query = URLQueryItem(name: key, value: "\(value)")
+      queries.append(query)
     }
+    queries.append(URLQueryItem(name: "key", value: Constants.APIKey))
+    component.queryItems = queries
+    return component.url!
   }
 }
-

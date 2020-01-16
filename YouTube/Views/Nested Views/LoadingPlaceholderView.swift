@@ -22,38 +22,55 @@
 
 import SwiftUI
 
-struct VideoItemView: View {
+struct LoadingPlaceholderView: View {
   
-  let video: ObjectVideo
+  @State var fillPoint = Double(0)
+  
+  
+  var animation: Animation {
+    Animation.linear(duration: 0.8).repeatForever(autoreverses: false)
+  }
   
   
   var body: some View {
-    VStack {
-      Image("preview")
-        .resizable()
-        .scaledToFit()
-        .clipped()
-      HStack(spacing: 10) {
-        Image("preview")
-          .resizable()
-          .frame(width: 50, height: 50, alignment: .center)
-          .clipShape(Circle())
-        VStack(alignment: .leading, spacing: 5) {
-          Text("sdgasgdadsgasdg sdasdfads sfasdf \n g sgd sgs gd sdg sdg sg s dgs dgs dg sdg sg sg s dgsd gs dg ").font(.subheadline).lineLimit(2)
-          Text("sdgasgdadsgasdg").padding(.leading, 5)
-          .font(.caption)
+    Ring(fillPoint)
+      .stroke(Color.red, lineWidth: 5)
+      .frame(width: 100, height: 100, alignment: .center)
+      .onAppear {
+        withAnimation(self.animation) {
+          self.fillPoint = 0.5
         }
-      }.padding(.horizontal, 5)
     }
-  }
-  
-  init(_ video: ObjectVideo) {
-    self.video = video
   }
 }
 
-struct FeedItemView_Previews: PreviewProvider {
+struct LoadingPlaceholderView_Previews: PreviewProvider {
   static var previews: some View {
-    VideoItemView()
+    LoadingPlaceholderView()
   }
+}
+
+
+struct Ring: Shape {
+  
+  var fillPoint: Double
+    
+  var animatableData: Double {
+    get { fillPoint}
+    set { fillPoint = newValue }
+  }
+  
+  func path(in rect: CGRect) -> Path {
+    let start = Double(0)
+    let end = 360 * fillPoint
+    var path = Path()
+    path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.width / 2, startAngle: .degrees(start), endAngle: .degrees(end), clockwise: false)
+    return path
+  }
+  
+  init(_ fillPoint: Double) {
+    self.fillPoint = fillPoint
+  }
+  
+  
 }

@@ -21,39 +21,47 @@
 //  SOFTWARE.
 
 import SwiftUI
+import KingfisherSwiftUI
 
-struct NavigationHeaderView: View {
+struct VideoItemView: View {
+  
+  var video: ObjectVideo
   
   var body: some View {
-    VStack(spacing: 0) {
-      Color(.systemGray4).edgesIgnoringSafeArea(.top).frame(height: 0)
-      HStack(spacing: 25) {
-        Image("logo").resizable().aspectRatio(contentMode: .fit).frame(height: 20)
-        Spacer()
-        
-        Button(action: {
-          //
-        }) {
-          Image(systemName: "magnifyingglass").foregroundColor(.white)
+    VStack {
+      KFImage(URL(string: video.imageURLString))
+        .cancelOnDisappear(true)
+        .placeholder ({
+          Text("loading")
+        })
+        .resizable()
+        .scaledToFit()
+        .background(Color.gray)
+        .clipped()
+      HStack(spacing: 10) {
+        KFImage(URL(string: video.imageURLString))
+          .cancelOnDisappear(true)
+          .resizable()
+          .scaledToFill()
+          .frame(width: 50, height: 50, alignment: .center)
+          .background(Color.gray)
+          .clipShape(Circle())
+        VStack(alignment: .leading, spacing: 5) {
+          Text(video.title).font(.subheadline).lineLimit(2)
+          Text("\(video.channelTitle) ・ \(video.channelTitle)").padding(.leading, 5)
+          .font(.caption)
         }
-        Button(action: {
-          //
-        }) {
-          Image(systemName: "person.circle.fill").foregroundColor(.white)
-        }
-      }.padding().background(Color(.systemGray4))
+      }.padding(.horizontal, 5)
     }
   }
   
-}
-
-
-struct NavigationHeaderView_Previews: PreviewProvider {
-  static var previews: some View {
-    NavigationHeaderView()
+  init(_ video: ObjectVideo) {
+    self.video = video
   }
 }
 
-
-
-
+//struct FeedItemView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    VideoItemView(ObjectVideo())
+//  }
+//}
