@@ -36,11 +36,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // Create the SwiftUI view that provides the window contents.
     let contentView = MainView()
-
+    let stateManager = StateManager()
     // Use a UIHostingController as window root view controller.
+    UITabBar.appearance().backgroundColor = .darkGray
+    UITableView.appearance().separatorStyle = .none
     if let windowScene = scene as? UIWindowScene {
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = UIHostingController(rootView: contentView)
+      window.rootViewController = UIHostingController(rootView: contentView.environmentObject(stateManager))
         self.window = window
         window.makeKeyAndVisible()
     }

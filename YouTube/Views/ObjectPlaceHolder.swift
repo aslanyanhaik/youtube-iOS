@@ -27,4 +27,8 @@ extension ObjectPlaceholder {
     ObjectPlaceholder(titleText: "Enjoy your favorite videos", descriptionText: "Sign in to acess videos that you've liked or saved", imageName: "folder.fill", shouldShowSignInButton: true)
   }
   
+  static var subscription: ObjectPlaceholder {
+    ObjectPlaceholder(titleText: "Don't miss new videos", descriptionText: "Sign in to see updates from your favorite YouTube channels", imageName: "rectangle.stack.fill", shouldShowSignInButton: true)
+  }
+  
 }

@@ -20,26 +20,28 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import SwiftUI
+import Foundation
+import Combine
 
-struct FeedItemView: View {
-    var body: some View {
-      VStack {
-        Image("new").resizable().aspectRatio(16/9, contentMode: .fit)
-        HStack {
-          Image("new").resizable().frame(width: 30, height: 30, alignment: .center)
-          VStack {
-            Text(verbatim: "sdgasgdadsgasdg sdg sgd sgs gd sdg sdg sg s dgs dgs dg sdg sg sg s dgsd gs dg ").lineLimit(1).multilineTextAlignment(.leading)
-            Text(verbatim: "sdgasgdadsgasdg").lineLimit(1)
-
-          }.multilineTextAlignment(.leading)
-        }
-      }
+class FeedManager: ObservableObject {
+  
+  @Published var mode = Mode.fetching
+  @Published var items = [ObjectVideo]()
+  
+  func fetchItems() {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+      self.mode = .error
     }
+    
+  }
+  
+  init() {}
 }
 
-struct FeedItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        FeedItemView()
-    }
+extension FeedManager {
+  enum Mode {
+    case fetching
+    case error
+    case completed
+  }
 }

@@ -20,16 +20,17 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import SwiftUI
+import Combine
+import Foundation
 
-struct SubscriptionsView: View {
-    var body: some View {
-        Text("SubscriptionsView")
-    }
-}
-
-struct SubscriptionsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SubscriptionsView()
-    }
+class ObjectVideo: Identifiable, Decodable {
+  
+  let id = UUID()
+  let imageURL: String
+  let name: String
+  let channelImageURL: String
+  let channelName: String
+  let viewsCount: Int
+  let duration: Int
+  
 }

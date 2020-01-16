@@ -22,47 +22,38 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct VideoItemView: View {
   
-  @State var selectedView = 0
-  @EnvironmentObject var manager: StateManager
+  let video: ObjectVideo
+  
   
   var body: some View {
-    ZStack {
-      TabView(selection: $selectedView) {
-        HomeView().tabItem {
-          Image(systemName: "house.fill")
-          Text("Home")
-        }.tag(0)
-        TrendingView().tabItem {
-          Image(systemName: "flame.fill")
-          Text("Trending")
-        }.tag(1)
-        PlaceholderView(placeholder: ObjectPlaceholder.subscription).tabItem {
-          Image(systemName: "rectangle.stack.fill")
-          Text("Subscriptions")
-        }.tag(2)
-        PlaceholderView(placeholder: ObjectPlaceholder.inbox).tabItem {
-          Image(systemName: "envelope.fill")
-          Text("Inbox")
-        }.tag(3)
-        PlaceholderView(placeholder: ObjectPlaceholder.library).tabItem {
-          Image(systemName: "play.rectangle.fill")
-          Text("Library")
-        }.tag(4)
-      }
-      .accentColor(.white)
-      .edgesIgnoringSafeArea(.top)
-      if manager.showPlayer {
-        Text("sfdghfdgf")
-      }
+    VStack {
+      Image("preview")
+        .resizable()
+        .scaledToFit()
+        .clipped()
+      HStack(spacing: 10) {
+        Image("preview")
+          .resizable()
+          .frame(width: 50, height: 50, alignment: .center)
+          .clipShape(Circle())
+        VStack(alignment: .leading, spacing: 5) {
+          Text("sdgasgdadsgasdg sdasdfads sfasdf \n g sgd sgs gd sdg sdg sg s dgs dgs dg sdg sg sg s dgsd gs dg ").font(.subheadline).lineLimit(2)
+          Text("sdgasgdadsgasdg").padding(.leading, 5)
+          .font(.caption)
+        }
+      }.padding(.horizontal, 5)
     }
   }
-}
-
-struct TabView_Previews: PreviewProvider {
-  static var previews: some View {
-    MainView()
+  
+  init(_ video: ObjectVideo) {
+    self.video = video
   }
 }
 
+struct FeedItemView_Previews: PreviewProvider {
+  static var previews: some View {
+    VideoItemView()
+  }
+}

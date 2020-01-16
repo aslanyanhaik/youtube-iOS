@@ -23,21 +23,44 @@
 import SwiftUI
 
 struct HomeView: View {
+  
+  @EnvironmentObject var stateManager: StateManager
+  @ObservedObject var feedManager = FeedManager()
+  
   var body: some View {
-    NavigationView {
-      Text("Hello world")
-        .navigationBarTitle(Text("Title"))
-        .navigationBarItems(trailing:
-          NavigationLink(destination: HomeView()) {
-            Text("Next")
+    ZStack {
+      Color(.systemGray5).edgesIgnoringSafeArea(.all)
+      VStack(spacing: 0) {
+        NavigationHeaderView()
+        if feedManager.mode == .completed {
+          List(feedManager.items) { _ in
+            VideoItemView()
           }
-      )
+        }
+        if feedManager.mode == .error {
+          VStack {
+            Text("error")
+          }
+        }
+        if feedManager.mode == .fetching {
+          VStack {
+            Spacer()
+            Text("fetching")
+            Spacer()
+          }
+        }
+      }
     }
+  }
+  
+  init() {
+    feedManager.fetchItems()
   }
 }
 
 struct HomeView_Previews: PreviewProvider {
   static var previews: some View {
-    HomeView()
+    HomeView().environmentObject(StateManager())
   }
 }
+

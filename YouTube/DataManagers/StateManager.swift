@@ -20,23 +20,11 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import SwiftUI
+import Combine
 
-struct FeedView: View {
-    var body: some View {
-      List.init {
-        FeedItemView()
-        FeedItemView()
-        FeedItemView()
-        FeedItemView()
-        FeedItemView()
-        FeedItemView()
-      }
-    }
-}
-
-struct FeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        FeedView()
-    }
+class StateManager: ObservableObject {
+  
+  @Published var showPlayer = false
+  
+  init() {}
 }

@@ -23,13 +23,19 @@
 import SwiftUI
 
 struct TrendingView: View {
-    var body: some View {
-        Text("TrendingView")
+  
+  
+  var body: some View {
+    VStack {
+      Text("user.name")
+      Button("Tap me") {
+      }
     }
+  }
 }
 
 struct TrendingView_Previews: PreviewProvider {
-    static var previews: some View {
-        TrendingView()
-    }
+  static var previews: some View {
+    TrendingView()
+  }
 }
